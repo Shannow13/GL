@@ -1,0 +1,65 @@
+package game;
+
+import java.util.List;
+
+public class SimpleJardin implements Jardin {
+
+	// attributs
+	
+	private int sizeX;
+	private int sizeY;
+	private List<Rocher> rochers;
+	private List<Carottes> carottes;
+	
+	
+	
+	
+	public SimpleJardin(int sizeX, int sizeY) {
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
+	}
+	
+	public SimpleJardin(int sizeX, int sizeY, List<Rocher> rochers, List<Carottes> carottes) {
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
+	}
+	
+	
+	
+	//getters - setters
+	@Override
+	public int getSizeX() {
+		return this.sizeX;
+	}
+
+	public void setSizeX(int sizeX) {
+		this.sizeX = sizeX;
+	}
+	
+	@Override
+	public int getSizeY() {
+		return this.sizeY;
+	}
+	
+	public void setSizeY(int sizeY) {
+		this.sizeY = sizeY;
+	}
+
+	@Override
+	public List<Rocher> getRochers() {
+		return this.rochers;
+	}
+
+	public void setRochers(List<Rocher> rochers) {
+		this.rochers = rochers;
+	}
+	
+	@Override
+	public List<Carottes> getCarottes() {
+		return this.carottes;
+	}
+
+	public void setCarottes(List<Carottes> carottes) {
+		this.carottes = carottes;
+	}
+}

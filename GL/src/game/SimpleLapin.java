@@ -11,11 +11,11 @@ public class SimpleLapin implements Lapin {
 	
 	
 	/*attributs*/
-	int positionX;
-	int positionY;
-	char orientation;
-	String trajet;
-	String nom;
+	private int positionX;
+	private int positionY;
+	private char orientation;
+	private String trajet;
+	private String nom;
 	
 	
 	

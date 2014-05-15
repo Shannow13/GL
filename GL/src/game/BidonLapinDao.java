@@ -16,7 +16,6 @@ public class BidonLapinDao implements LapinDao {
 	
 	@Override
 	public List<Lapin> findAllLapins() {
-		// TODO Auto-generated method stub
 		
 		LOGGER.debug("find All Lapins : début");
 		
@@ -26,6 +25,8 @@ public class BidonLapinDao implements LapinDao {
 		final SimpleLapin bunny = new SimpleLapin(1,1, 'E', "AADADAGA", "Bunny");
 		lapins.add(bunny);
 		
+		
+		LOGGER.debug("find all Lapins : fin");
 		
 		return lapins;
 	}
