@@ -1,8 +1,9 @@
 package game;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface Jardin {
+public interface Jardin extends Serializable {
 
 	
 	
