@@ -6,6 +6,8 @@ public class SimpleCarottes implements Carottes {
 	private int positionY;
 	private int nombre;
 	
+	private static final long serialVersionUID = 1L;
+	
 	public SimpleCarottes(int positionX, int positionY, int nombre){
 		this.positionX = positionX;
 		this.positionY = positionY;
@@ -14,20 +16,18 @@ public class SimpleCarottes implements Carottes {
 
 	@Override
 	public int getPositionX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.positionX;
+		
 	}
 
 	@Override
 	public int getPositionY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.positionY;
 	}
 
 	@Override
 	public int getNombre() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.nombre;
 	}
 	
 
