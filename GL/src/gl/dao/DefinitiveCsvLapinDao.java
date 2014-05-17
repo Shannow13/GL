@@ -104,11 +104,13 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
     	
     	
     	
-    	lapin.setPositionX((values[1]));
-    	lapin.setPositionY(values[2]);
-    	lapin.setOrientation(values[3]);
+    	lapin.setPositionX(Integer.parseInt(values[1]));
+    	lapin.setPositionY(Integer.parseInt(values[2]));
+    	lapin.setOrientation(values[3].charAt(0));
     	lapin.setTrajet(values[4]);
     	lapin.setNom(values[5]);
+    	
+    	return lapin;
     	
     }
 
