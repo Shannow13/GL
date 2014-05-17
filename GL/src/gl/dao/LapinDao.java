@@ -1,4 +1,6 @@
-package game;
+package gl.dao;
+
+import game.Lapin;
 
 import java.util.List;
 
