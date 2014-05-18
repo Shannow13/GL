@@ -1,4 +1,6 @@
-package game;
+package gl.dao.test;
+import gl.dao.CsvJardinDao;
+
 import java.io.File;
 
 import org.apache.log4j.*;
@@ -24,6 +26,19 @@ public abstract class AbstractJardinDaoTest {
 
 	        LOGGER.debug("doBefore Fin");
 	    }
+	 
+	 //TODO Finir le Test 
+	 
+	 @Test
+	 public void tailleJardin(){
+		 
+		 final int position = 0;
+		 final int sizeXAttendue = 6;
+		 final int sizeYAttedue = 5;
+	
+		
+		 
+	 }
 	 
 	 
 
