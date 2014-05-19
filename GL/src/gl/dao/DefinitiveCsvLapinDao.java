@@ -2,7 +2,7 @@ package gl.dao;
 
 import game.Lapin;
 import game.SimpleLapin;
-import gl.dao.test.AbstractCsvLapinDaoTest;
+//import gl.dao.test.AbstractCsvLapinDaoTest;
 
 import java.io.File;
 import java.io.FileReader;
@@ -70,6 +70,8 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
         try {
             final FileReader fr = new FileReader(file);
             final CSVReader csvReader = new CSVReader(fr, SEPARATOR);
+            
+            // TODO corriger cette fuite
             
             String[] nextLine = null;
             while ((nextLine = csvReader.readNext()) != null) {

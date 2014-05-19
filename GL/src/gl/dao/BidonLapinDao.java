@@ -1,7 +1,9 @@
-package game;
+package gl.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import game.Lapin;
+import game.SimpleLapin;
 
 import org.apache.log4j.Logger;
 

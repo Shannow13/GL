@@ -6,6 +6,10 @@ public class SimpleJardin implements Jardin {
 
 	// attributs
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int sizeX;
 	private int sizeY;
 	private List<Rocher> rochers;

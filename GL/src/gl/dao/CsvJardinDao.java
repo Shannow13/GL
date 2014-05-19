@@ -1,4 +1,4 @@
-package game;
+package gl.dao;
 
 import java.io.File;
 

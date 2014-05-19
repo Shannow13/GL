@@ -1,4 +1,8 @@
-package game;
+package gl.dao;
+
+import game.Carottes;
+import game.Jardin;
+import game.Rocher;
 
 import java.io.File;
 import java.util.List;
