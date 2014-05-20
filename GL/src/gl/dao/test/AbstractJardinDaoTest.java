@@ -1,4 +1,5 @@
 package gl.dao.test;
+import static org.apache.log4j.Logger.getLogger;
 import gl.dao.CsvJardinDao;
 
 import java.io.File;
@@ -10,7 +11,7 @@ import org.junit.Assert;
 
 
 public abstract class AbstractJardinDaoTest {
-	 private static final Logger LOGGER = Logger.getLogger(AbstractJardinDaoTest.class);
+	 private static final Logger LOGGER = getLogger(AbstractJardinDaoTest.class);
 	 
 	 private final static String RESOURCES_PATH = "resources/";
 	 private final static String JARDIN_FILE_NAME = "jardin-1.csv";
@@ -35,6 +36,8 @@ public abstract class AbstractJardinDaoTest {
 		 final int position = 0;
 		 final int sizeXAttendue = 6;
 		 final int sizeYAttedue = 5;
+		 
+
 	
 		
 		 
