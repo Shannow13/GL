@@ -71,6 +71,7 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
             final FileReader fr = new FileReader(file);
             final CSVReader csvReader = new CSVReader(fr, SEPARATOR);
             
+            
             // TODO corriger cette fuite
             
             String[] nextLine = null;
@@ -92,11 +93,11 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
                 }
                 lignes.add(nextLine);
             }
-
+            csvReader.close();
         } catch (Exception e) {
             LOGGER.error("ça marche pô...", e);
         }
-
+      
         return lignes;
     }
 
