@@ -18,14 +18,14 @@ public class SimpleJardin implements Jardin {
 	
 	
 	
-	public SimpleJardin(int sizeX, int sizeY) {
-		this.sizeX = sizeX;
-		this.sizeY = sizeY;
+	public SimpleJardin() {
 	}
 	
 	public SimpleJardin(int sizeX, int sizeY, List<Rocher> rochers, List<Carottes> carottes) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
+		this.rochers = rochers;
+		this.carottes = carottes;
 	}
 	
 	
