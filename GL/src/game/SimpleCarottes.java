@@ -19,10 +19,18 @@ public class SimpleCarottes implements Carottes {
 		return this.positionX;
 		
 	}
+	
+	public void setPositionX(int positionX) {
+		this.positionX = positionX;
+	}
 
 	@Override
 	public int getPositionY() {
 		return this.positionY;
+	}
+	
+	public void setPositionY(int positionY) {
+		this.positionY = positionY;
 	}
 
 	@Override
@@ -30,5 +38,8 @@ public class SimpleCarottes implements Carottes {
 		return this.nombre;
 	}
 	
+	public void setNombre(int nombre) {
+		this.nombre = nombre;
+	}
 
 }
