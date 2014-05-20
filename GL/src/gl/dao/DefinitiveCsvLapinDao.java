@@ -34,7 +34,7 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
     	 LOGGER.debug("reloadLapins");
 
          if (file == null) {
-             throw new IllegalStateException("Le fichier est nul...");
+             throw new IllegalStateException("Le fichier est vide...");
          }
 
          try {
@@ -62,7 +62,7 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
 		LOGGER.debug("getLignesFromFile");
 
         if (file == null) {
-            throw new IllegalStateException("Le fichier est nul...");
+            throw new IllegalStateException("Le fichier est vide...");
         }
 
         final List<String[] > lignes = new ArrayList<String[] >();
@@ -94,7 +94,7 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
             }
 
         } catch (Exception e) {
-            LOGGER.error("aie aie aie", e);
+            LOGGER.error("ça marche pô...", e);
         }
 
         return lignes;
