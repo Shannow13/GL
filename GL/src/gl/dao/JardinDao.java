@@ -1,6 +1,7 @@
 package gl.dao;
 
 import game.Carottes;
+import game.Jardin;
 import game.Rocher;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface JardinDao {
 	
 	List<Rocher> findRochers();
 	List<Carottes> findCarottes();
-	
+	Jardin findJardin();
 }
