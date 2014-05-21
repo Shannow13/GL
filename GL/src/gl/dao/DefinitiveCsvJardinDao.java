@@ -21,7 +21,7 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
 	private File file;
 	private static final Logger LOGGER = Logger.getLogger(DefinitiveCsvJardinDao.class);
 	private final static char SEPARATOR = ';';
-	private Jardin lvljardin;
+	private SimpleJardin lvljardin;
 	private ArrayList<Carottes> carottes;
 	private ArrayList<Rocher> rochers;
 	
@@ -48,7 +48,7 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
        
         }try{
         	
-        	SimpleJardin jardin = new SimpleJardin();
+        	lvljardin = new SimpleJardin();
 		final List<String[] > lignes = getLignesFromFile();
 		
 			LOGGER.debug("On a transformé le CSV en lignes");
@@ -70,7 +70,7 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
 			}
 		
 		
-			transformLigneToJardin(lignes.get(0), jardin, carottes, rochers);
+			transformLigneToJardin(lignes.get(0), lvljardin, carottes, rochers);
 		
         }catch(Exception e){
         	LOGGER.error("fuck");
