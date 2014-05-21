@@ -19,6 +19,15 @@ public class SimpleCarottes implements Carottes {
 		this.positionY = positionY;
 		this.nombre = nombre;
 	}
+	
+	
+	
+	 @Override
+	 public String toString() {
+		 return("Carotte @ " + positionX +"-"+ positionY +"x" + nombre);
+	 }
+	
+	
 
 	@Override
 	public int getPositionX() {
