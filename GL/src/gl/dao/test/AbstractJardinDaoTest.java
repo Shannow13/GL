@@ -2,6 +2,7 @@ package gl.dao.test;
 import static org.apache.log4j.Logger.getLogger;
 import static org.junit.Assert.*;
 import game.Jardin;
+import game.SimpleJardin;
 import gl.dao.CsvJardinDao;
 
 import java.io.File;
@@ -53,15 +54,14 @@ public abstract class AbstractJardinDaoTest {
 		 
 	 }
 	 
-	/* @Test
-	 public void testCarottes(){
+	 @Test
+	 public void testnbCarottes(){
 
-		 final int position = 0;
-		 final int positionXAttendue = 4;
-		 final int positionYAttendue = 2;
+		 int nbCarottesAttendues = 2;
 		 
-		 final List<Carotte> carottes = dao.completeLapins();
+		 final Jardin jardins = dao.findJardin();
 		 
-		 assertEquals(positionXAttendue, )
-		 */
+		 assertEquals(nbCarottesAttendues, jardins.getCarottes().size());
+		 
+	 }
 }
