@@ -64,4 +64,19 @@ public abstract class AbstractJardinDaoTest {
 		 assertEquals(nbCarottesAttendues, jardins.getCarottes().size());
 		 
 	 }
+	 @Test
+	 public void testplaceCarotte(){
+		 
+		 int positionXattendue = 4;
+		 int positionYattendue = 2;
+		 int nbAttendu = 1;
+		 
+		 final Jardin jardins = dao.findJardin();
+		 
+		 assertEquals(positionXattendue, jardins.getCarottes().get(0).getPositionX());
+		 assertEquals(positionYattendue, jardins.getCarottes().get(0).getPositionY());
+		 assertEquals(nbAttendu, jardins.getCarottes().get(0).getNombre());
+		 
+	 }
+	 
 }
