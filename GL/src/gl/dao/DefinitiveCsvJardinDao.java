@@ -185,7 +185,7 @@ private ArrayList<Rocher> addRochers(String[] ligne, ArrayList<Rocher> rochers){
 	public Jardin findJardin() {
 		LOGGER.debug("Début du remplissage du Jardin");
 		
-		//lvljardin = transformLigneToJardin
+		
 		
 		return lvljardin;
 	}
