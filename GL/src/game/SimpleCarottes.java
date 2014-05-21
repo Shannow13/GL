@@ -8,6 +8,12 @@ public class SimpleCarottes implements Carottes {
 	
 	private static final long serialVersionUID = 1L;
 	
+	public SimpleCarottes(){
+		
+		
+	}
+	
+	
 	public SimpleCarottes(int positionX, int positionY, int nombre){
 		this.positionX = positionX;
 		this.positionY = positionY;

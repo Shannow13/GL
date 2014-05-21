@@ -42,16 +42,26 @@ public abstract class AbstractJardinDaoTest {
 		 
 		 final Jardin jardins = dao.findJardin();
 		 
+		 if(jardins != null)
+			 LOGGER.debug("Jardin alloué");
+		 
 		 assertEquals(sizeXAttendue, jardins.getSizeX());
 		 assertEquals(sizeYAttendue, jardins.getSizeY());
 		 
-		 LOGGER.debug("Fin du Test de la taille du Jardin");
-		 	 
-	
-		
+		 LOGGER.debug("Fin du Test de la taille du Jardin");	 
+			
 		 
 	 }
 	 
-	 
+	/* @Test
+	 public void testCarottes(){
 
+		 final int position = 0;
+		 final int positionXAttendue = 4;
+		 final int positionYAttendue = 2;
+		 
+		 final List<Carotte> carottes = dao.completeLapins();
+		 
+		 assertEquals(positionXAttendue, )
+		 */
 }

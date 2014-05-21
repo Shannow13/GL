@@ -10,8 +10,8 @@ public class SimpleJardin implements Jardin {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private int sizeX;
-	private int sizeY;
+	public int sizeX;
+	public int sizeY;
 	private List<Rocher> rochers;
 	private List<Carottes> carottes;
 	

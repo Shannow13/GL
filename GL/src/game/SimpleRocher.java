@@ -12,6 +12,10 @@ public class SimpleRocher implements Rocher {
 	private int positionY;
 	
 	
+	public SimpleRocher(){
+		
+		
+	}
 	
 	public SimpleRocher(int positionX, int positionY) {
 		this.positionX = positionX;

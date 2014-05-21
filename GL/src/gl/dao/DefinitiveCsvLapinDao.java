@@ -72,7 +72,6 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
             final CSVReader csvReader = new CSVReader(fr, SEPARATOR);
             
             
-            // TODO corriger cette fuite
             
             String[] nextLine = null;
             while ((nextLine = csvReader.readNext()) != null) {
@@ -101,7 +100,7 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
         return lignes;
     }
 
-    private Lapin transformLigneToLapin(final String [] values) throws Exception {
+    private Lapin transformLigneToLapin(final String [] values){
     	
     	final SimpleLapin lapin = new SimpleLapin();
     	
