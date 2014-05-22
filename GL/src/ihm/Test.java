@@ -107,34 +107,67 @@ class Graph extends JPanel
                  int largeur = (int)tailleEcran.getWidth();
                  frmLoad.setLocation((int)(hauteur*0.78), (int)(largeur*0.21));
                  
-                 int width = 500;
-                 int height = 400;
+                 int width = 600;
+                 int height = 500;
                  frmLoad.setSize( width, height );
                  frmLoad.setVisible(true);
                  
                  JPanel panel = new JPanel();
                  JPanel back = new JPanel();
                  
-                 ImageIcon img = new ImageIcon("resources/help2.png");
-                 JLabel imgHelp = new JLabel(img);
-                 imgHelp.setPreferredSize(new Dimension(500,500));
+                 JLabel choix = new JLabel("  Choisissez votre niveau :");
+                 choix.setPreferredSize(new Dimension(160, 40));
+                 JPanel top = new JPanel();
                  
+                 ImageIcon img = new ImageIcon("resources/lapin1.gif");
+                 JLabel imgHelp = new JLabel(img);
+                 imgHelp.setPreferredSize(new Dimension(230,230));
+                 
+                 ImageIcon img2 = new ImageIcon("resources/lapin2.gif");
+                 JLabel imgHelp2 = new JLabel(img2);
+                 imgHelp2.setPreferredSize(new Dimension(230,230));
+                 
+                 JLabel fill1 = new JLabel();
+                 JLabel fill2 = new JLabel();
+                 JLabel fill3 = new JLabel();
+                 JLabel fill4 = new JLabel();
+                 JLabel fill5 = new JLabel();
+                 JLabel fill6 = new JLabel();
+                 JLabel fill7 = new JLabel();
+             	 
                  JButton btnLoad1 = new JButton("1");
                  JButton btnLoad2 = new JButton("2");
                  JButton btnLoad3 = new JButton("3");
                  JButton btnLoad4 = new JButton("4");
+                 JButton btnLoad5 = new JButton("5");
+                 JButton btnLoad6 = new JButton("Niveaux perso...");
                  JButton btnBack = new JButton("Retour");
-                
-                 panel.add(btnLoad1);
-                 panel.add(btnLoad2);
-                 panel.add(btnLoad3);
-                 panel.add(btnLoad4);
-                 back.add(btnBack);
+                 btnBack.setPreferredSize(new Dimension(160, 40));
                  
-                 frmLoad.add(panel,BorderLayout.NORTH);
-                 frmLoad.add(imgHelp, BorderLayout.CENTER);
-                 frmLoad.add(back, BorderLayout.SOUTH);
+                 panel.setLayout(new GridLayout(13, 1));
                 
+                 panel.add(fill1);
+                 panel.add(btnLoad1);
+                 panel.add(fill2);
+                 panel.add(btnLoad2);
+                 panel.add(fill3);
+                 panel.add(btnLoad3);
+                 panel.add(fill4);
+                 panel.add(btnLoad4);
+                 panel.add(fill5);
+                 panel.add(btnLoad5);
+                 panel.add(fill6);
+                 panel.add(btnLoad6);
+                 panel.add(fill7);
+                 back.add(btnBack);
+                 top.add(choix);
+                 
+                 frmLoad.add(panel,BorderLayout.CENTER);
+                 frmLoad.add(imgHelp, BorderLayout.EAST);
+                 frmLoad.add(imgHelp2, BorderLayout.WEST);
+                 frmLoad.add(back, BorderLayout.SOUTH);
+                 frmLoad.add(top, BorderLayout.NORTH);
+                 
                  btnBack.addActionListener(new ActionListener()
                  {
                          public void actionPerformed(ActionEvent e)
@@ -143,8 +176,8 @@ class Graph extends JPanel
                          }
                  });
                 
-                 panel.setBackground(Color.WHITE);
-                 back.setBackground(Color.WHITE);
+                 //panel.setBackground(Color.WHITE);
+                 //back.setBackground(Color.WHITE);
                  
                  System.out.println("Charger Niveau");
             }
