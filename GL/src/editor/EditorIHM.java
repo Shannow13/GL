@@ -41,7 +41,7 @@ public class EditorIHM {
 		carotte = new JButton("Carotte");
 		rocher = new JButton ("Rocher");
 		renard = new JButton ("Renard");
-		quitter = new JButton("Quitter");
+		quitter = new JButton("Retour");
 		
 		frame.add(jardin);
 		frame.add(carotte);
@@ -62,7 +62,7 @@ public class EditorIHM {
 	    carotte.addActionListener(new EditCarotte());
 	    rocher.addActionListener(new EditRocher());
 	    renard.addActionListener(new EditRenard());
-	    quitter.addActionListener(new EditQuitter());
+	    quitter.addActionListener(new EditQuitter(frame));
 		
 		/*GridLayout gridL = new GridLayout(4,1);
 		gridL.setHgap(50);
@@ -234,9 +234,14 @@ public class EditorIHM {
 	
 	
 	public class EditQuitter implements ActionListener{
+		private JFrame frame;
+
+		public EditQuitter(final JFrame frame){
+			this.frame = frame;
+		}
 		public void actionPerformed(ActionEvent e){
 			LOGGER.debug("Click de quitter");
-			System.exit(0);
+			frame.setVisible(false);
 		}
 	}
 	

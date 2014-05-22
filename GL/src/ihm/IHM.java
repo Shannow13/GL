@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.event.*;
+import editor.EditorIHM;
 
 public class IHM
 {
@@ -66,8 +67,8 @@ class Graph extends JPanel
         add( btnExit );
         add( btnFullScreen );
                 
-        int w = ( width / 2) - 50;
-        int h = ( height / 2 ) - 150;
+        int w = ( width / 2) - 150;
+        int h = ( height / 2 ) - 50;
 
         btnNew.setBounds( w - 50, h - 200, 200, 40);
         btnCont.setBounds( w - 50, h - 100, 200, 40 );
@@ -187,7 +188,8 @@ class Graph extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Edition Niveau");
+                //System.out.println("Edition Niveau");
+            	new EditorIHM();
             }
         });
         
