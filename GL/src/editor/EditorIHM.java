@@ -23,7 +23,7 @@ public class EditorIHM {
 	
 	public JFrame frame;
 	//public JPanel panelG, panel;
-	public JButton jardin, carotte, rocher, renard;
+	public JButton jardin, carotte, rocher, renard, quitter;
 	public boolean flagAnnuler = false;
 	
 	public EditorIHM()
@@ -41,24 +41,28 @@ public class EditorIHM {
 		carotte = new JButton("Carotte");
 		rocher = new JButton ("Rocher");
 		renard = new JButton ("Renard");
+		quitter = new JButton("Quitter");
 		
 		frame.add(jardin);
 		frame.add(carotte);
 		frame.add(rocher);
 		frame.add(renard);
+		frame.add(quitter);
 		
 		int w = (frame.getWidth()/2)-50;
 		int h = (frame.getHeight()/2);
 		
-		jardin.setBounds( w - 50, h-100, 200, 40);
-	    carotte.setBounds( w - 50, h -50, 200, 40);
-	    rocher.setBounds( w - 50, h , 200, 40);
-	    renard.setBounds( w - 50, h +50, 200, 40 );
+		jardin.setBounds( w - 50, h-150, 200, 40);
+	    carotte.setBounds( w - 50, h -100, 200, 40);
+	    rocher.setBounds( w - 50, h -50, 200, 40);
+	    renard.setBounds( w - 50, h , 200, 40 );
+	    quitter.setBounds(w-50 , h + 50 , 200, 40);
 	    
 	    jardin.addActionListener(new EditJardin());
 	    carotte.addActionListener(new EditCarotte());
 	    rocher.addActionListener(new EditRocher());
 	    renard.addActionListener(new EditRenard());
+	    quitter.addActionListener(new EditQuitter());
 		
 		/*GridLayout gridL = new GridLayout(4,1);
 		gridL.setHgap(50);
@@ -78,7 +82,10 @@ public class EditorIHM {
 		
 		frame.add(panelG);*/
 		
+	    frame.setResizable(false);
 		frame.setVisible(true);
+		
+		LOGGER.debug("Fin IHM");
 		
 	}
 	
@@ -94,7 +101,7 @@ public class EditorIHM {
 			LOGGER.debug("Click de jardin");
 			final JFrame frmJardin = new JFrame("Création Jardin");
 			//frmJardin.setUndecorated(true);
-			//frmJardin.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			frmJardin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmJardin.setSize(new Dimension(500,300));
 			frmJardin.setLocation(600, 300);
 			frmJardin.setLayout(null);
@@ -116,13 +123,7 @@ public class EditorIHM {
 		    btnAnnuler.setBounds( w - 125, h + 50, 150, 40);
 		    btnOk.setBounds( w + 75, h + 50, 150, 40 );
 		    
-		    btnAnnuler.addActionListener(new ActionListener()
-            {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        frmJardin.setVisible( false );
-                    }
-            });			
+		    btnAnnuler.addActionListener(new EditCancel(frmJardin));		
 		    
 		    btnOk.addActionListener(new ActionListener()
             {
@@ -143,6 +144,7 @@ public class EditorIHM {
 			
 			LOGGER.debug("Click de carotte");
 			final JFrame frmNbC = new JFrame("Nombre de Carottes");
+			frmNbC.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmNbC.setSize(new Dimension(300,300));
 			frmNbC.setLocation(700, 300);
 			frmNbC.setLayout(null);
@@ -164,30 +166,62 @@ public class EditorIHM {
 			btnOk.setBounds( w + 15, h + 100, 160, 40);
 			btnAnnuler.setBounds( w + 15, h + 150, 160, 40);
 			
-			btnAnnuler.addActionListener(new ActionListener()
-            {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        frmNbC.setVisible( false );
-                    }
-            });			
+			btnAnnuler.addActionListener(new EditCancel(frmNbC));		
+		    
+		    btnOk.addActionListener(new EditOkCarotte(nbCarottes,frmNbC));
+		    
+			frmNbC.setVisible(true);
+		}
+	} 
+	
+	class EditRocher implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+					
+			LOGGER.debug("Click de rocher");
+			
+			final JFrame frmNbR = new JFrame("Nombre de Rocher");
+			frmNbR.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			frmNbR.setSize(new Dimension(500,300));
+			frmNbR.setLocation(600, 300);
+			frmNbR.setLayout(null);
+			frmNbR.getContentPane().setBackground(new Color(255, 102, 255));
+			frmNbR.setResizable(false);
+			
+			int w = (frmNbR.getWidth()/2);
+			int h = (frmNbR.getHeight()/2);
+			
+			JLabel text = new JLabel("Entrez le nombre de rocher:");
+			JTextField nbRocher = new JTextField("");
+			JButton btnOk = new JButton("OK");
+			JButton btnAnnuler = new JButton("Annuler");
+			
+			frmNbR.add(text);
+			frmNbR.add(nbRocher);
+			frmNbR.add(btnOk);
+			frmNbR.add(btnAnnuler);
+			
+			text.setBounds( w-75 , h -100, 200, 40);
+		    nbRocher.setBounds( w-75 , h - 50, 160, 40);
+			btnOk.setBounds( w-75, h , 160, 40);
+			btnAnnuler.setBounds( w-75 , h + 50, 160, 40);
+			
+			btnAnnuler.addActionListener(new EditCancel(frmNbR));			
 		    
 		    btnOk.addActionListener(new ActionListener()
             {
                     public void actionPerformed(ActionEvent e)
                     {
-                        frmNbC.setVisible( false );
+                        frmNbR.setVisible( false );
                     }
             });	
 		    
-			frmNbC.setVisible(true);
-		}
-	} class EditRocher implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			LOGGER.debug("Click de rocher");
-			System.exit(0);
+			frmNbR.setVisible(true);
+			
 		}
 	}
+	
+	
+	
 	
 	public class EditRenard implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -195,4 +229,106 @@ public class EditorIHM {
 			System.exit(0);
 		}
 	}
+	
+	
+	
+	
+	public class EditQuitter implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			LOGGER.debug("Click de quitter");
+			System.exit(0);
+		}
+	}
+	
+	
+	
+	
+	public class EditCancel implements ActionListener{
+		private JFrame frame;
+
+		public EditCancel(final JFrame frame){
+			this.frame = frame;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			frame.setVisible(false);
+			LOGGER.debug("Fermeture de " + frame.getTitle());
+		}
+	}
+	
+	
+	
+	public class EditOkCarotte implements ActionListener{
+		
+		private JTextField nbCarottes;
+		JFrame frame;
+		int nbC;
+		
+		public EditOkCarotte(JTextField nbCarottes,JFrame frame)
+		{
+			this.nbCarottes = nbCarottes;
+			this.frame = frame;
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			LOGGER.debug("Click de OK pour les carottes");
+			LOGGER.debug("Test : " + nbCarottes.getText());
+			
+			try{
+				nbC = Integer.parseInt(nbCarottes.getText());
+				frame.setVisible(false);
+				creationCarotte(nbC);
+				LOGGER.debug("C'est bien un int.");
+			}catch(NumberFormatException er){
+				LOGGER.debug("C'est pas un INT!!!!");
+				return;
+			}
+			
+			
+		}
+		
+		private void creationCarotte(int nbC)
+		{
+			LOGGER.debug("Création des carottes");
+				frame = new JFrame("Les Carottes!");
+				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+				frame.setSize(new Dimension(500,300));
+				frame.setLocation(600, 300);
+				frame.setLayout(null);
+				frame.getContentPane().setBackground(new Color(255, 102, 0));
+				frame.setResizable(false);
+				
+				int w = (frame.getWidth() /2);
+				int h = frame.getHeight()/2;
+				
+				JLabel ligne = new JLabel("N° Ligne :");
+				JLabel colonne = new JLabel("N° Colonne :");
+				JLabel nombre = new JLabel("Nombre :");
+				JTextField l = new JTextField();
+				JTextField c = new JTextField();
+				JTextField n = new JTextField();
+				JButton cancel = new JButton("Annuler");
+				JButton ok = new JButton("OK");
+				
+				frame.add(ligne);
+				frame.add(colonne);
+				frame.add(nombre);
+				frame.add(l);
+				frame.add(c);
+				frame.add(n);
+				
+				//text.setBounds( w-75 , h -100, 200, 40);
+				
+				ligne.setBounds(w-200, h-115, 100,40);
+				l.setBounds(w-200,h-70,100,40);
+				colonne.setBounds(w-50,h-115,100,40);
+				c.setBounds(w-50,h-70,100,40);
+				nombre.setBounds(w+100,h-115,100,40);
+				n.setBounds(w+100,h-70,100,40);
+				
+				frame.setVisible(true);
+		}
+	}
+	
+	
 }
