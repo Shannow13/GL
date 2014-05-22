@@ -33,7 +33,7 @@ public abstract class AbstractJardinDaoTest {
 	        LOGGER.debug("doBefore Fin");
 	    }
 	 
-	 //TODO Finir le Test 
+	  
 	 
 	 @Test
 	 public void tailleJardin(){
@@ -42,7 +42,8 @@ public abstract class AbstractJardinDaoTest {
 		 
 		 final int sizeXAttendue = 6;
 		 final int sizeYAttendue = 5;
-		 
+		 final int lvlAttendu = 1;
+		 final int debloqueAttendu = 1;
 		 final Jardin jardins = dao.findJardin();
 		 
 		 if(jardins != null)
@@ -50,6 +51,8 @@ public abstract class AbstractJardinDaoTest {
 		 
 		 assertEquals(sizeXAttendue, jardins.getSizeX());
 		 assertEquals(sizeYAttendue, jardins.getSizeY());
+		 assertEquals(lvlAttendu, jardins.getIndicelvl());
+		 assertEquals(debloqueAttendu, jardins.getDebloque());
 		 
 		 LOGGER.debug("Fin du Test de la taille du Jardin");	 
 			

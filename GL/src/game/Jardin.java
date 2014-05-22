@@ -9,9 +9,13 @@ public interface Jardin extends Serializable {
 	
 	int getSizeX();
 	int getSizeY();
+	int getIndicelvl();
+	int getDebloque();
 	
 	List<Rocher> getRochers();
 	List<Carottes> getCarottes();
+	
+
 	
 	
 	

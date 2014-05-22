@@ -178,6 +178,8 @@ private ArrayList<Rocher> addRochers(String[] ligne, ArrayList<Rocher> rochers){
     		
     		jardin.setSizeX(Integer.parseInt(lignes[1]));
     		jardin.setSizeY(Integer.parseInt(lignes[2]));
+    		jardin.setIndicelvl(Integer.parseInt(lignes[3]));
+    		jardin.setDebloque(Integer.parseInt(lignes[4]));
     		jardin.setCarottes(carottes);
     		jardin.setRochers(rochers);
     		System.out.println(jardin.sizeX);

@@ -12,6 +12,8 @@ public class SimpleJardin implements Jardin {
 	private static final long serialVersionUID = 1L;
 	public int sizeX;
 	public int sizeY;
+	public int indicelvl;
+	public int debloque;
 	private List<Rocher> rochers;
 	private List<Carottes> carottes;
 	
@@ -49,6 +51,23 @@ public class SimpleJardin implements Jardin {
 		this.sizeY = sizeY;
 	}
 
+	@Override
+	public int getIndicelvl(){
+		return this.indicelvl;
+	}
+	
+	public void setIndicelvl(int indicelvl){
+		this.indicelvl = indicelvl;
+	}
+	
+	@Override
+	public int getDebloque(){
+		return this.debloque;
+	}
+	public void setDebloque(int debloque){
+		
+		this.debloque = debloque;
+	}
 	@Override
 	public List<Rocher> getRochers() {
 		return this.rochers;
