@@ -5,6 +5,8 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -47,6 +49,11 @@ public class EditorIHM {
 	    carotte.setBounds( w - 50, h -50, 200, 40);
 	    rocher.setBounds( w - 50, h , 200, 40);
 	    renard.setBounds( w - 50, h +50, 200, 40 );
+	    
+	    jardin.addActionListener(new EditJardin());
+	    carotte.addActionListener(new EditCarotte());
+	    rocher.addActionListener(new EditRocher());
+	    renard.addActionListener(new EditRenard());
 		
 		/*GridLayout gridL = new GridLayout(4,1);
 		gridL.setHgap(50);
@@ -71,6 +78,34 @@ public class EditorIHM {
 	
 	public static void main(String[] args){
 		new EditorIHM();
+	}
+	
+	public class EditJardin implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			LOGGER.debug("Click de jardin");
+			System.exit(0);
+		}
+	}
+	
+	public class EditCarotte implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			LOGGER.debug("Click de carotte");
+			System.exit(0);
+		}
+	}
+	
+	public class EditRocher implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			LOGGER.debug("Click de rocher");
+			System.exit(0);
+		}
+	}
+	
+	public class EditRenard implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			LOGGER.debug("Click de renard");
+			System.exit(0);
+		}
 	}
 	
 }
