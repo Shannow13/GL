@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import game.Jardin;
 //import game.SimpleJardin;
 import gl.dao.CsvJardinDao;
+import gl.dao.DefinitiveCsvJardinDao;
 
 import java.io.File;
 
@@ -19,7 +20,7 @@ public abstract class AbstractJardinDaoTest {
 	 private final static String RESOURCES_PATH = "resources/";
 	 private final static String JARDIN_FILE_NAME = "jardin-1.csv";
 	 
-	 protected CsvJardinDao dao;
+	 protected DefinitiveCsvJardinDao dao;
 	 
 	 @Before
 	    public void doBefore() {
