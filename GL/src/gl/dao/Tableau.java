@@ -32,6 +32,7 @@ public class Tableau extends JFrame {
 	public JPanel[][] jp;
 	public boolean[] isLapinAlive;
 	public boolean over;
+	public int tours;
 	
 	
 	
@@ -157,6 +158,9 @@ public class Tableau extends JFrame {
 			isLapinAlive[i] = true;
 		}
 		
+		
+		tours = 1;
+		
 		Scanner scan = new Scanner(System.in);
 		
 		
@@ -165,6 +169,8 @@ public class Tableau extends JFrame {
 		
 		
 		while(resteCarottes(jardin) == true && resteLapinsVivants(isLapinAlive) == true) {
+			
+			LOGGER.debug("tour : "+tours);
 			
 			
 			
@@ -192,6 +198,8 @@ public class Tableau extends JFrame {
 				boolean ok = false;
 				do {
 					
+					
+					// TODO remplacer le scanner par des actionlistener sur le coté du tableau
 					String s = scan.next();
 					s.toUpperCase();
 					System.out.print(s);
@@ -349,9 +357,155 @@ public class Tableau extends JFrame {
 			}
 			
 			LOGGER.debug("fin du tour joueur");
+			LOGGER.debug("debut du tout renards");
 			
-			// TODO phase renards
+			for(int i=0; i<renards.size(); i++) {
+				SimpleRenard r = (SimpleRenard) renards.get(i);
+				
+				String trajet = r.getTrajet();
+				LOGGER.debug("trajet : "+trajet);
+				char dir = trajet.charAt(tours%trajet.length());
+				LOGGER.debug("dir : "+dir);
+				
+				int rx = r.getPositionX();
+				int ry = r.getPositionY();
+				char o = r.getOrientation();
+				
+				
+				if(dir == 'A') {
+					switch(o) {
+					case 'N': 
+						if(rx != 0) {
+							if(jardin[rx-1][ry] == 'r') {
+								LOGGER.warn("Déplacement du renard sur un rocher impossible");
+								break;
+							} else {
+								(jp[rx][ry]).setBackground(Color.green);
+								r.setPositionX(rx-1);
+								(jp[r.getPositionX()][r.getPositionY()]).setBackground(Color.red);
+								break;
+							}
+						}
+						else {
+							LOGGER.warn("Déplacement du renard impossible");
+							break;
+						}
+													
+					case 'S':
+						if(rx != x-1) {
+							if(jardin[rx+1][ry] == 'r') {
+								LOGGER.warn("Déplacement du renrad sur un rocher impossible");
+								break;
+							} else {
+								(jp[rx][ry]).setBackground(Color.green);
+								r.setPositionX(rx+1);
+								(jp[r.getPositionX()][r.getPositionY()]).setBackground(Color.red);
+								break;
+							}
+						}
+						else {
+							LOGGER.warn("Déplacement du renard impossible");
+							break;
+						}
+						
+					case 'E':
+						if(ry != y-1) {
+							if(jardin[rx][ry+1] == 'r') {
+								LOGGER.warn("Déplacement du renard sur un rocher impossible");
+								break;
+							}
+							else {
+								(jp[rx][ry]).setBackground(Color.green);
+								r.setPositionY(ry+1);
+								(jp[r.getPositionX()][r.getPositionY()]).setBackground(Color.red);
+								break;
+							}
+						}
+						else {
+							LOGGER.warn("Déplacement du renard impossible");
+							break;
+						}
+						
+					case 'W':
+						if(ry != 0) {
+							if(jardin[rx][ry-1] == 'r') {
+								LOGGER.warn("Déplacement du renard sur un rocher impossible");
+								break;
+							} else {
+								(jp[rx][ry]).setBackground(Color.green);
+								r.setPositionY(ry-1);
+								(jp[r.getPositionX()][r.getPositionY()]).setBackground(Color.red);
+								break;
+							}
+						}
+						else {
+							LOGGER.warn("Déplacement du renard impossible");
+							break;
+						}
+					}
+				}
+				else if(dir == 'D') {
+					switch(o){
+						case('N'):
+							r.setOrientation('E'); break;
+						case('E'):
+							r.setOrientation('S'); break;
+						case('S'):
+							r.setOrientation('W'); break;
+						case('W'):
+							r.setOrientation('N'); break;							
+					}
+					(jp[rx][ry]).setBackground(Color.red);
+					LOGGER.debug("Nouvelle orientation du renard : " + o);
+				}
+				else if(dir == 'G') {
+					switch(o){
+						case('N'):
+							r.setOrientation('W'); break;
+						case('E'):
+							r.setOrientation('N'); break;
+						case('S'):
+							r.setOrientation('E'); break;
+						case('W'):
+							r.setOrientation('S'); break;							
+					}
+					(jp[rx][ry]).setBackground(Color.red);
+					LOGGER.debug("Nouvelle orientation du renard : " + o);
+				}
+				else {
+					LOGGER.error("Erreur du trajet du renard");
+				}
+				
+				
+				for(int j=0; j< lapins.size(); j++) {
+					Lapin l = lapins.get(j);
+					if(rx == l.getPositionX() && ry == l.getPositionY()) {
+						LOGGER.debug("Renard a buté un lapin");
+						(jp[rx][ry]).setBackground(Color.red);
+						isLapinAlive[i] = false;
+						if(!resteLapinsVivants(isLapinAlive)) {
+							over = true;
+						}
+						break;
+					}
+					
+				}
+				
+				if(over) {
+					break;
+				}
+				
+				
+				
+			}
 			
+			if(over) {
+				break;
+			}
+			
+			LOGGER.debug("fin de la phase renards");
+			LOGGER.debug("fin de ce tour");
+			tours ++;
 		}
 		
 		
