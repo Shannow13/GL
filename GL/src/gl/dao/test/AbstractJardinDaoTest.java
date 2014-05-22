@@ -2,7 +2,7 @@ package gl.dao.test;
 import static org.apache.log4j.Logger.getLogger;
 import static org.junit.Assert.*;
 import game.Jardin;
-import game.SimpleJardin;
+//import game.SimpleJardin;
 import gl.dao.CsvJardinDao;
 
 import java.io.File;
@@ -10,7 +10,7 @@ import java.io.File;
 import org.apache.log4j.*;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
+//import org.junit.Assert;
 
 
 public abstract class AbstractJardinDaoTest {
