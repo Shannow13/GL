@@ -23,6 +23,8 @@ public abstract class AbstractJardinDaoTest {
 	 
 	 @Before
 	    public void doBefore() {
+		 
+		 //On initialise le fichier utilisé par les tests
 	        LOGGER.debug("doBefore Debut");
 
 	        final File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
@@ -35,7 +37,7 @@ public abstract class AbstractJardinDaoTest {
 	 
 	 @Test
 	 public void tailleJardin(){
-		 
+		 // On teste la taille du jardin pour vérifier la bonne construction du Jardin
 		 LOGGER.debug("Test de la Taille du Jardin");
 		 
 		 final int sizeXAttendue = 6;
@@ -56,7 +58,7 @@ public abstract class AbstractJardinDaoTest {
 	 
 	 @Test
 	 public void testnbCarottes(){
-
+		 //On teste le nombre de carottes de l'objet afin de vérifier sa construction 
 		 int nbCarottesAttendues = 2;
 		 
 		 final Jardin jardins = dao.findJardin();
@@ -66,7 +68,7 @@ public abstract class AbstractJardinDaoTest {
 	 }
 	 @Test
 	 public void testplaceCarotte(){
-		 
+		 //On teste l'emplacement des carottes et leur nombre afin de vérifier la bonne construction de l'objet.
 		 int positionXattendue = 4;
 		 int positionYattendue = 2;
 		 int nbAttendu = 1;

@@ -47,8 +47,10 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
             throw new IllegalStateException("Le fichier est vide...");
        
         }try{
+        	//On construit le Jardin
         	
         	lvljardin = new SimpleJardin();
+        	//Transformation du CSV en liste de String[] afin de créer un jardin correct
 		final List<String[] > lignes = getLignesFromFile();
 		
 			LOGGER.debug("On a transformé le CSV en lignes");
@@ -56,20 +58,23 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
 			for(String[] ligne : lignes){
 				if(ligne[0].charAt(0) == 'J'){
 					LOGGER.debug("Jardin");
+					//on saute la première ligne qui contient la taille du jardin, elle sera traitée plus loin
 					continue;
 				}
 				if(ligne[0].charAt(0) == 'C'){
 					LOGGER.debug("Carotte");
+					//Dès qu'on voit une carotte on l'ajoute à la liste 
 					addCarottes(ligne,carottes);
 					LOGGER.debug("Carotte ajoutée !");
 				}
 				if(ligne[0].charAt(0) == 'R'){
 					addRochers(ligne, rochers);
+					//Dès qu'on voit un rocher on l'ajoute à la liste de rochers
 					LOGGER.debug("Rocher ajouté !");
 				}
 			}
 		
-		
+			//on transforme le tout en jardin
 			transformLigneToJardin(lignes.get(0), lvljardin, carottes, rochers);
 		
         }catch(Exception e){
@@ -79,9 +84,10 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
 
 	private ArrayList<Carottes> addCarottes(String[] ligne, ArrayList<Carottes> carotte){
 		
+		//On crée un nouvel objet carotte
 		final SimpleCarottes carotteplus = new SimpleCarottes();
 		LOGGER.debug("Début de la création");
-		
+		//On initialise ses variables
 		carotteplus.setPositionX(Integer.parseInt(ligne[1]));
 		carotteplus.setPositionY(Integer.parseInt(ligne[2]));
 		carotteplus.setNombre(Integer.parseInt(ligne[3]));
@@ -89,18 +95,19 @@ public class DefinitiveCsvJardinDao implements CsvJardinDao {
 		LOGGER.debug("ajout à la liste");
 		if(carottes == null)
 		{
+			//Si la liste passée en paramètre est nulle on la crée
 			carottes = new ArrayList<Carottes>();
 			LOGGER.debug("carottes NULL");
 		}
-		
+			//On ajoute l'objet à la liste
 			carottes.add(carotteplus);
 			LOGGER.debug("A été ajouté");
-			
+			// on retourne la Liste
 	return carotte;
 	}
 
 private ArrayList<Rocher> addRochers(String[] ligne, ArrayList<Rocher> rochers){
-	
+	//Même principe que pour la carotte
 	final SimpleRocher rocherplus = new SimpleRocher();
 	
 	LOGGER.debug("Création de l'objet Rocher");
@@ -132,6 +139,7 @@ private ArrayList<Rocher> addRochers(String[] ligne, ArrayList<Rocher> rochers){
 	        final List<String[] > lignes = new ArrayList<String[] >();
 	        
 	        try {
+	        	// on ouvre le fichier et on se sert de csvreader afin de le transformer en liste de String[]
 	            final FileReader fr = new FileReader(file);
 	            final CSVReader csvReader = new CSVReader(fr, SEPARATOR);
 	            
@@ -166,7 +174,7 @@ private ArrayList<Rocher> addRochers(String[] ligne, ArrayList<Rocher> rochers){
 
 
     private Jardin transformLigneToJardin(final String[] lignes, final SimpleJardin jardin, final ArrayList<Carottes> carottes, final ArrayList<Rocher> rochers){
-    	
+    	//On crée le Jardin
     		
     		jardin.setSizeX(Integer.parseInt(lignes[1]));
     		jardin.setSizeY(Integer.parseInt(lignes[2]));
