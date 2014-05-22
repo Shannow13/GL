@@ -62,6 +62,7 @@ public class EditorIHM {
 		panel = new JPanel();
 		panel.setLayout(gridL);
 		
+		
 		panel.add(jardin);
 		panel.add(carotte);
 		panel.add(rocher);
