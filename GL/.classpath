@@ -4,8 +4,8 @@
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Pierre-Jean/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Pierre-Jean/.m2/repository/log4j/log4j/1.2.13/log4j-1.2.13.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Pierre-Jean/.m2/repository/fr/ybonnel/csvengine/1.3.5/csvengine-1.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Windows/.m2/repository/fr/ybonnel/csvengine/1.3.5/csvengine-1.3.5.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Windows/.m2/repository/log4j/log4j/1.2.13/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Windows/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
