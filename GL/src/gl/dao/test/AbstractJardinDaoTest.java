@@ -2,8 +2,6 @@ package gl.dao.test;
 import static org.apache.log4j.Logger.getLogger;
 import static org.junit.Assert.*;
 import game.Jardin;
-//import game.SimpleJardin;
-import gl.dao.CsvJardinDao;
 import gl.dao.DefinitiveCsvJardinDao;
 
 import java.io.File;
