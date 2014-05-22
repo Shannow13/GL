@@ -24,7 +24,7 @@ public class SimpleLapin implements Lapin {
 		
 	}
 	
-	public SimpleLapin(int positionX, int positionY, char orientation, String trajet, String nom) {
+	public SimpleLapin(int positionX, int positionY, char orientation, String nom) {
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.orientation = orientation;
