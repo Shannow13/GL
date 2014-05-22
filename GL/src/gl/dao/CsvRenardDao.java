@@ -2,7 +2,7 @@ package gl.dao;
 
 import java.io.File;
 
-public interface CsvLapinDao extends LapinDao {
+public interface CsvRenardDao extends RenardDao {
 
 	/**
 	 * Initialisation du DAO.

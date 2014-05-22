@@ -33,14 +33,6 @@ public interface Lapin extends Serializable {
 	
 	/**
 	 * 
-	 * Fonction recuperant le trajet complet d'un lapin
-	 * 
-	 *  @return
-	 */
-	String getTrajet();
-	
-	/**
-	 * 
 	 * Fonction recuperant le nom d'un lapin
 	 * 
 	 * @return

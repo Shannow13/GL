@@ -1,12 +1,9 @@
 package game;
 
-public class SimpleLapin implements Lapin {
+public class SimpleRenard implements Renard {
+
 	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	
 	
@@ -14,20 +11,22 @@ public class SimpleLapin implements Lapin {
 	private int positionX;
 	private int positionY;
 	private char orientation;
+	private String trajet;
 	private String nom;
 	
 	
 	
 	
 	/*constructeur*/
-	public SimpleLapin(){
+	public SimpleRenard(){
 		
 	}
 	
-	public SimpleLapin(int positionX, int positionY, char orientation, String trajet, String nom) {
+	public SimpleRenard(int positionX, int positionY, char orientation, String trajet, String nom) {
 		this.positionX = positionX;
 		this.positionY = positionY;
 		this.orientation = orientation;
+		this.trajet = trajet;
 		this.nom = nom;
 		
 	}
@@ -73,13 +72,24 @@ public class SimpleLapin implements Lapin {
 	public void setOrientation(char orientation) {
 		this.orientation = orientation;
 	}
+	
+	@Override
+	public String getTrajet() {
+		return this.trajet;
+	}
+	
+	public void setTrajet(String trajet) {
+		this.trajet = trajet;
+	}
+	
 
 	@Override
 	public String getNom() {
-		return this.nom;
+		return nom;
 	}
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	
 }

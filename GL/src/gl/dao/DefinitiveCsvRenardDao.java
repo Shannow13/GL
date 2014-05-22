@@ -1,8 +1,8 @@
 package gl.dao;
 
-import game.Lapin;
-import game.SimpleLapin;
-//import gl.dao.test.AbstractCsvLapinDaoTest;
+import game.Renard;
+import game.SimpleRenard;
+//import gl.dao.test.AbstractCsvRenardDaoTest;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,12 +13,12 @@ import org.apache.log4j.Logger;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-public class DefinitiveCsvLapinDao implements CsvLapinDao {
+public class DefinitiveCsvRenardDao implements CsvRenardDao {
 
 	private File file;
-	private static final Logger LOGGER = Logger.getLogger(DefinitiveCsvLapinDao.class);
+	private static final Logger LOGGER = Logger.getLogger(DefinitiveCsvRenardDao.class);
 	private final static char SEPARATOR = ';';
-	private List<Lapin> lapins;
+	private List<Renard> renards;
 	
 	@Override
 	public void init(File file) {
@@ -26,12 +26,12 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
 		this.file=file;
 		
 		//Nouvelle lecture à chaque init. Cela permet ainsi de changer de fichier ou de le recharger.
-		reloadLapins();
+		reloadRenards();
 		
 	}
 	
-    private void reloadLapins() {
-    	 LOGGER.debug("reloadLapins");
+    private void reloadRenards() {
+    	 LOGGER.debug("reloadRenards");
 
          if (file == null) {
              throw new IllegalStateException("Le fichier est vide...");
@@ -43,11 +43,11 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
             
             
 
-             lapins = new ArrayList<Lapin>(lignes.size());
+             renards = new ArrayList<Renard>(lignes.size());
              
              for (String[] ligne : lignes) {
-                 final Lapin lapin= transformLigneToLapin(ligne);
-                 lapins.add(lapin);
+                 final Renard renard= transformLigneToRenard(ligne);
+                 renards.add(renard);
 
              
              }
@@ -100,30 +100,30 @@ public class DefinitiveCsvLapinDao implements CsvLapinDao {
         return lignes;
     }
 
-    private Lapin transformLigneToLapin(final String [] values){
+    private Renard transformLigneToRenard(final String [] values){
     	
-    	final SimpleLapin lapin = new SimpleLapin();
+    	final SimpleRenard renard = new SimpleRenard();
     	
     	
     	
-    	lapin.setPositionX(Integer.parseInt(values[1]));
-    	lapin.setPositionY(Integer.parseInt(values[2]));
-    	lapin.setOrientation(values[3].charAt(0));
-    	lapin.setTrajet(values[4]);
-    	lapin.setNom(values[5]);
+    	renard.setPositionX(Integer.parseInt(values[1]));
+    	renard.setPositionY(Integer.parseInt(values[2]));
+    	renard.setOrientation(values[3].charAt(0));
+    	renard.setTrajet(values[4]);
+    	renard.setNom(values[5]);
     	
-    	return lapin;
+    	return renard;
     	
     }
 
 	
 	@Override
-	public List<Lapin> findAllLapins() {
-		LOGGER.debug("Remplissage des Lapins");
+	public List<Renard> findAllRenards() {
+		LOGGER.debug("Remplissage des Renards");
 		
 		
 		
-		return lapins;
+		return renards;
 	}
 
 	// Getters
