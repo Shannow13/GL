@@ -321,6 +321,8 @@ public class EditorIHM {
 				frame.add(l);
 				frame.add(c);
 				frame.add(n);
+				frame.add(cancel);
+				frame.add(ok);
 				
 				//text.setBounds( w-75 , h -100, 200, 40);
 				
@@ -330,8 +332,12 @@ public class EditorIHM {
 				c.setBounds(w-50,h-70,100,40);
 				nombre.setBounds(w+100,h-115,100,40);
 				n.setBounds(w+100,h-70,100,40);
+				cancel.setBounds(w-150,h+50,100,40);
+				ok.setBounds(w+50,h+50,100,40);
 				
 				frame.setVisible(true);
+				
+				cancel.addActionListener(new EditCancel(frame));
 		}
 	}
 	
