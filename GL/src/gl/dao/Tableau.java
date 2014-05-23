@@ -4,10 +4,10 @@ import game.Jardin;
 import game.Lapin;
 import game.Renard;
 import game.Rocher;
-import game.SimpleJardin;
+//import game.SimpleJardin;
 import game.SimpleLapin;
 import game.SimpleRenard;
-import gl.dao.*;
+//import gl.dao.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -34,8 +34,7 @@ public class Tableau extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public static final Logger LOGGER = Logger.getLogger(Tableau.class);
 
-	public List<Renard> renards;
-	public List<Lapin> lapins;
+	
 	public char[][] jardin;
 	public JPanel[][] jp;
 	public boolean[] isLapinAlive;
@@ -56,9 +55,17 @@ public class Tableau extends JFrame {
 	
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String JARDIN_FILE_NAME = "jardin-1.csv";
+	private final static String RENARD_FILE_NAME = "DAO/renard-1.csv";
 	final static File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
+	final static File renard_file = new File(RESOURCES_PATH + RENARD_FILE_NAME);
+	
+	public ArrayList<Carottes> carottes;
+	public ArrayList<Rocher> rochers;
 
-
+	public List<Renard> renards;
+	public List<Lapin> lapins;
+	
+	
 	public Tableau(Jardin jardins) {
 
 		
@@ -66,10 +73,11 @@ public class Tableau extends JFrame {
 		
 		int x = jardins.getSizeX();
 		int y = jardins.getSizeY();
-		ArrayList<Carottes> carottes = new ArrayList<Carottes>();
-		ArrayList<Rocher> rochers = new ArrayList<Rocher>();
+		carottes = new ArrayList<Carottes>();
+		rochers = new ArrayList<Rocher>();
 		carottes = jardins.getCarottes();
 		rochers = jardins.getRochers();
+		//renards = TODO
 		over = false;
 
 		jardin = new char[x][y]; //Tableau du jardin avec infos herbe, carottes et rochers
@@ -274,13 +282,6 @@ public class Tableau extends JFrame {
 				boolean ok = false;
 				do {
 
-
-					// TODO remplacer le scanner par des actionlistener sur le coté du tableau
-					/*String s = scan.next();
-					s.toUpperCase();
-					System.out.print(s);
-					char dir = s.charAt(0);
-					System.out.println(" "+ dir);*/
 					
 					nameLabel.setText(l.getNom());
 					orientLabel.setText("orientation : "+ l.getOrientation());
