@@ -4,11 +4,9 @@ import game.Jardin;
 import game.Lapin;
 import game.Renard;
 import game.Rocher;
-//import game.SimpleJardin;
 import game.SimpleLapin;
 import game.SimpleRenard;
 
-//import gl.dao.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,27 +53,31 @@ public class Tableau extends JFrame {
 	
 	public static Jardin jardins;
 	
-	/*private final static String RESOURCES_PATH = "resources/";
-	private final static String JARDIN_FILE_NAME = "jardin-1.csv";
-	private final static String RENARD_FILE_NAME = "DAO/renard-1.csv";
-	private final static String LAPIN_FILE_NAME = "DAO/lapin-1.csv";
-	final static File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
-	final static File renard_file = new File(RESOURCES_PATH + RENARD_FILE_NAME);
-	final static File lapin_file = new File(RESOURCES_PATH + LAPIN_FILE_NAME);*/
-	
-	
 	public ArrayList<Carottes> carottes;
 	public ArrayList<Rocher> rochers;
-
 	public List<Renard> renards;
 	public List<Lapin> lapins;
 	
-	
+	/**
+	 * 
+	 * @param jardin_file
+	 * @param renard_file
+	 * @param lapin_file
+	 * 
+	 * constructeur du tableau ; appel a doDao, pour ouvrir les fichiers contenant les données du niveau
+	 */
 	public Tableau(final String jardin_file, final  String renard_file, final String lapin_file){
 		doDao(jardin_file, renard_file, lapin_file);
 	}
 	
-	
+	/**
+	 * 
+	 * @param jardin_file
+	 * @param renard_file
+	 * @param lapin_file
+	 * 
+	 * ouvre les fichiers contenant les données et initialise les listes de lapins, renard, et le jardin
+	 */
 	private void doDao(final String jardin_file, final  String renard_file, final String lapin_file) {
 		LOGGER.debug("On va créer le jardin");
 		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
@@ -90,15 +92,15 @@ public class Tableau extends JFrame {
 		tableauCrea(jardins, renards, lapins);
 	}
 
-
-	/*private void doWork(final JardinDao dao, final RenardDao daoR, final CsvLapinDao daoL) {
-		final Jardin jardins = dao.findJardin();
-		final List<Renard> renards = daoR.findAllRenards();
-		final List<Lapin> lapins = daoL.findAllLapins();
-		tableauCrea(jardins, renards, lapins);
-	}*/
 	
-	
+	/**
+	 * 
+	 * @param jardins
+	 * @param renards
+	 * @param lapins
+	 *
+	 *	création du Tableau de jeu et exécution de l'algorithme
+	 */
 	public void tableauCrea(Jardin jardins, List<Renard> renards, List<Lapin> lapins) {
 
 		
@@ -107,6 +109,7 @@ public class Tableau extends JFrame {
 		orientImg = new ImageIcon("resources/img/fN.png");
 		orientPhoto = new JLabel(orientImg);
 	
+		// récupération des données du jardin
 		int x = jardins.getSizeX();
 		int y = jardins.getSizeY();
 		carottes = new ArrayList<Carottes>();
@@ -139,15 +142,6 @@ public class Tableau extends JFrame {
 			
 		}
 		
-		//jardin[2][2] = 'c'; // carotte
-		//jardin[4][4] = 'r'; // rocher
-		/*jardin[2][4] = 'l'; // lapin
-		jardin[5][5] = 'l';
-		jardin[0][0] = 'l';
-		jardin[1][1] = 'f'; // renard ; fox*/
-
-
-		
 		/*
 		 * X : lignes
 		 * Y : colonnes
@@ -156,18 +150,7 @@ public class Tableau extends JFrame {
 		
 		
 
-		/*ajout de renards pour la liste*/
-		LOGGER.debug("init renards");
-		/*renards = new ArrayList<Renard>();
-		renards.add(new SimpleRenard(1,1,'S',"AGAGAGAGADADADAD","Fox1"));*/
-
-		LOGGER.debug("init lapins");
-		//lapins = new ArrayList<Lapin>();
-		//lapins.add(new SimpleLapin(2,4,'E',"Bugs"));
-		//lapins.add(new SimpleLapin(5,5,'N',"Bunny"));
-		//lapins.add(new SimpleLapin(0,0,'E',"Wabbit"));
-
-
+		/*paramètrage du tableau*/
 		this.setTitle("Terrain de jeu"); //Titre de la fenêtre
 		this.setSize(100*x,120*y); //Taille de la fenêtre
 		this.setResizable(false); //On interdit à l'utilisateur la possibilité de redimensionner la fenêtre
@@ -317,8 +300,7 @@ public class Tableau extends JFrame {
 		c.add(eastPanel, BorderLayout.EAST);
 		
 		
-		//this.setUndecorated(true);
-		//this.removeNotify();
+		
 		
 		LOGGER.debug("pop fenetre"); //Debug de console
 		this.setVisible(true); // Autoriser l'affichage de la fenêtre
@@ -346,11 +328,13 @@ public class Tableau extends JFrame {
 
 
 			LOGGER.debug("player's turn");
+			//phase du joueur : on va donner un ordre a tous les lapins vivants
 			for(int i = 0; i<lapins.size(); i++) {
-				if(!isLapinAlive[i]) {
+				if(!isLapinAlive[i]) {	// si le lapin est mort, on passe au suivant
 					continue;
 				}
-
+				
+				//on récupère les infos du lapin courant
 				SimpleLapin l = (SimpleLapin) lapins.get(i);
 				char o = l.getOrientation();
 				int lx = l.getPositionX();
@@ -360,15 +344,15 @@ public class Tableau extends JFrame {
 				(jp[lx][ly]).setBackground(Color.cyan);
 
 				LOGGER.debug("choix de l'action");
-				System.out.println("Orientation actuelle : " + o);
+				/*System.out.println("Orientation actuelle : " + o);
 				System.out.println("Choisir la direction (D,G,A)");
 				System.out.println("Si A, tout droit");
 				System.out.println("Sinon, on pivote de 90 degres vers le cote souhaite");
-
+				 */
 				dir = '0';
 				boolean ok = false;
 				do {
-
+					//affichage des parmaètres sur la fenêtre
 					nameLabel.setText(l.getNom());
 					orientLabel.setText("orientation : "+ l.getOrientation());
 					orientImg = new ImageIcon("resources/img/f"+ l.getOrientation() + ".png");
@@ -403,11 +387,12 @@ public class Tableau extends JFrame {
 
 						case 'S': //Dans le cas où le lapin avait pour direction initiale le SUD
 							if(lx != x-1) {
-								if(jardin[lx+1][ly] == 'r') {
+								if(jardin[lx+1][ly] == 'r') { // le lapin ne peut pas aller sur un rocher
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
 									dir = '0';
 									break;
 								} else {
+									// on déplace le lapin une case plus bas
 									(jp[lx][ly]).removeAll();
 									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
 									(jp[lx][ly]).setBackground(new Color( 80, 151, 9));
@@ -420,13 +405,14 @@ public class Tableau extends JFrame {
 									break;
 								}
 							}
-							else {
+							else { //le lapin de ne pas se déplacer plus bas si il est déjà tout en bas
 								dir = '0';
 								System.out.println("Déplacement impossible, reessayer");
 								break;
 							}
 
 						case 'E': //Dans le cas où le lapin avait pour direction initiale l'EST
+							// même principe que pour le SUD
 							if(ly != y-1) {
 								if(jardin[lx][ly+1] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
@@ -452,6 +438,7 @@ public class Tableau extends JFrame {
 							}
 
 						case 'W': //Dans le cas où le lapin avait pour direction initiale l'OUEST
+							//même principe que les autres directions
 							if(ly != 0) {
 								if(jardin[lx][ly-1] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
@@ -516,27 +503,31 @@ public class Tableau extends JFrame {
 
 				}while(!ok); //On attend la commande du joueur tant que le flag "ok" n'est pas à "true"
 
+				//on mémorise les nouvelles coordonnées du lapin
 				lx = l.getPositionX();
 				ly = l.getPositionY();
 
-				if(jardin[lx][ly] == 'c') {
+				if(jardin[lx][ly] == 'c') {	// si le lapin est sur une carotte, il la mange
 					LOGGER.debug("Carotte mangee");
 					jardin[lx][ly] = 'h';
 					(jp[lx][ly]).removeAll();
 					(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
 					(jp[lx][ly]).setBackground(Color.white);
 					this.validate();
-					if(!resteCarottes(jardin)) {
+					if(!resteCarottes(jardin)) { // si il n'y a plus de carottes, le joueur gagne
 						over = true;
 						flagWin = true;
 					}
 				}
 
 				for(Renard r : renards) {
+					// si le joueur fait sournoisement rentrer le lapin en contact
+					// avec un renard, le napin meurt
 					if(lx == r.getPositionX() && ly == r.getPositionY()) {
 						LOGGER.debug("Lapin mort sur un renard");
 						(jp[lx][ly]).setBackground(Color.red);
 						isLapinAlive[i] = false;
+						//si il n'y a plus de lapins vivants, le joueur a perdu
 						if(!resteLapinsVivants(isLapinAlive)) {
 							over = true;
 						}
@@ -550,36 +541,42 @@ public class Tableau extends JFrame {
 				}
 
 				LOGGER.debug("lapin suivant");
+				
 			}
-
+			
+			// si la partie est finie, on sort directement du jeu
 			if(over) {
 				break;
 			}
-
+			
 			LOGGER.debug("fin du tour joueur");
 			LOGGER.debug("debut du tout renards");
-
+			// on parcourt tous les renards
 			for(int i=0; i<renards.size(); i++) {
 				SimpleRenard r = (SimpleRenard) renards.get(i);
-
+				
+				// on récupère le prochain mouvement du renard grâce a son pattern
 				String trajet = r.getTrajet();
 				LOGGER.debug("trajet : "+trajet);
+				// on boucle sur le pattern si on arrive au bout
 				char dir = trajet.charAt(tours%trajet.length());
 				LOGGER.debug("dir : "+dir);
-
+				
+				//récupération des coordonnées actuelles du renard
 				int rx = r.getPositionX();
 				int ry = r.getPositionY();
 				char o = r.getOrientation();
 
-
+				// si le renard doit avancer
 				if(dir == 'A') {
 					switch(o) {
-					case 'N': 
+					case 'N': // au NORD 
 						if(rx != 0) {
-							if(jardin[rx-1][ry] == 'r') {
+							if(jardin[rx-1][ry] == 'r') {	// le renard ne peut avancer dans un rocher, donc il ne fait rien
 								LOGGER.warn("Déplacement du renard sur un rocher impossible");
 								break;
 							} else {
+								//le renard avance d'une case plus haut (même principe que les lapins)
 								(jp[rx][ry]).removeAll();
 								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
 								(jp[rx][ry]).setBackground(new Color( 80, 151, 9));
@@ -591,12 +588,12 @@ public class Tableau extends JFrame {
 								break;
 							}
 						}
-						else {
+						else { // le renard ne peut pas avancer plus bas si il est déjà tout en bas
 							LOGGER.warn("Déplacement du renard impossible");
 							break;
 						}
 
-					case 'S':
+					case 'S': // au SUD, même principe
 						if(rx != x-1) {
 							if(jardin[rx+1][ry] == 'r') {
 								LOGGER.warn("Déplacement du renard sur un rocher impossible");
@@ -618,7 +615,7 @@ public class Tableau extends JFrame {
 							break;
 						}
 
-					case 'E':
+					case 'E': // à l'est même principe
 						if(ry != y-1) {
 							if(jardin[rx][ry+1] == 'r') {
 								LOGGER.warn("Déplacement du renard sur un rocher impossible");
@@ -641,7 +638,7 @@ public class Tableau extends JFrame {
 							break;
 						}
 
-					case 'W':
+					case 'W': // a l'OUEST même principe
 						if(ry != 0) {
 							if(jardin[rx][ry-1] == 'r') {
 								LOGGER.warn("Déplacement du renard sur un rocher impossible");
@@ -664,7 +661,7 @@ public class Tableau extends JFrame {
 						}
 					}
 				}
-				else if(dir == 'D') {
+				else if(dir == 'D') { // le renard tourne sur lui même à 90° sur sa droite
 					switch(o){
 						case('N'):
 							r.setOrientation('E'); break;
@@ -678,7 +675,7 @@ public class Tableau extends JFrame {
 					(jp[rx][ry]).setBackground(Color.red);
 					LOGGER.debug("Nouvelle orientation du renard : " + o);
 				}
-				else if(dir == 'G') {
+				else if(dir == 'G') { // le renard tourne sur lui même à 90° sur sa droite
 					switch(o){
 						case('N'):
 							r.setOrientation('W'); break;
@@ -692,24 +689,26 @@ public class Tableau extends JFrame {
 					(jp[rx][ry]).setBackground(Color.red);
 					LOGGER.debug("Nouvelle orientation du renard : " + o);
 				}
-				else if(dir == 'X') {
+				else if(dir == 'X') { // le renard attend patiemment sa proie
 					LOGGER.debug("renard statique");
 				}
-				else {
+				else { //sinon, le pattern est éronné ; le renard ne fait rien
 					LOGGER.error("Erreur du trajet du renard");
 				}
 
-				
+				// obtention des nouvelles coordonnées du lapin
 				rx = r.getPositionX();
 				ry = r.getPositionY();
 				
+				// on regarde si le renard est arrivé sur un lapin
 				for(int j=0; j< lapins.size(); j++) {
 					Lapin l = lapins.get(j);
+					// si le renard arrive sur un lapin, il le mange
 					if(rx == l.getPositionX() && ry == l.getPositionY()) {
-						LOGGER.debug("Renard a buté un lapin");
+						LOGGER.debug("Renard a tué un lapin");
 						(jp[rx][ry]).setBackground(Color.red);
 						isLapinAlive[j] = false;
-						if(!resteLapinsVivants(isLapinAlive)) {
+						if(!resteLapinsVivants(isLapinAlive)) { // si il n'y a plus de lapin, le joueur perd
 							over = true;
 							//flagWin = true;
 						}
@@ -731,6 +730,7 @@ public class Tableau extends JFrame {
 			LOGGER.debug("fin de la phase renards");
 			
 			LOGGER.debug("mise à jour du tableau");
+			// mise à jour du tableau; correction de bugs
 			for(int i = 0; i<jardin.length;i++) {
 				for(int j = 0; j>jardin[0].length;j++) {
 					if(jardin[i][j] == 'c') {
@@ -746,10 +746,11 @@ public class Tableau extends JFrame {
 			
 			
 			LOGGER.debug("fin de ce tour");
-			tours ++;
+			tours ++; // tour suivant
 		}
 
-
+		
+		// arrivé à ce point, la partie est terminée
 		LOGGER.debug("closing");
 
 		if(flagWin == true) {
@@ -769,7 +770,11 @@ public class Tableau extends JFrame {
 		
 	}
 
-
+	/**
+	 * 
+	 * @param jardin
+	 * @return true si il reste des carottes à manger dans le jardin ; false sinon
+	 */
 	public boolean resteCarottes(char jardin[][]) {
 
 		for(int i=0; i<jardin.length; i++) {
@@ -783,7 +788,11 @@ public class Tableau extends JFrame {
 		return false;
 	}
 
-
+	/**
+	 * 
+	 * @param isLapinAlive
+	 * @return true si il reste des lapins vivants ; false sinon
+	 */
 	public boolean resteLapinsVivants(boolean isLapinAlive[]) {
 
 		for(int i=0; i<isLapinAlive.length; i++) {
@@ -796,10 +805,6 @@ public class Tableau extends JFrame {
 	}
 
 	
-	public void setDirection(char dir) {
-		this.dir = dir;
-	}
-	
 
 	/*
 	public static void main(String[] args) {
@@ -809,7 +814,9 @@ public class Tableau extends JFrame {
 	}*/
 	
 	
-
+	/*
+	 * ActionListener pour les différents boutons
+	 */
 	class Avance implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
