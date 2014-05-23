@@ -8,9 +8,23 @@ import java.awt.event.*;
 
 import editor.EditorIHM;
 
-public class IHM
+public final class IHM
 {
     static JFrame frm = new JFrame("Projet GL");
+    
+    /*singleton*/
+    private static volatile IHM instance = new IHM();
+    
+    private IHM() {
+    }
+    
+    static {
+    	instance = new IHM();
+    }
+    
+    public final static IHM getInstance() {
+    	return IHM.instance;
+    }
     
     public static void main(String[] args)
     {
