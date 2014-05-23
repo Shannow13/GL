@@ -177,10 +177,10 @@ public class Tableau extends JFrame {
 		boutonPanel.add(buttonG);
 		boutonPanel.add(buttonD);
 		textPanel = new JPanel(new GridLayout(2,1));
-		nameLabel = new JLabel();
-		orientLabel = new JLabel();
-		textPanel.add(nameLabel);
-		textPanel.add(orientLabel);
+		nameLabel = new JLabel("name", JLabel.CENTER);
+		orientLabel = new JLabel("orient",JLabel.CENTER);
+		textPanel.add(nameLabel, "Center");
+		textPanel.add(orientLabel, "Center");
 		eastPanel.add(boutonPanel,BorderLayout.NORTH);
 		eastPanel.add(textPanel,BorderLayout.SOUTH);
 
