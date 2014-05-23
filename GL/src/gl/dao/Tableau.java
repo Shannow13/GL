@@ -50,7 +50,8 @@ public class Tableau extends JFrame {
 	private JLabel orientLabel;
 	private JLabel orientPhoto;
 	private ImageIcon orientImg;
-
+	private boolean flagWin = false;
+	
 	public static Jardin jardins;
 	
 	private final static String RESOURCES_PATH = "resources/";
@@ -207,18 +208,18 @@ public class Tableau extends JFrame {
 		
 		//Bouton "Avancer"
 		buttonA = new JButton();
-		buttonA.setBackground(Color.WHITE);
+		buttonA.setBackground(Color.WHITE); // Couleur de fond
 		JPanel panA = new JPanel();
 		panA.setBackground(Color.WHITE);
 		panA.setLayout(new BorderLayout());
-		JLabel titleA = new JLabel("     Avancer");
-		ImageIcon img_A = new ImageIcon("resources/img/fleche.png");
-		JLabel imgA = new JLabel(img_A);
-		panA.add(titleA, BorderLayout.CENTER);
-		panA.add(imgA, BorderLayout.SOUTH);
-		imgA.setPreferredSize(new Dimension(80, 80));
-		buttonA.add(panA);
-		buttonA.addActionListener(new Avance());
+		JLabel titleA = new JLabel("     Avancer"); // Titre du bouton
+		ImageIcon img_A = new ImageIcon("resources/img/fleche.png"); // Image liée au bouton
+		JLabel imgA = new JLabel(img_A); 
+		panA.add(titleA, BorderLayout.CENTER); // Ajout du titre en haut du bouton
+		panA.add(imgA, BorderLayout.SOUTH);// Ajout de l'image en dessous du titre
+		imgA.setPreferredSize(new Dimension(80, 80)); // Taille de l'image dans le JButton
+		buttonA.add(panA); // AJout du bouton au Panel
+		buttonA.addActionListener(new Avance()); // Action listener pour faire l'action si le bouton est clické
 		
 		//Bouton "Attendre"
 		buttonX = new JButton();
@@ -233,7 +234,7 @@ public class Tableau extends JFrame {
 		panX.add(imgX, BorderLayout.SOUTH);
 		imgX.setPreferredSize(new Dimension(80, 80));
 		buttonX.add(panX);
-		buttonX.addActionListener(new stayHere());
+		buttonX.addActionListener(new stayHere()); // Action listener pour faire l'action si le bouton est clické
 		
 		//Bouton "Rotation Gauche"
 		buttonG = new JButton();
@@ -248,7 +249,7 @@ public class Tableau extends JFrame {
 		panG.add(imgG, BorderLayout.SOUTH);
 		imgG.setPreferredSize(new Dimension(80, 80));
 		buttonG.add(panG);
-		buttonG.addActionListener(new rotateGauche());
+		buttonG.addActionListener(new rotateGauche()); // Action listener pour faire l'action si le bouton est clické
 		
 		//Bouton "Rotation Droite"
 		buttonD = new JButton();
@@ -263,16 +264,16 @@ public class Tableau extends JFrame {
 		panD.add(imgD, BorderLayout.SOUTH);
 		imgD.setPreferredSize(new Dimension(80, 80));
 		buttonD.add(panD);
-		buttonD.addActionListener(new rotateDroite());
+		buttonD.addActionListener(new rotateDroite()); // Action listener pour faire l'action si le bouton est clické
 		
-		boutonPanel.add(buttonA);
+		boutonPanel.add(buttonA); //Ajout des boutons au Panel
 		boutonPanel.add(buttonX);
 		boutonPanel.add(buttonG);
 		boutonPanel.add(buttonD);
 		
 		textPanel = new JPanel(new GridLayout(2,1));
-		nameLabel = new JLabel("name", JLabel.CENTER);
-		orientLabel = new JLabel("orient",JLabel.CENTER);
+		nameLabel = new JLabel("name", JLabel.CENTER); //Affichage du nom du lapin
+		orientLabel = new JLabel("orient",JLabel.CENTER); //Affichage de l'orientation centré sur le Label
 		textPanel.add(nameLabel, "North");
 		//textPanel.add(orientLabel, "Center");
 		textPanel.add(orientPhoto, "Center");
@@ -287,14 +288,14 @@ public class Tableau extends JFrame {
 		//this.setUndecorated(true);
 		//this.removeNotify();
 		
-		LOGGER.debug("pop fenetre");
-		this.setVisible(true);
+		LOGGER.debug("pop fenetre"); //Debug de console
+		this.setVisible(true); // Autoriser l'affichage de la fenêtre
 
 
-
+		//Parcours de la liste de lapins pour savoir s'ils sont vivants ou non
 		isLapinAlive = new boolean[lapins.size()];
-		for (int i = 0; i < isLapinAlive.length; i++) {
-			isLapinAlive[i] = true;
+		for (int i = 0; i < isLapinAlive.length; i++) { //Pour chaque lapin de la liste
+			isLapinAlive[i] = true; //S'ils sont vivants, on leur donne la valeur "true"
 		}
 
 
@@ -302,10 +303,10 @@ public class Tableau extends JFrame {
 
 
 
-		LOGGER.debug("starting game");
+		LOGGER.debug("starting game"); //Debug de console
 
 
-
+		//Condition de jeu : tant qu'il reste des carottes et des lapins vivants
 		while(resteCarottes(jardin) == true && resteLapinsVivants(isLapinAlive) == true) {
 
 			LOGGER.debug("tour : "+tours);
@@ -343,32 +344,32 @@ public class Tableau extends JFrame {
 										
 					if(dir == 'A') { //Si la direction choisie est "Avancer" (A)
 						switch(o) { //Alors plusieurs cas par rapport à l'orientation d'origine
-						case 'N': //Dans le cas où le lapin avait pour direction initiale le Nord
+						case 'N': //Dans le cas où le lapin avait pour direction initiale le NORD
 							if(lx != 0) { //Si on ne se trouve pas sur le bord supérieur du plateau de jeu
-								if(jardin[lx-1][ly] == 'r') { //Si il y a un rocher sur la ligne où le lapin essaie d'avancer
+								if(jardin[lx-1][ly] == 'r') { //Si il y a un rocher sur la case où le lapin essaie d'avancer
 									System.out.println("Déplacement sur un rocher impossible, ressayer"); //Déplacement impossible
-									dir = '0'; 
+									dir = '0'; //Pas de direction
 									break;
-								} else {
-									(jp[lx][ly]).removeAll();
-									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-									(jp[lx][ly]).setBackground(new Color( 80, 151, 9));
-									l.setPositionX(lx-1);
-									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
-									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
-									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
+								} else { //S'il n'y a pas de rocher sur la case où le lapin veut aller
+									(jp[lx][ly]).removeAll(); //On retire toutes les images sur la case où le lapin était
+									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png"))); //On remet de l'herbe sur la case où le lapin était
+									(jp[lx][ly]).setBackground(new Color( 80, 151, 9)); //On rajoute en plus un backgroudn de couleur vert sur la case où le lapin était
+									l.setPositionX(lx-1); //On donne la nouvelle position au lapin
+									(jp[l.getPositionX()][l.getPositionY()]).removeAll(); //On récupère la nouvelle position du lapin
+									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png"))); //On peut donc remettre l'image du lapin sur la bonne case
+									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white); //On rajoute un fond blanc pour dire que le lapin a joué son tour
 									this.validate(); //Actualisation de la frame
 									ok = true; //On passe le flag à "true"
 									break;
 								}
 							}
-							else {
-								dir = '0';
-								System.out.println("Déplacement impossible, reessayer");
+							else { //Si on se trouve sur le bord supérieur du terrain de jeu
+								dir = '0'; //Pas de direction choisie
+								System.out.println("Déplacement impossible, reessayer"); //Le déplacement est impossible sinon on sort du terrain de jeu
 								break;
 							}
 
-						case 'S':
+						case 'S': //Dans le cas où le lapin avait pour direction initiale le SUD
 							if(lx != x-1) {
 								if(jardin[lx+1][ly] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
@@ -393,7 +394,7 @@ public class Tableau extends JFrame {
 								break;
 							}
 
-						case 'E':
+						case 'E': //Dans le cas où le lapin avait pour direction initiale l'EST
 							if(ly != y-1) {
 								if(jardin[lx][ly+1] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
@@ -418,7 +419,7 @@ public class Tableau extends JFrame {
 								break;
 							}
 
-						case 'W':
+						case 'W': //Dans le cas où le lapin avait pour direction initiale l'OUEST
 							if(ly != 0) {
 								if(jardin[lx][ly-1] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
@@ -444,22 +445,22 @@ public class Tableau extends JFrame {
 							}
 						}
 					}
-					else if(dir == 'D') {
+					else if(dir == 'D') { //Si on choisit la rotation droite
 						ok = true;
-						switch(o){
-							case('N'):
-								l.setOrientation('E'); break;
-							case('E'):
-								l.setOrientation('S'); break;
-							case('S'):
-								l.setOrientation('W'); break;
-							case('W'):
-								l.setOrientation('N'); break;							
+						switch(o){ //Plusieurs cas par rapport à l'orientation d'origine
+							case('N'): //Si NORD
+								l.setOrientation('E'); break; //Alors EST
+							case('E'): //Si EST
+								l.setOrientation('S'); break;//Alors SUD
+							case('S'): //Si SUD
+								l.setOrientation('W'); break; //Alors OUEST
+							case('W'): //Si OUEST
+								l.setOrientation('N'); break; //Alors NORD							
 						}
-						(jp[lx][ly]).setBackground(Color.white);
-						LOGGER.debug("Nouvelle orientation : " + o);
+						(jp[lx][ly]).setBackground(Color.white); //On remet le background en blanc car le lapin a joué son tour
+						LOGGER.debug("Nouvelle orientation : " + o); //Debug de console pour l'orientation du lapin
 					}
-					else if(dir == 'G') {
+					else if(dir == 'G') { //Si on choisit la rotation gauche
 						ok = true;
 						switch(o){
 							case('N'):
@@ -474,14 +475,14 @@ public class Tableau extends JFrame {
 						(jp[lx][ly]).setBackground(Color.white);
 						LOGGER.debug("Nouvelle orientation : " + o);
 					}
-					else if(dir == 'X') {
+					else if(dir == 'X') { //Si on choisit de ne rien faire
 						LOGGER.debug("stay here");
-						(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
+						(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white); //On change juste la couleur de backgroudn de la case actuelle du lapin
 						ok = true;
 						break;
 					}
 
-				}while(!ok);
+				}while(!ok); //On attend la commande du joueur tant que le flag "ok" n'est pas à "true"
 
 				lx = l.getPositionX();
 				ly = l.getPositionY();
@@ -495,6 +496,7 @@ public class Tableau extends JFrame {
 					this.validate();
 					if(!resteCarottes(jardin)) {
 						over = true;
+						flagWin = true;
 					}
 				}
 
@@ -674,9 +676,10 @@ public class Tableau extends JFrame {
 					if(rx == l.getPositionX() && ry == l.getPositionY()) {
 						LOGGER.debug("Renard a buté un lapin");
 						(jp[rx][ry]).setBackground(Color.red);
-						isLapinAlive[i] = false;
+						isLapinAlive[j] = false;
 						if(!resteLapinsVivants(isLapinAlive)) {
 							over = true;
+							//flagWin = true;
 						}
 						break;
 					}
@@ -717,9 +720,21 @@ public class Tableau extends JFrame {
 
 		LOGGER.debug("closing");
 
+		if(flagWin == true) {
+			
+			new IsVictory();
+			
+		}
+		else {
+			
+			new IsDefeat();
+			
+		}
+		
 		this.setVisible(false);
 		dispose();
-		System.exit(0);
+		//System.exit(0);
+		
 	}
 
 
