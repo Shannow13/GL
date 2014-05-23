@@ -1,10 +1,12 @@
 package editor;
 
 import game.Carottes;
+import game.Lapin;
 import game.Renard;
 import game.Rocher;
 import game.SimpleCarottes;
 import game.SimpleJardin;
+import game.SimpleLapin;
 import game.SimpleRenard;
 import game.SimpleRocher;
 
@@ -27,6 +29,7 @@ public class EditorIHM {
     ArrayList<Carottes> cList;
     ArrayList<Rocher> rList;
     ArrayList<Renard> fList;
+    ArrayList<Lapin> lList;
 
     private static final Logger LOGGER = Logger.getLogger(EditorIHM.class);
 
@@ -666,6 +669,12 @@ public class EditorIHM {
                 LOGGER.debug("C'est pas un INT!!!!");
                 return;
             }
+            
+            if(nbFox > 0)
+            	creationRenard(nbFox);
+            else if(nbFox == 0)
+            	fList = new ArrayList<Renard>();
+        
         }
     }
 
@@ -812,6 +821,201 @@ public class EditorIHM {
     
     
     
+    /////////////////////////////////////////////////////	LAPINS	////////////////////////////////////////////////////////////
+
+    //            Gestion du bouton renard
+
+    public class EditLapin implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            LOGGER.debug("Click de renard");
+
+                final JFrame frmNbL = new JFrame("Création des lapins!");
+                frmNbL.setSize(new Dimension(300,230));
+                frmNbL.setLocation(805, 300);
+                frmNbL.setLayout(null);
+                frmNbL.getContentPane().setBackground(Color.WHITE);
+                frmNbL.setResizable(false);
+
+                int w = (frmNbL.getWidth()/2);
+                int h = (frmNbL.getHeight()/2);
+
+                JLabel text = new JLabel("Nombre de lapin");
+                JTextField nbL = new JTextField("");
+                JButton btnOk = new JButton("OK");
+                JButton btnAnnuler = new JButton("Annuler");
+
+                frmNbL.add(text);
+                frmNbL.add(nbL);
+                frmNbL.add(btnOk);
+                frmNbL.add(btnAnnuler);
+
+                //Positionnement des boutons et champs
+                text.setBounds( w - 58 , h - 105, 200, 40);
+                nbL.setBounds( w - 81 , h - 65, 160, 40);
+                btnOk.setBounds( w + 19, h + 25 , 80, 40);
+                btnAnnuler.setBounds( w - 96 , h + 25, 80, 40);
+
+                btnAnnuler.addActionListener(new EditCancel(frmNbL, fList));            
+
+                btnOk.addActionListener(new EditOkLapin(nbL,frmNbL));
+
+                frmNbL.setVisible(true);
+        }
+    }
+
+    
+ // Gestion du choix du nombre de rocher     
+    private class EditOkLapin implements ActionListener{
+
+        private JTextField nbL;
+        JFrame frame;
+        int nbLapin;
+
+        public EditOkLapin(JTextField nbL,JFrame frame)
+        {
+            this.nbL = nbL;
+            this.frame = frame;
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            LOGGER.debug("Click de OK pour les lapins");
+            LOGGER.debug("Test : " + nbL.getText());
+
+            try{
+                nbLapin = Integer.parseInt(nbL.getText());
+                frame.setVisible(false);
+                LOGGER.debug("C'est bien un int.");
+                creationRenard(nbLapin);
+            }catch(NumberFormatException er){
+                LOGGER.debug("C'est pas un INT!!!!");
+                return;
+            }
+            
+            if(nbLapin > 0)
+            	creationLapin(nbLapin);
+            else
+            	LOGGER.error("ATTENTION : pas de lapin créé.");
+        }
+    }
+
+
+    // Gestion du pop up pour définir les renards    
+    private void creationLapin(int nbL)
+    {
+        LOGGER.debug("Création des Lapins");
+        frame = new JFrame("Les Lapns!");
+        frame.setSize(new Dimension(500,300));
+        frame.setLocation(600, 300);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(Color.WHITE);
+        frame.setResizable(false);
+
+        int w = (frame.getWidth() /2);
+        int h = frame.getHeight()/2;
+
+        JLabel ligne = new JLabel("N° Ligne :");
+        JLabel colonne = new JLabel("N° Colonne :");
+        JLabel orientation = new JLabel("Orientation* :");
+        JLabel orientationExpl = new JLabel("*N=haut, S=bas, E=droite, W=gauche");
+        JTextField l = new JTextField();
+        JTextField c = new JTextField();
+        JTextField o = new JTextField();
+        JButton cancel = new JButton("Annuler");
+        JButton ok = new JButton("OK");
+
+        frame.add(ligne);
+        frame.add(colonne);
+        frame.add(orientation);
+        frame.add(l);
+        frame.add(c);
+        frame.add(o);
+        frame.add(cancel);
+        frame.add(ok);
+        frame.add(orientationExpl);
+
+        //text.setBounds( w-75 , h -100, 200, 40);
+
+        ligne.setBounds(w-230, h-115, 100,40);
+        l.setBounds(w-230,h-70,100,40);
+        colonne.setBounds(w-110,h-115,100,40);
+        c.setBounds(w-110,h-70,100,40);
+        orientation.setBounds(w+10, h-115, 100, 40);
+        o.setBounds(w+10,h-70, 100, 40);
+        cancel.setBounds(w-150,h+50,100,40);
+        ok.setBounds(w+50,h+50,100,40);
+        orientationExpl.setBounds(w-240,h,220,40);
+
+        frame.setVisible(true);
+
+        fList = new ArrayList<Renard>();
+
+        cancel.addActionListener(new EditCancel(frame,fList));
+        ok.addActionListener(new NouveauLapin(nbL,l,c,o,frame));
+
+    }
+
+
+    // Création d'un nouveau renard et ajout dans la liste des rochers à mettre dans le csv
+
+    private class NouveauLapin implements ActionListener{
+
+        private JFrame frame;
+        private int nbF;
+        private JTextField l,c,o;
+        int ligne, colonne;
+        char orient;
+
+        public NouveauLapin(int nbF,  JTextField l, JTextField c, JTextField o, JFrame frame){
+            this.nbF = nbF;
+            this.l = l;
+            this.c = c;
+            this.o = o;
+            this.frame = frame;
+            LOGGER.debug("Click sur ok");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            try{
+                ligne = Integer.parseInt(l.getText());
+                colonne = Integer.parseInt(c.getText());
+                LOGGER.debug("Ce sont bien des int.");
+            }catch(NumberFormatException er){
+                LOGGER.debug("Ce ne sont pas des INT!");
+                return;
+            }
+
+            
+            orient = o.getText().toUpperCase().charAt(0);
+            LOGGER.debug("Orientation : "+orient);
+            
+           if(orient != 'N' && orient != 'S' && orient != 'W' && orient != 'E')
+            {
+            	LOGGER.error("L'orientation n'est pas bonne!");
+            	return;
+            }
+                        
+            SimpleLapin lapin = new SimpleLapin();
+            lapin.setPositionX(ligne);
+            lapin.setPositionY(colonne);
+            lapin.setOrientation(orient);
+
+            lList.add(lapin);
+
+            if(fList.size() == nbF){
+                frame.setVisible(false);
+                LOGGER.debug("Les lapins sont finis! =>" + nbF);
+            }
+
+            l.setText("");
+            c.setText("");
+            o.setText("");
+
+
+        }
+    }
+    
+    
+    
     /////////////////////////////////////////////    FINALISATION    //////////////////////////////////////////////////////
 
     
@@ -887,7 +1091,7 @@ public class EditorIHM {
         
         public WriteCSV(JFrame frame){
             this.frame = frame;
-            new EditorLevel(theJardin, cList, rList, fList);
+            new EditorLevel(theJardin, cList, rList, fList, lList);
         }
         
     }
