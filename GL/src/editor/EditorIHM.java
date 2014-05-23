@@ -37,6 +37,9 @@ public class EditorIHM {
 	public JButton jardin, carotte, rocher, renard, quitter;
 	public boolean flagAnnuler = false;
 	
+	
+	//				Création de la fenetre principale
+	
 	public EditorIHM()
 	{
 		LOGGER.debug("Debut du IHM");
@@ -63,12 +66,14 @@ public class EditorIHM {
 		int w = (frame.getWidth()/2)-50;
 		int h = (frame.getHeight()/2);
 		
+		//Postionnement des boutons
 		jardin.setBounds( w - 50, h-150, 200, 40);
 	    carotte.setBounds( w - 50, h -100, 200, 40);
 	    rocher.setBounds( w - 50, h -50, 200, 40);
 	    renard.setBounds( w - 50, h , 200, 40 );
 	    quitter.setBounds(w-50 , h + 50 , 200, 40);
 	    
+	    //Lien entre les boutons et les actions
 	    jardin.addActionListener(new EditJardin());
 	    carotte.addActionListener(new EditCarotte());
 	    rocher.addActionListener(new EditRocher());
@@ -104,6 +109,10 @@ public class EditorIHM {
 		new EditorIHM();
 	}
 	
+	
+	//			Création de la fenetre de création du jardin
+	// Gestion du bouton jardin
+	
 	public class EditJardin implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			int w = (frame.getWidth()/2)-50;
@@ -128,6 +137,7 @@ public class EditorIHM {
 			frmJardin.add(btnAnnuler);
 			frmJardin.add(btnOk);
 			
+			//Positionnement des boutons et champs
 			colonnes.setBounds( w - 125, h - 50, 150, 40);
 		    lignes.setBounds( w + 75, h - 50, 150, 40);
 		    btnAnnuler.setBounds( w - 125, h + 50, 150, 40);
@@ -146,6 +156,11 @@ public class EditorIHM {
 			frmJardin.setVisible(true);
 		}
 	}
+	
+	
+	
+	//			Création de la fenetre de création des carottes
+	// Gestion du bouton carotte
 	
 	public class EditCarotte implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -169,7 +184,7 @@ public class EditorIHM {
 			frmNbC.add(nbCarottes);
 			frmNbC.add(btnOk);
 			frmNbC.add(btnAnnuler);
-			
+			// positionnement des boutons
 			text.setBounds( w + 15, h - 30, 200, 40);
 		    nbCarottes.setBounds( w + 15, h + 20, 160, 40);
 			btnOk.setBounds( w + 15, h + 100, 160, 40);
@@ -182,6 +197,11 @@ public class EditorIHM {
 			frmNbC.setVisible(true);
 		}
 	} 
+	
+	
+	
+	//			Création de la fenetre de création des rochers
+	// Gestion du bouton rocher
 	
 	class EditRocher implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -208,6 +228,7 @@ public class EditorIHM {
 			frmNbR.add(btnOk);
 			frmNbR.add(btnAnnuler);
 			
+			//Positionnement des boutons et champs
 			text.setBounds( w-75 , h -100, 200, 40);
 		    nbRocher.setBounds( w-75 , h - 50, 160, 40);
 			btnOk.setBounds( w-75, h , 160, 40);
@@ -224,6 +245,7 @@ public class EditorIHM {
 	
 	
 	
+	//			Gestion du bouton renard
 	
 	public class EditRenard implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -234,6 +256,7 @@ public class EditorIHM {
 	
 	
 	
+//			Gestion du bouton quitter
 	
 	public class EditQuitter implements ActionListener{
 		private JFrame frame;
@@ -249,6 +272,7 @@ public class EditorIHM {
 	
 	
 	
+	//		Gestion des boutons "annuler"
 	
 	public class EditCancel implements ActionListener{
 		private JFrame frame;
@@ -264,6 +288,8 @@ public class EditorIHM {
 	}
 	
 	
+	
+	// Gestion du bouton OK après selection du nombre de carottes
 	
 	public class EditOkCarotte implements ActionListener{
 		
@@ -281,6 +307,7 @@ public class EditorIHM {
 			LOGGER.debug("Click de OK pour les carottes");
 			LOGGER.debug("Test : " + nbCarottes.getText());
 			
+			// On s'assure qu'on prend bien un int
 			try{
 				nbC = Integer.parseInt(nbCarottes.getText());
 				frame.setVisible(false);
