@@ -292,6 +292,7 @@ public class Tableau extends JFrame {
 
 					
 					nameLabel.setText(l.getNom());
+					LOGGER.debug("name : "+l.getNom());
 					orientLabel.setText("orientation : "+ l.getOrientation());
 
 					if(dir == 'A') { //Si la direction choisie est "Avancer" (A)
@@ -429,6 +430,7 @@ public class Tableau extends JFrame {
 					}
 					else if(dir == 'X') {
 						LOGGER.debug("stay here");
+						(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
 						ok = true;
 						break;
 					}
