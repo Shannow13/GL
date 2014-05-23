@@ -8,17 +8,18 @@ import org.apache.log4j.Logger;
 import au.com.bytecode.opencsv.CSVReader;
 
 
-public class EditorLevel {
+public class EditorLevel extends AbstractEditor {
 	
 	private static final Logger LOGGER = getLogger(EditorLevel.class);
 	
 	private File file;
-	private EditorIHM ihm = new EditorIHM();
+	private EditorIHM ihm;
 	
 	public void init(File file)
 	{
 		LOGGER.debug("Création fichier");
 		this.file = file;
+		ihm = new EditorIHM();
 		
 	}
 	
