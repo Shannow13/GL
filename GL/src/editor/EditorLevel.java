@@ -51,6 +51,8 @@ public class EditorLevel{
 		
 		try{
 			writer.close();
+			fWriter.close();
+			lWriter.close();
 		}catch(IOException e){
 			LOGGER.error("Erreur de fermeture du fichier!");
 			return;
