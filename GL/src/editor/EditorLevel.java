@@ -13,11 +13,13 @@ public class EditorLevel {
 	private static final Logger LOGGER = getLogger(EditorLevel.class);
 	
 	private File file;
+	private EditorIHM ihm = new EditorIHM();
 	
 	public void init(File file)
 	{
 		LOGGER.debug("Création fichier");
 		this.file = file;
+		
 	}
 	
 	public String fileName()
