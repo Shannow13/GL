@@ -1,11 +1,11 @@
 package editor;
 
 import game.Carottes;
-//import game.Renard;
+import game.Renard;
 import game.Rocher;
 import game.SimpleCarottes;
 import game.SimpleJardin;
-//import game.SimpleRenard;
+import game.SimpleRenard;
 import game.SimpleRocher;
 
 import java.awt.Color;
@@ -26,7 +26,7 @@ public class EditorIHM {
     SimpleJardin theJardin;
     ArrayList<Carottes> cList;
     ArrayList<Rocher> rList;
-   // ArrayList<Renard> fList;
+    ArrayList<Renard> fList;
 
     private static final Logger LOGGER = Logger.getLogger(EditorIHM.class);
 
@@ -55,14 +55,14 @@ public class EditorIHM {
         jardin = new JButton("Jardin");
         carotte = new JButton("Carotte");
         rocher = new JButton ("Rocher");
-       // renard = new JButton ("Renard");
+        renard = new JButton ("Renard");
         quitter = new JButton("Retour");
         fin = new JButton ("Créer");
 
         frame.add(jardin);
         frame.add(carotte);
         frame.add(rocher);
-        //frame.add(renard);
+        frame.add(renard);
         frame.add(quitter);
         frame.add(fin);
 
@@ -73,7 +73,7 @@ public class EditorIHM {
         jardin.setBounds( w - 50, h-200, 200, 40);
         carotte.setBounds( w - 50, h -150, 200, 40);
         rocher.setBounds( w - 50, h -100, 200, 40);
-       // renard.setBounds( w - 50, h -50 , 200, 40 );
+        renard.setBounds( w - 50, h -50 , 200, 40 );
         quitter.setBounds(w-50 , h + 100 , 200, 40);
         fin.setBounds(w-50,h,200,40);
 
@@ -81,7 +81,7 @@ public class EditorIHM {
         jardin.addActionListener(new EditJardin());
         carotte.addActionListener(new EditCarotte());
         rocher.addActionListener(new EditRocher());
-       // renard.addActionListener(new EditRenard());
+        renard.addActionListener(new EditRenard());
         quitter.addActionListener(new EditQuitter(frame));
         fin.addActionListener(new EditFin(frame));
         /*GridLayout gridL = new GridLayout(4,1);
@@ -309,6 +309,8 @@ public class EditorIHM {
 
             if(nbC > 0)
             	creationCarotte(nbC);
+            else if(nbC == 0)
+            	cList = new ArrayList<Carottes>();
 
         }
 
@@ -486,11 +488,16 @@ public class EditorIHM {
                 nbR = Integer.parseInt(nbRocher.getText());
                 frame.setVisible(false);
                 LOGGER.debug("C'est bien un int.");
-                creationRocher(nbR);
+                
             }catch(NumberFormatException er){
                 LOGGER.debug("C'est pas un INT!!!!");
                 return;
             }
+            
+            if(nbR > 0)
+            	creationRocher(nbR);
+            else if(nbR == 0)
+            	rList = new ArrayList<Rocher>();
         }
     }
 
@@ -591,7 +598,7 @@ public class EditorIHM {
     /////////////////////////////////////////////////    LES RENARDS    /////////////////////////////////////////////////////
 
 
-/*    
+    
     //            Gestion du bouton renard
 
     public class EditRenard implements ActionListener{
@@ -803,7 +810,7 @@ public class EditorIHM {
         }
     }
     
-    */
+    
     
     /////////////////////////////////////////////    FINALISATION    //////////////////////////////////////////////////////
 
@@ -821,7 +828,7 @@ public class EditorIHM {
         }
     
         public void actionPerformed(ActionEvent e) {
-            if(theJardin == null || cList == null || rList == null /*|| fList == null*/)
+            if(theJardin == null || cList == null || rList == null || fList == null)
             {
                 LOGGER.debug("Pas tous fini!");
                 new PopUp();
@@ -880,7 +887,7 @@ public class EditorIHM {
         
         public WriteCSV(JFrame frame){
             this.frame = frame;
-            new EditorLevel(theJardin, cList, rList);
+            new EditorLevel(theJardin, cList, rList, fList);
         }
         
     }
