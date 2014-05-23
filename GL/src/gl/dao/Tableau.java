@@ -172,7 +172,7 @@ public class Tableau extends JFrame {
 		this.setSize(100*x,120*y); //Taille de la fenêtre
 		this.setResizable(false); //On interdit à l'utilisateur la possibilité de redimensionner la fenêtre
 		this.setLocation(100, 10); //On set l'endroit où la fenêtre va apparaitre à l'écran
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //Fermeture du jeu si on ferme la fenêtre de jeu
+		//this.setDefaultCloseOperation(EXIT_ON_CLOSE); //Fermeture du jeu si on ferme la fenêtre de jeu
 
 		Container c = getContentPane(); //On créer notre container général pour la totalité de la fenêtre de jeu
 
