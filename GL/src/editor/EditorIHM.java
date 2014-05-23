@@ -31,11 +31,11 @@ public class EditorIHM {
 		LOGGER.debug("Debut du IHM");
 		
 		frame = new JFrame("Edition");
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		//frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(500,500));
 		frame.setBounds(0, 0, 500, 500);
 		frame.setLayout(null);
-		frame.setLocation(600,300);
+		frame.setLocation(700,200);
 		
 		jardin = new JButton("Jardin");
 		carotte = new JButton("Carotte");
