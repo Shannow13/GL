@@ -938,15 +938,15 @@ public class EditorIHM {
 
         //text.setBounds( w-75 , h -100, 200, 40);
 
-        ligne.setBounds(w-230, h-115, 100,40);
-        l.setBounds(w-230,h-70,100,40);
-        colonne.setBounds(w-110,h-115,100,40);
-        c.setBounds(w-110,h-70,100,40);
-        orientation.setBounds(w+10, h-115, 100, 40);
-        o.setBounds(w+10,h-70, 100, 40);
+        ligne.setBounds(w-200, h-115, 100,40);
+        l.setBounds(w-200,h-70,100,40);
+        colonne.setBounds(w-50,h-115,100,40);
+        c.setBounds(w-50,h-70,100,40);
+        orientation.setBounds(w+100, h-115, 100, 40);
+        o.setBounds(w+100,h-70, 100, 40);
         cancel.setBounds(w-150,h+50,100,40);
         ok.setBounds(w+50,h+50,100,40);
-        orientationExpl.setBounds(w-240,h,220,40);
+        orientationExpl.setBounds(w-200,h,220,40);
 
         frame.setVisible(true);
 
