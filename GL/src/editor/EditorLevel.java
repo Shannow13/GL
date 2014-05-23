@@ -2,7 +2,7 @@ package editor;
 
 import static org.apache.log4j.Logger.getLogger;
 import game.Carottes;
-import game.Renard;
+//import game.Renard;
 import game.Rocher;
 import game.SimpleJardin;
 
@@ -38,6 +38,7 @@ public class EditorLevel{
 		writeJardin(jardin);
 		writeCarotte(c);
 		writeRocher(r);
+
 		
 		try{
 			writer.close();
@@ -68,15 +69,16 @@ public class EditorLevel{
 		}
 	}
 	
-	private void writeFox(ArrayList<Renard> renard){
+/*	private void writeFox(ArrayList<Renard> renard){
+		int i =0;
 		for( Renard f : renard)
 		{
-			String[] entries = ("F;"+ f.getPositionX()+ ";"+ f.getPositionY()+";"+f.getOrientation()+";"+f.getTrajet()+";"+f.getNom()).split(";");
+			String[] entries = ("F;"+ f.getPositionX()+ ";"+ f.getPositionY()+";"+f.getOrientation()+";"+f.getTrajet()+";Renard"+i++).split(";");
 			writer.writeNext(entries);
 		}
 		
 	}
-	
+*/	
 	
 	private void writeJardin(SimpleJardin jardin){
 		String[] entries = ("J;"+jardin.getSizeX()+";"+jardin.getSizeY()+";0;1").split(";");
