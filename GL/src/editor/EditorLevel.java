@@ -76,6 +76,12 @@ public class EditorLevel{
 			return false;
 		}
 		
+		if(jardin.getSizeX() > 9 || jardin.getSizeY() > 9)
+		{
+			LOGGER.error("Taille jardin trop grand.");
+			return false;
+		}
+		
 		for(Rocher rocher : r)
 		{
 			if(jardin.getSizeX() <= rocher.getPositionX() || rocher.getPositionX() < 0 || jardin.getSizeY() <= rocher.getPositionY() || rocher.getPositionY() < 0)
