@@ -16,6 +16,12 @@ public class EditorLevel extends AbstractEditor {
 	private File file;
 	private EditorIHM ihm;
 	
+	public EditorLevel()
+	{
+		file = super.file;
+		init(file);
+	}
+	
 	public void init(File file)
 	{
 		LOGGER.debug("Création fichier");

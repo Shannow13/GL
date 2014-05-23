@@ -15,6 +15,7 @@ public abstract class AbstractEditor {
 	 
 	private final static String RESOURCES_PATH = "resources/";
 	private EditorLevel edit = new EditorLevel();
+	File file;
 	
 	private int num;
 	
@@ -24,7 +25,7 @@ public abstract class AbstractEditor {
 		LOGGER.debug("Début création");
 		num = 2;
 		
-		File file = new File(RESOURCES_PATH + "jardinEdite" + num + ".csv");
+		file = new File(RESOURCES_PATH + "jardinEdite" + num + ".csv");
 		
 			try {
 				while(!file.createNewFile())
