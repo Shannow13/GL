@@ -589,21 +589,61 @@ public class EditorIHM {
 
 	
 	/////////////////////////////////////////////	FINALISATION	//////////////////////////////////////////////////////
-	// TODO
+
 	public class EditFin implements ActionListener{
 		
 		JFrame frame;
+		JFrame popup;
 		
 		public EditFin(JFrame frame)
 		{
 			this.frame = frame;
 		}
 	
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
+		public void actionPerformed(ActionEvent e) {
+			if(theJardin == null || cList == null || rList == null)
+			{
+				LOGGER.debug("Pas tous fini!");
+				new PopUp();
+			}
+				
 			
 		}
 		
+	}
+	
+	private class PopUp{
+		JFrame frame;
+		
+		public PopUp(){
+			frame = new JFrame("NOPE!");
+			frame.setSize(new Dimension(500,300));
+			frame.setLocation(700,300);
+			
+			JLabel text = new JLabel("Vous devez terminer TOUTES les étapes.");
+			JButton ok = new JButton("J'y retourne...");
+			
+			frame.add(text);
+			frame.add(ok);
+			
+			int w = 500/2;
+			int h = 300/2;
+			
+			ok.setBounds(w-100,h-100,100,40);
+			text.setBounds(w-100,h+50,100,40);
+			
+			frame.setVisible(true);
+			
+			 ok.addActionListener(new ActionListener()
+		        {
+				 public void actionPerformed(ActionEvent e)
+		            {
+		               frame.setVisible(false);
+		               LOGGER.debug("On est reparti");
+		            }
+		        });
+		}
+
 	}
 	
 }	
