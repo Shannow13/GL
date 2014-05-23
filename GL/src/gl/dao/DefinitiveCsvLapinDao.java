@@ -14,6 +14,9 @@ import au.com.bytecode.opencsv.CSVReader;
 
 public class DefinitiveCsvLapinDao implements CsvLapinDao {
 
+	/**
+ * Cette classe est extrêmement similaire à DefinitiveCsvRenardDao et fonctionne de la même façon que cette dernière
+ */
 
 	private File file;
 	private static final Logger LOGGER = Logger.getLogger(DefinitiveCsvLapinDao.class);
