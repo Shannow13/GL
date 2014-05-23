@@ -44,6 +44,13 @@ public class EditorLevel{
 		fWriter = new CSVWriter(fFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// fox
 		lWriter = new CSVWriter(lFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// lapin
 		
+		
+		if(!isOk(jardin,c,r,f,l))
+		{
+			LOGGER.error("Quelques chose ne convient pas (élément en dehors du jardin, jardin à taille négative...)");
+			return;
+		}
+		
 		writeJardin(jardin);
 		writeCarotte(c);
 		writeRocher(r);
@@ -60,6 +67,54 @@ public class EditorLevel{
 			return;
 		}
 	}
+	
+	private boolean isOk(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r, ArrayList<Renard> f, ArrayList<Lapin> l)
+	{
+		if(jardin.getSizeX() <= 0 || jardin.getSizeY() <= 0)
+		{
+			LOGGER.error("Taille jardin négative.");
+			return false;
+		}
+		
+		for(Rocher rocher : r)
+		{
+			if(jardin.getSizeX() <= rocher.getPositionX() || rocher.getPositionX() < 0 || jardin.getSizeY() <= rocher.getPositionY() || rocher.getPositionY() < 0)
+			{
+				LOGGER.error("Rocher en dehors du jardin.");
+				return false;
+			}
+		}
+		
+		for(Carottes carotte : c)
+		{
+			if(jardin.getSizeX() <= carotte.getPositionX() || carotte.getPositionX() < 0 || jardin.getSizeY() <= carotte.getPositionY() || carotte.getPositionY() < 0)
+			{
+				LOGGER.error("Carotte en dehors du jardin.");
+				return false;
+			}
+		}
+		
+		for(Renard fox : f)
+		{
+			if(jardin.getSizeX() <= fox.getPositionX() || fox.getPositionX() < 0 || jardin.getSizeY() <= fox.getPositionY() || fox.getPositionY() < 0)
+			{
+				LOGGER.error("Renard en dehors du jardin.");
+				return false;
+			}
+		}
+		
+		for(Lapin lapin : l)
+		{
+			if(jardin.getSizeX() <= lapin.getPositionX() || lapin.getPositionX() < 0 || jardin.getSizeY() <= lapin.getPositionY() || lapin.getPositionY() < 0)
+			{
+				LOGGER.error("Lapin en dehors du jardin.");
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	
 	public String fileName()
 	{
