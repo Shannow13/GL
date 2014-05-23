@@ -578,6 +578,7 @@ public class EditorIHM {
 	/////////////////////////////////////////////////	LES RENARDS	/////////////////////////////////////////////////////
 
 
+	
 	//			Gestion du bouton renard
 
 	public class EditRenard implements ActionListener{

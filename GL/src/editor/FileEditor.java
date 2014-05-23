@@ -19,7 +19,6 @@ public class FileEditor {
 	
 	private int num;
 	
-
 	public FileEditor()
 	{
 		LOGGER.debug("Début création");

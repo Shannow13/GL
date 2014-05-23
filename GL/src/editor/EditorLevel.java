@@ -69,6 +69,7 @@ public class EditorLevel{
 	
 	private void writeFox(){
 		//TODO
+		
 	}
 	
 	private void writeJardin(SimpleJardin jardin){
