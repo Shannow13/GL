@@ -4,12 +4,21 @@ import game.Renard;
 import game.SimpleLapin;
 import game.SimpleRenard;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import org.apache.log4j.Logger;
 
@@ -30,6 +39,9 @@ public class Tableau extends JFrame {
 	public List<Lapin> lapins;
 	public char[][] jardin;
 	public JPanel[][] jp;
+	public JPanel boutonPanel, eastPanel, textPanel;
+	public JLabel textLabel;
+	public JButton buttonA, buttonX, buttonG, buttonD;
 	public boolean[] isLapinAlive;
 	public boolean over;
 	public int tours;
@@ -41,8 +53,8 @@ public class Tableau extends JFrame {
 		
 		LOGGER.debug("config");
 		
-		int x = 6;
-		int y = 6;
+		final int x = 6;
+		final int y = 6;
 		over = false;
 		
 		jardin = new char[x][y]; //Tableau du jardin avec infos herbe, carottes et rochers
@@ -78,10 +90,14 @@ public class Tableau extends JFrame {
 		
 		
 		this.setTitle("Terrain de jeu");
-		this.setSize(75*x,75*y);
+		this.setSize(75*x+100,75*y);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(new BorderLayout());
+		this.setLocationRelativeTo(null);
+		
 		
 		Container c = getContentPane();
+		
 		
 		JPanel panelGeneral = new JPanel();
 		GridLayout grille = new GridLayout(x,y);
@@ -144,10 +160,34 @@ public class Tableau extends JFrame {
 			(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
 		}
 		
-		
+		c.add(panelGeneral, BorderLayout.CENTER);
 		
 		//pack();
-		c.add(panelGeneral);
+		
+		
+		LOGGER.debug("init boutons");
+		/*boutons*/
+		
+		eastPanel = new JPanel(new GridLayout(2,1));
+		boutonPanel = new JPanel(new GridLayout(2,2));
+		buttonA = new JButton("A");
+		buttonX = new JButton("X");
+		buttonG = new JButton("G");
+		buttonD = new JButton("D");
+		boutonPanel.add(buttonA);
+		boutonPanel.add(buttonX);
+		boutonPanel.add(buttonG);
+		boutonPanel.add(buttonD);
+		textPanel = new JPanel();
+		textLabel = new JLabel("texte");
+		textPanel.add(textLabel);
+		eastPanel.add(boutonPanel,BorderLayout.NORTH);
+		eastPanel.add(textPanel,BorderLayout.SOUTH);
+		
+		
+		
+		c.add(eastPanel, BorderLayout.EAST);
+		
 		LOGGER.debug("pop fenetre");
 		this.setVisible(true);
 		
@@ -180,10 +220,10 @@ public class Tableau extends JFrame {
 					continue;
 				}
 				
-				SimpleLapin l = (SimpleLapin) lapins.get(i);
-				char o = l.getOrientation();
-				int lx = l.getPositionX();
-				int ly = l.getPositionY();
+				final SimpleLapin l = (SimpleLapin) lapins.get(i);
+				final char o = l.getOrientation();
+				final int lx = l.getPositionX();
+				final int ly = l.getPositionY();
 				
 				LOGGER.debug("lapin en surbrillance");
 				(jp[lx][ly]).setBackground(Color.cyan);
@@ -195,147 +235,159 @@ public class Tableau extends JFrame {
 				System.out.println("Sinon, on pivote de 90 degres vers le cote souhaite");
 				
 				
-				boolean ok = false;
-				do {
 					
 					
 					// TODO remplacer le scanner par des actionlistener sur le coté du tableau
-					String s = scan.next();
+					/*String s = scan.next();
 					s.toUpperCase();
 					System.out.print(s);
 					char dir = s.charAt(0);
-					System.out.println(" "+ dir);
+					System.out.println(" "+ dir);*/
 					
 					
 					
-					if(dir == 'A') {
-						switch(o) {
-						case 'N': 
-							if(lx != 0) {
-								if(jardin[lx-1][ly] == 'r') {
-									System.out.println("Déplacement sur un rocher impossible, ressayer");
-									break;
-								} else {
-									(jp[lx][ly]).setBackground(Color.green);
-									l.setPositionX(lx-1);
-									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
-									ok = true;
-									break;
-								}
-							}
-							else {
-								System.out.println("Déplacement impossible, reessayer");
-								break;
-							}
-														
-						case 'S':
-							if(lx != x-1) {
-								if(jardin[lx+1][ly] == 'r') {
-									System.out.println("Déplacement sur un rocher impossible, ressayer");
-									break;
-								} else {
-									(jp[lx][ly]).setBackground(Color.green);
-									l.setPositionX(lx+1);
-									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
-									ok = true;
-									break;
-								}
-							}
-							else {
-								System.out.println("Déplacement impossible, reessayer");
-								break;
-							}
-							
-						case 'E':
-							if(ly != y-1) {
-								if(jardin[lx][ly+1] == 'r') {
-									System.out.println("Déplacement sur un rocher impossible, ressayer");
-									break;
+					//if(dir == 'A') {
+					buttonA.addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) 
+						{
+							switch(o) {
+							case 'N': 
+								if(lx != 0) {
+									if(jardin[lx-1][ly] == 'r') {
+										System.out.println("Déplacement sur un rocher impossible, ressayer");
+										break;
+									} else {
+										(jp[lx][ly]).setBackground(Color.green);
+										l.setPositionX(lx-1);
+										(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
+										break;
+									}
 								}
 								else {
-									(jp[lx][ly]).setBackground(Color.green);
-									l.setPositionY(ly+1);
-									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
-									ok = true;
+									System.out.println("Déplacement impossible, reessayer");
+									break;
+								}
+															
+							case 'S':
+								if(lx != x-1) {
+									if(jardin[lx+1][ly] == 'r') {
+										System.out.println("Déplacement sur un rocher impossible, ressayer");
+										break;
+									} else {
+										(jp[lx][ly]).setBackground(Color.green);
+										l.setPositionX(lx+1);
+										(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
+										break;
+									}
+								}
+								else {
+									System.out.println("Déplacement impossible, reessayer");
+									break;
+								}
+								
+							case 'E':
+								if(ly != y-1) {
+									if(jardin[lx][ly+1] == 'r') {
+										System.out.println("Déplacement sur un rocher impossible, ressayer");
+										break;
+									}
+									else {
+										(jp[lx][ly]).setBackground(Color.green);
+										l.setPositionY(ly+1);
+										(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
+										break;
+									}
+								}
+								else {
+									System.out.println("Déplacement impossible, reessayer");
+									break;
+								}
+								
+							case 'W':
+								if(ly != 0) {
+									if(jardin[lx][ly-1] == 'r') {
+										System.out.println("Déplacement sur un rocher impossible, ressayer");
+										break;
+									} else {
+										(jp[lx][ly]).setBackground(Color.green);
+										l.setPositionY(ly-1);
+										(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
+										break;
+									}
+								}
+								else {
+									System.out.println("Déplacement impossible, reessayer");
 									break;
 								}
 							}
-							else {
-								System.out.println("Déplacement impossible, reessayer");
-								break;
+						}
+					});
+					/*else if(dir == 'D') {*/
+					buttonD.addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) {
+						
+							switch(o){
+								case('N'):
+									l.setOrientation('E'); break;
+								case('E'):
+									l.setOrientation('S'); break;
+								case('S'):
+									l.setOrientation('W'); break;
+								case('W'):
+									l.setOrientation('N'); break;							
 							}
+							(jp[lx][ly]).setBackground(Color.white);
+							LOGGER.debug("Nouvelle orientation : " + o);
+						}
+					});
+					/*else if(dir == 'G') {*/
+					buttonG.addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) {
 							
-						case 'W':
-							if(ly != 0) {
-								if(jardin[lx][ly-1] == 'r') {
-									System.out.println("Déplacement sur un rocher impossible, ressayer");
-									break;
-								} else {
-									(jp[lx][ly]).setBackground(Color.green);
-									l.setPositionY(ly-1);
-									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
-									ok = true;
-									break;
-								}
+							switch(o){
+								case('N'):
+									l.setOrientation('W'); break;
+								case('E'):
+									l.setOrientation('N'); break;
+								case('S'):
+									l.setOrientation('E'); break;
+								case('W'):
+									l.setOrientation('S'); break;							
 							}
-							else {
-								System.out.println("Déplacement impossible, reessayer");
-								break;
-							}
+							(jp[lx][ly]).setBackground(Color.white);
+							LOGGER.debug("Nouvelle orientation : " + o);
 						}
-					}
-					else if(dir == 'D') {
-						ok = true;
-						switch(o){
-							case('N'):
-								l.setOrientation('E'); break;
-							case('E'):
-								l.setOrientation('S'); break;
-							case('S'):
-								l.setOrientation('W'); break;
-							case('W'):
-								l.setOrientation('N'); break;							
+					});
+					
+					buttonX.addActionListener(new ActionListener() {
+						
+						public void actionPerformed(ActionEvent e) {
+							System.out.println("Ne pas bouger");
 						}
-						(jp[lx][ly]).setBackground(Color.white);
-						LOGGER.debug("Nouvelle orientation : " + o);
-					}
-					else if(dir == 'G') {
-						ok = true;
-						switch(o){
-							case('N'):
-								l.setOrientation('W'); break;
-							case('E'):
-								l.setOrientation('N'); break;
-							case('S'):
-								l.setOrientation('E'); break;
-							case('W'):
-								l.setOrientation('S'); break;							
-						}
-						(jp[lx][ly]).setBackground(Color.white);
-						LOGGER.debug("Nouvelle orientation : " + o);
-					}
-					else {
-						System.out.println("Commande erronnée, rééssayez");
-					}
+					});
 					
 					
-				}while(!ok);
+					
 				
-				lx = l.getPositionX();
-				ly = l.getPositionY();
 				
-				if(jardin[lx][ly] == 'c') {
+				int lx1 = l.getPositionX();
+				int ly1 = l.getPositionY();
+				
+				if(jardin[lx1][ly1] == 'c') {
 					LOGGER.debug("Carotte mangee");
-					jardin[lx][ly] = 'h';
+					jardin[lx1][ly1] = 'h';
 					if(!resteCarottes(jardin)) {
 						over = true;
 					}
 				}
 
 				for(Renard r : renards) {
-					if(lx == r.getPositionX() && ly == r.getPositionY()) {
+					if(lx1 == r.getPositionX() && ly1 == r.getPositionY()) {
 						LOGGER.debug("Lapin mort sur un renard");
-						(jp[lx][ly]).setBackground(Color.red);
+						(jp[lx1][ly1]).setBackground(Color.red);
 						isLapinAlive[i] = false;
 						if(!resteLapinsVivants(isLapinAlive)) {
 							over = true;

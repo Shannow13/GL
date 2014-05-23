@@ -2,12 +2,19 @@ package editor;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
+import game.Carottes;
+import game.Rocher;
+import game.SimpleCarottes;
+import game.SimpleJardin;
+import game.SimpleRocher;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,12 +26,19 @@ import org.apache.log4j.Logger;
 
 public class EditorIHM {
 	
+	SimpleJardin theJardin = new SimpleJardin();
+	ArrayList<Carottes> cList;
+	ArrayList<Rocher> rList = new ArrayList<Rocher>();
+	
 	private static final Logger LOGGER = Logger.getLogger(EditorIHM.class);
 	
 	public JFrame frame;
 	//public JPanel panelG, panel;
 	public JButton jardin, carotte, rocher, renard, quitter;
 	public boolean flagAnnuler = false;
+	
+	
+	//				Création de la fenetre principale
 	
 	public EditorIHM()
 	{
@@ -52,12 +66,14 @@ public class EditorIHM {
 		int w = (frame.getWidth()/2)-50;
 		int h = (frame.getHeight()/2);
 		
+		//Postionnement des boutons
 		jardin.setBounds( w - 50, h-150, 200, 40);
 	    carotte.setBounds( w - 50, h -100, 200, 40);
 	    rocher.setBounds( w - 50, h -50, 200, 40);
 	    renard.setBounds( w - 50, h , 200, 40 );
 	    quitter.setBounds(w-50 , h + 50 , 200, 40);
 	    
+	    //Lien entre les boutons et les actions
 	    jardin.addActionListener(new EditJardin());
 	    carotte.addActionListener(new EditCarotte());
 	    rocher.addActionListener(new EditRocher());
@@ -93,6 +109,10 @@ public class EditorIHM {
 		new EditorIHM();
 	}
 	
+	
+	//			Création de la fenetre de création du jardin
+	// Gestion du bouton jardin
+	
 	public class EditJardin implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			int w = (frame.getWidth()/2)-50;
@@ -101,7 +121,6 @@ public class EditorIHM {
 			LOGGER.debug("Click de jardin");
 			final JFrame frmJardin = new JFrame("Création Jardin");
 			//frmJardin.setUndecorated(true);
-			frmJardin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmJardin.setSize(new Dimension(500,300));
 			frmJardin.setLocation(600, 300);
 			frmJardin.setLayout(null);
@@ -118,6 +137,7 @@ public class EditorIHM {
 			frmJardin.add(btnAnnuler);
 			frmJardin.add(btnOk);
 			
+			//Positionnement des boutons et champs
 			colonnes.setBounds( w - 125, h - 50, 150, 40);
 		    lignes.setBounds( w + 75, h - 50, 150, 40);
 		    btnAnnuler.setBounds( w - 125, h + 50, 150, 40);
@@ -137,6 +157,11 @@ public class EditorIHM {
 		}
 	}
 	
+	
+	
+	//			Création de la fenetre de création des carottes
+	// Gestion du bouton carotte
+	
 	public class EditCarotte implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			int w = (frame.getWidth()/2)-200;
@@ -144,7 +169,6 @@ public class EditorIHM {
 			
 			LOGGER.debug("Click de carotte");
 			final JFrame frmNbC = new JFrame("Nombre de Carottes");
-			frmNbC.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmNbC.setSize(new Dimension(300,300));
 			frmNbC.setLocation(700, 300);
 			frmNbC.setLayout(null);
@@ -160,7 +184,7 @@ public class EditorIHM {
 			frmNbC.add(nbCarottes);
 			frmNbC.add(btnOk);
 			frmNbC.add(btnAnnuler);
-			
+			// positionnement des boutons
 			text.setBounds( w + 15, h - 30, 200, 40);
 		    nbCarottes.setBounds( w + 15, h + 20, 160, 40);
 			btnOk.setBounds( w + 15, h + 100, 160, 40);
@@ -174,13 +198,17 @@ public class EditorIHM {
 		}
 	} 
 	
+	
+	
+	//			Création de la fenetre de création des rochers
+	// Gestion du bouton rocher
+	
 	class EditRocher implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 					
 			LOGGER.debug("Click de rocher");
 			
 			final JFrame frmNbR = new JFrame("Nombre de Rocher");
-			frmNbR.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmNbR.setSize(new Dimension(500,300));
 			frmNbR.setLocation(600, 300);
 			frmNbR.setLayout(null);
@@ -200,6 +228,7 @@ public class EditorIHM {
 			frmNbR.add(btnOk);
 			frmNbR.add(btnAnnuler);
 			
+			//Positionnement des boutons et champs
 			text.setBounds( w-75 , h -100, 200, 40);
 		    nbRocher.setBounds( w-75 , h - 50, 160, 40);
 			btnOk.setBounds( w-75, h , 160, 40);
@@ -207,13 +236,7 @@ public class EditorIHM {
 			
 			btnAnnuler.addActionListener(new EditCancel(frmNbR));			
 		    
-		    btnOk.addActionListener(new ActionListener()
-            {
-                    public void actionPerformed(ActionEvent e)
-                    {
-                        frmNbR.setVisible( false );
-                    }
-            });	
+		    btnOk.addActionListener(new EditOkRocher(nbRocher,frmNbR));
 		    
 			frmNbR.setVisible(true);
 			
@@ -222,6 +245,7 @@ public class EditorIHM {
 	
 	
 	
+	//			Gestion du bouton renard
 	
 	public class EditRenard implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -232,6 +256,7 @@ public class EditorIHM {
 	
 	
 	
+//			Gestion du bouton quitter
 	
 	public class EditQuitter implements ActionListener{
 		private JFrame frame;
@@ -247,6 +272,7 @@ public class EditorIHM {
 	
 	
 	
+	//		Gestion des boutons "annuler"
 	
 	public class EditCancel implements ActionListener{
 		private JFrame frame;
@@ -262,6 +288,8 @@ public class EditorIHM {
 	}
 	
 	
+	
+	// Gestion du bouton OK après selection du nombre de carottes
 	
 	public class EditOkCarotte implements ActionListener{
 		
@@ -279,6 +307,7 @@ public class EditorIHM {
 			LOGGER.debug("Click de OK pour les carottes");
 			LOGGER.debug("Test : " + nbCarottes.getText());
 			
+			// On s'assure qu'on prend bien un int
 			try{
 				nbC = Integer.parseInt(nbCarottes.getText());
 				frame.setVisible(false);
@@ -296,7 +325,6 @@ public class EditorIHM {
 		{
 			LOGGER.debug("Création des carottes");
 				frame = new JFrame("Les Carottes!");
-				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setSize(new Dimension(500,300));
 				frame.setLocation(600, 300);
 				frame.setLayout(null);
@@ -337,9 +365,174 @@ public class EditorIHM {
 				
 				frame.setVisible(true);
 				
+				cList = new ArrayList<Carottes>();
+				
 				cancel.addActionListener(new EditCancel(frame));
+				ok.addActionListener(new NouvelleCarotte(nbC,l,c,n,frame));
 		}
 	}
 	
+	private class NouvelleCarotte implements ActionListener{
+
+		private JFrame frame;
+		private final int nbC;
+		private JTextField l,c,n;
+		int ligne, colonne, nombre;
+		
+		public NouvelleCarotte(int nbC, JTextField l, JTextField c,JTextField n, JFrame frame){
+			this.nbC = nbC;
+			this.l = l;
+			this.c = c;
+			this.n = n;
+			this.frame = frame;
+			LOGGER.debug("Click sur ok");
+		}
+		
+		public void actionPerformed(ActionEvent e) {
+			try{
+				ligne = Integer.parseInt(l.getText());
+				colonne = Integer.parseInt(c.getText());
+				nombre = Integer.parseInt(n.getText());
+				LOGGER.debug("Ce sont bien des int.");
+			}catch(NumberFormatException er){
+				LOGGER.debug("Ce ne sont pas des INT!");
+				return;
+			}
+			
+			SimpleCarottes carotte = new SimpleCarottes();
+			carotte.setPositionX(ligne);
+			carotte.setPositionY(colonne);
+			carotte.setNombre(nombre);
+			
+			cList.add(carotte);
+			
+			if(cList.size() == nbC){
+				frame.setVisible(false);
+				LOGGER.debug("Les carottes sont finies! =>" + nbC);
+			}
+			
+			l.setText("");
+			c.setText("");
+			n.setText("");
+		}
+	}
+		
+		
+		////////////////////////////////////////////////////////////////////////////////
+		
+		private class EditOkRocher implements ActionListener{
+			
+			private JTextField nbRocher;
+			JFrame frame;
+			int nbR;
+			
+			public EditOkRocher(JTextField nbRocher,JFrame frame)
+			{
+				this.nbRocher = nbRocher;
+				this.frame = frame;
+			}
+			
+			public void actionPerformed(ActionEvent e) {
+				LOGGER.debug("Click de OK pour les rochers");
+				LOGGER.debug("Test : " + nbRocher.getText());
+				
+				try{
+					nbR = Integer.parseInt(nbRocher.getText());
+					frame.setVisible(false);
+					LOGGER.debug("C'est bien un int.");
+					creationRocher(nbR);
+				}catch(NumberFormatException er){
+					LOGGER.debug("C'est pas un INT!!!!");
+					return;
+				}
+			}
+		}
+			private void creationRocher(int nbR)
+			{
+				LOGGER.debug("Création des Rochers");
+					frame = new JFrame("Les Rochers!");
+					frame.setSize(new Dimension(500,300));
+					frame.setLocation(600, 300);
+					frame.setLayout(null);
+					frame.getContentPane().setBackground(new Color(255, 102, 255));
+					frame.setResizable(false);
+					
+					int w = (frame.getWidth() /2);
+					int h = frame.getHeight()/2;
+					
+					JLabel ligne = new JLabel("N° Ligne :");
+					JLabel colonne = new JLabel("N° Colonne :");
+					JTextField l = new JTextField();
+					JTextField c = new JTextField();
+					JButton cancel = new JButton("Annuler");
+					JButton ok = new JButton("OK");
+					
+					frame.add(ligne);
+					frame.add(colonne);
+					frame.add(l);
+					frame.add(c);
+					frame.add(cancel);
+					frame.add(ok);
+					
+					//text.setBounds( w-75 , h -100, 200, 40);
+					
+					ligne.setBounds(w-150, h-115, 100,40);
+					l.setBounds(w-150,h-70,100,40);
+					colonne.setBounds(w+50,h-115,100,40);
+					c.setBounds(w+50,h-70,100,40);
+					cancel.setBounds(w-150,h+50,100,40);
+					ok.setBounds(w+50,h+50,100,40);
+					
+					frame.setVisible(true);
+					
+					rList = new ArrayList<Rocher>();
+					
+					cancel.addActionListener(new EditCancel(frame));
+					ok.addActionListener(new NouveauRocher(nbR,l,c,frame));
+			
+		}
+		
+		private class NouveauRocher implements ActionListener{
+
+			private JFrame frame;
+			private final int nbR;
+			private JTextField l,c;
+			int ligne, colonne;
+			
+			public NouveauRocher(int nbR, JTextField l, JTextField c, JFrame frame){
+				this.nbR = nbR;
+				this.l = l;
+				this.c = c;
+				this.frame = frame;
+				LOGGER.debug("Click sur ok");
+			}
+			
+			public void actionPerformed(ActionEvent e) {
+				try{
+					ligne = Integer.parseInt(l.getText());
+					colonne = Integer.parseInt(c.getText());
+					LOGGER.debug("Ce sont bien des int.");
+				}catch(NumberFormatException er){
+					LOGGER.debug("Ce ne sont pas des INT!");
+					return;
+				}
+				
+				SimpleRocher rocher = new SimpleRocher();
+				rocher.setPositionX(ligne);
+				rocher.setPositionY(colonne);
+				
+				rList.add(rocher);
+				
+				if(rList.size() == nbR){
+					frame.setVisible(false);
+					LOGGER.debug("Les rochers sont finies! =>" + nbR);
+				}
+				
+				l.setText("");
+				c.setText("");
+					
+				
+			}
+	}
 	
-}
+}	
