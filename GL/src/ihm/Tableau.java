@@ -1,4 +1,4 @@
-package gl.dao;
+package ihm;
 import game.Carottes;
 import game.Jardin;
 import game.Lapin;
@@ -6,6 +6,12 @@ import game.Renard;
 import game.Rocher;
 import game.SimpleLapin;
 import game.SimpleRenard;
+import gl.dao.CsvJardinDao;
+import gl.dao.CsvLapinDao;
+import gl.dao.CsvRenardDao;
+import gl.dao.DefinitiveCsvJardinDao;
+import gl.dao.DefinitiveCsvLapinDao;
+import gl.dao.DefinitiveCsvRenardDao;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

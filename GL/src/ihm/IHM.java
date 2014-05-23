@@ -5,8 +5,8 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.event.*;
+
 import editor.EditorIHM;
-import gl.dao.Tableau;
 
 public class IHM
 {
