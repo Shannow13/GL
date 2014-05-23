@@ -29,7 +29,7 @@ public class newIHM extends JPanel{
 	    public static void main(String[] args)
 	    {
 	        frm.getContentPane().setLayout( new BorderLayout() );
-	        frm.getContentPane().add( new Graph(), BorderLayout.CENTER );
+	        frm.getContentPane().add( new newIHM(), BorderLayout.CENTER );
 	        int w = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
 	        int h = (int) Toolkit.getDefaultToolkit().getScreenSize().height;
 	        frm.setSize( w, h );

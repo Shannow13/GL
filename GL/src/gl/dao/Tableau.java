@@ -75,6 +75,30 @@ public class Tableau extends JFrame {
 		doDao(jardin_file, renard_file, lapin_file);
 	}
 	
+	
+	private void doDao(final String jardin_file, final  String renard_file, final String lapin_file) {
+		LOGGER.debug("On va créer le jardin");
+		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
+		final CsvRenardDao daoR = new DefinitiveCsvRenardDao();
+		final CsvLapinDao daoL = new DefinitiveCsvLapinDao();
+		dao.init(new File(jardin_file));
+		daoR.init(new File(renard_file));
+		daoL.init(new File(lapin_file));
+		final Jardin jardins = dao.findJardin();
+		final List<Renard> renards = daoR.findAllRenards();
+		final List<Lapin> lapins = daoL.findAllLapins();
+		tableauCrea(jardins, renards, lapins);
+	}
+
+
+	/*private void doWork(final JardinDao dao, final RenardDao daoR, final CsvLapinDao daoL) {
+		final Jardin jardins = dao.findJardin();
+		final List<Renard> renards = daoR.findAllRenards();
+		final List<Lapin> lapins = daoL.findAllLapins();
+		tableauCrea(jardins, renards, lapins);
+	}*/
+	
+	
 	public void tableauCrea(Jardin jardins, List<Renard> renards, List<Lapin> lapins) {
 
 		
@@ -782,26 +806,6 @@ public class Tableau extends JFrame {
 	}*/
 	
 	
-	private void doDao(final String jardin_file, final  String renard_file, final String lapin_file) {
-		LOGGER.debug("On va créer le jardin");
-		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
-		final CsvRenardDao daoR = new DefinitiveCsvRenardDao();
-		final CsvLapinDao daoL = new DefinitiveCsvLapinDao();
-		dao.init(new File(jardin_file));
-		daoR.init(new File(renard_file));
-		daoL.init(new File(lapin_file));
-		doWork(dao, daoR, daoL);
-	}
-
-
-	private void doWork(final JardinDao dao, final RenardDao daoR, final CsvLapinDao daoL) {
-		final Jardin jardins = dao.findJardin();
-		final List<Renard> renards = daoR.findAllRenards();
-		final List<Lapin> lapins = daoL.findAllLapins();
-		tableauCrea(jardins, renards, lapins);
-
-		
-	}
 
 	class Avance implements ActionListener {
 
