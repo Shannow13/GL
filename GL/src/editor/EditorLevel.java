@@ -77,6 +77,7 @@ public class EditorLevel{
 		
 	}
 	
+	
 	private void writeJardin(SimpleJardin jardin){
 		String[] entries = ("J;"+jardin.getSizeX()+";"+jardin.getSizeY()+";0;1").split(";");
 		writer.writeNext(entries);
