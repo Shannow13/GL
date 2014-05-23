@@ -1091,10 +1091,9 @@ public class EditorIHM {
     // Gestion de la finalisation avec toutes les étapes accomplies
     
     private class WriteCSV{
-        JFrame frame;
-        
+    	
         public WriteCSV(JFrame frame){
-            this.frame = frame;
+        	
             EditorLevel edi = new EditorLevel(theJardin, cList, rList, fList, lList);
             
             if(edi.isok)
