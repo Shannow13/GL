@@ -2,6 +2,7 @@ package editor;
 
 import static org.apache.log4j.Logger.getLogger;
 import game.Carottes;
+import game.Renard;
 import game.Rocher;
 import game.SimpleJardin;
 
@@ -67,8 +68,12 @@ public class EditorLevel{
 		}
 	}
 	
-	private void writeFox(){
-		//TODO
+	private void writeFox(ArrayList<Renard> renard){
+		for( Renard f : renard)
+		{
+			String[] entries = ("F;"+ f.getPositionX()+ ";"+ f.getPositionY()+";"+f.getOrientation()+";"+f.getTrajet()+";"+f.getNom()).split(";");
+			writer.writeNext(entries);
+		}
 		
 	}
 	
