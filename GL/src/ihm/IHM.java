@@ -237,7 +237,7 @@ class Graph extends JPanel
                 int hauteur = (int)tailleEcran.getHeight();
                 int largeur = (int)tailleEcran.getWidth();
                 frmHelp.setLocation((int)(hauteur*0.712), (int)(largeur*0.15));*/
-                frmHelp.setLocation(750, 200);
+                frmHelp.setLocation(570, 150);
                 
                 JButton btnBack = new JButton("Retour");
                 
@@ -248,14 +248,37 @@ class Graph extends JPanel
                 imgHelp.setPreferredSize(new Dimension(200,500));
                 
                 frmHelp.getContentPane().setLayout( new BorderLayout() );    
-                int width = 400;
-                int height = 500;
+                int width = 800;
+                int height = 800;
                 frmHelp.setSize( width, height );
                 
                 JLabel text1, text2;
                 
-                text1 = new JLabel ("COMMANDES");
-                text2 = new JLabel ("<html>P : Pause<br>Q : Quitter<html>");
+                text1 = new JLabel ("AIDE");
+                text2 = new JLabel ("<html>" + 
+                		"<br><br>" +
+                		"NOM DU JEU : Rabbit Insanity<br><br>" +
+                		"BUT DU JEU : Récupérer les carottes à l'aide de un ou plusieurs lapins sans se faire toucher par un renard.<br><br><br><br>" +
+                		"LANCER UNE PARTIE : Cliquer sur le bouton 'Nouvelle partie'<br><br>" +
+                		"CHOISIR UN NIVEAU : Cliquer sur le bouton 'Charger partie'<br><br>" +
+                		"CREER UN NIVEAU : Cliquer sur le bouton 'Editer Niveau'<br><br>" +
+                		"QUITTER LE JEU : Cliquer sur le bouton 'Quitter'<br><br><br><br>" +
+                		"Une fois la partie lancée, le jeu se déroule au tour par tour.<br>" +
+                		"Chaque personnage effectue une action à la fois dans l'ordre suivant : les lapins puis les renards.<br>" +
+                		"Les contrôles se font par les boutons placés à droite du plateau de jeu.<br>" +
+                		"Les boutons ont les actions suivantes :<br><br>" +
+                		"- Bouton AVANCER : Le lapin avance droit devant lui sauf s'il y a un rocher ou un bord du plateau<br><br>" +
+                		"- Bouton ROTATION DROITE : Le lapin tourne sur lui-même dans le sens horaire ce<br>" +
+                		"qui a pour effet de modifier de la même manière la direction de déplacement du lapin.<br>" +
+                		"Chaque rotation se fait à angle droit.<br><br>" +
+                		"- Bouton ROTATION GAUCHE : Le lapin tourne sur lui-même dans le sens anti horaire ce<br>" +
+                		"qui a pour effet de modifier de la même manière la direction de déplacement du lapin.<br>" +
+                		"Chaque rotation se fait à angle droit.<br><br>" +
+                		"- Bouton ATTENDRE : Le lapin ne fait rien pendant 1 tour.<br><br><br><br>" +
+                		"Une action équivaut à un clique sur un bouton.<br>" +
+                		"Le lapin contrôlé pour le joueur se trouve sur une case bleue.<br>" +
+                		"Son nom et son orientation sont indiqués en bas à droite de la fenêtre (sous les boutons).<html>");
+                
                 
                 JPanel title = new JPanel();
                 JPanel help = new JPanel();
