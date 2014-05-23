@@ -682,6 +682,7 @@ public class EditorIHM {
     }
 
 
+    
     // Gestion du pop up pour définir les renards    
     private void creationRenard(int nbF)
     {
