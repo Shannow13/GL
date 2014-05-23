@@ -15,7 +15,6 @@ import org.apache.log4j.Logger;
 import au.com.bytecode.opencsv.CSVWriter;
 
 
-
 public class EditorLevel{
 	
 	private static final Logger LOGGER = getLogger(EditorLevel.class);

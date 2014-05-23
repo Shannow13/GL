@@ -133,7 +133,6 @@ public class EditorIHM {
     }
 
 
-
     //        Gestion des boutons "annuler"
 
     public class EditCancel implements ActionListener{
