@@ -1,53 +1,70 @@
 package editor;
 
 import static org.apache.log4j.Logger.getLogger;
-import java.io.File;
+import game.Carottes;
+import game.Rocher;
+import game.SimpleJardin;
+
+import java.io.FileWriter;
+import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
 
-import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
 
 
 
-public class EditorLevel extends AbstractEditor {
+public class EditorLevel{
 	
 	private static final Logger LOGGER = getLogger(EditorLevel.class);
 	
-	private File file;
-	private EditorIHM ihm;
+	private FileWriter wFile;
+	private FileEditor fichier;
 	
-	public EditorLevel()
-	{
-		file = super.file;
-		init(file);
-	}
+	private CSVWriter writer;
 	
-	public void init(File file)
+	
+	public EditorLevel(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r )
 	{
-		LOGGER.debug("Création fichier");
-		this.file = file;
-		ihm = new EditorIHM();
+		fichier = new FileEditor();
+		this.wFile = fichier.wFile;
 		
+		LOGGER.debug("Le fichier devrait etre créer avec le CSVWriter");
+		
+		writer = new CSVWriter(wFile,'\n');
+		
+		writeJardin(jardin);
+		writeCarotte(c);
+		writeRocher(r);
 	}
 	
 	public String fileName()
 	{
-		return file.getName();
+		return fichier.file.getName();
 	}
 	
-	private void writeCarotte(){
-		//TODO
+	private void writeCarotte(ArrayList<Carottes> carotte){
+		for(Carottes c : carotte)
+		{
+			String[] entries = ("C;"+c.getPositionX() +";"+c.getPositionY()+";"+c.getNombre()).split(";");
+			writer.writeNext(entries);
+		}
 	}
 	
-	private void writeRocher(){
-		//TODO
+	private void writeRocher(ArrayList<Rocher> rocher){
+		for(Rocher r : rocher)
+		{
+			String[] entries = ("R;"+r.getPositionX() +";"+r.getPositionY()).split(";");
+			writer.writeNext(entries);
+		}
 	}
 	
 	private void writeFox(){
 		//TODO
 	}
 	
-	private void writeJardin(){
-		//TODO
+	private void writeJardin(SimpleJardin jardin){
+		String[] entries = ("J;"+jardin.getSizeX()+";"+jardin.getSizeY()+";0;1").split(";");
+		writer.writeNext(entries);
 	}
 }

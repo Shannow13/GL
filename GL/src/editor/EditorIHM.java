@@ -112,9 +112,9 @@ public class EditorIHM {
 	//////////////////////////////////////////////////	GENERAL	///////////////////////////////////////////////////
 
 
-/*	public static void main(String[] args){
+	public static void main(String[] args){
 		new EditorIHM();
-	}*/
+	}
 
 	//	Gestion du bouton quitter
 
@@ -665,7 +665,7 @@ public class EditorIHM {
 		
 		public WriteCSV(JFrame frame){
 			this.frame = frame;
-			IsOk = true;
+			new EditorLevel(theJardin, cList, rList);
 		}
 		
 	}
