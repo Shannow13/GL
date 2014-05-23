@@ -1,18 +1,25 @@
 package gl.dao;
+import game.Carottes;
+import game.Jardin;
 import game.Lapin;
 import game.Renard;
+import game.Rocher;
+import game.SimpleJardin;
 import game.SimpleLapin;
 import game.SimpleRenard;
+import gl.dao.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 
 import org.apache.log4j.Logger;
+
 
 
 
@@ -45,15 +52,24 @@ public class Tableau extends JFrame {
 	private JLabel nameLabel;
 	private JLabel orientLabel;
 
+	public static Jardin jardins;
+	
+	private final static String RESOURCES_PATH = "resources/";
+	private final static String JARDIN_FILE_NAME = "jardin-1.csv";
+	final static File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
 
 
-	public Tableau() {
+	public Tableau(Jardin jardins) {
 
-
+		
 		LOGGER.debug("config");
-
-		int x = 6;
-		int y = 6;
+		
+		int x = jardins.getSizeX();
+		int y = jardins.getSizeY();
+		ArrayList<Carottes> carottes = new ArrayList<Carottes>();
+		ArrayList<Rocher> rochers = new ArrayList<Rocher>();
+		carottes = jardins.getCarottes();
+		rochers = jardins.getRochers();
 		over = false;
 
 		jardin = new char[x][y]; //Tableau du jardin avec infos herbe, carottes et rochers
@@ -66,8 +82,18 @@ public class Tableau extends JFrame {
 
 			}
 		}
-
-		jardin[2][2] = 'c'; // carotte
+		for(Carottes c : carottes){
+		
+			jardin[c.getPositionY()][c.getPositionX()] = 'c';
+			
+			
+		}
+		/*for(Rocher r : rochers){
+			jardin[r.getPositionX()][r.getPositionY()] = 'r';
+			
+		}*/
+		
+		//jardin[2][2] = 'c'; // carotte
 		jardin[4][4] = 'r'; // rocher
 		/*jardin[2][4] = 'l'; // lapin
 		jardin[5][5] = 'l';
@@ -597,15 +623,29 @@ public class Tableau extends JFrame {
 	
 
 	public static void main(String[] args) {
-
-			new Tableau();
-
-
+		
+			doDao();
+			
 	}
 	
 	
 	
 	
+	private static void doDao() {
+		LOGGER.debug("On va créer le jardin");
+		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
+		dao.init(file);
+		doWork(dao);
+	}
+
+
+	private static void doWork(final JardinDao dao) {
+		final Jardin jardins = dao.findJardin();
+		new Tableau(jardins);
+
+		
+	}
+
 	class Avance implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {

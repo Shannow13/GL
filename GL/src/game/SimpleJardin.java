@@ -1,5 +1,6 @@
 package game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleJardin implements Jardin {
@@ -14,8 +15,8 @@ public class SimpleJardin implements Jardin {
 	public int sizeY;
 	public int indicelvl;
 	public int debloque;
-	private List<Rocher> rochers;
-	private List<Carottes> carottes;
+	private ArrayList<Rocher> rochers;
+	private ArrayList<Carottes> carottes;
 	
 	
 	
@@ -23,7 +24,7 @@ public class SimpleJardin implements Jardin {
 	public SimpleJardin() {
 	}
 	
-	public SimpleJardin(int sizeX, int sizeY, List<Rocher> rochers, List<Carottes> carottes) {
+	public SimpleJardin(int sizeX, int sizeY, ArrayList<Rocher> rochers, ArrayList<Carottes> carottes) {
 		this.sizeX = sizeX;
 		this.sizeY = sizeY;
 		this.rochers = rochers;
@@ -69,20 +70,20 @@ public class SimpleJardin implements Jardin {
 		this.debloque = debloque;
 	}
 	@Override
-	public List<Rocher> getRochers() {
+	public ArrayList<Rocher> getRochers() {
 		return this.rochers;
 	}
 
-	public void setRochers(List<Rocher> rochers) {
+	public void setRochers(ArrayList<Rocher> rochers) {
 		this.rochers = rochers;
 	}
 	
 	@Override
-	public List<Carottes> getCarottes() {
+	public ArrayList<Carottes> getCarottes() {
 		return this.carottes;
 	}
 
-	public void setCarottes(List<Carottes> carottes) {
+	public void setCarottes(ArrayList<Carottes> carottes) {
 		this.carottes = carottes;
 	}
 }
