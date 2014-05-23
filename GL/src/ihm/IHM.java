@@ -36,12 +36,9 @@ class Graph extends JPanel
 {
     private static final long serialVersionUID = 1L;
 
-    private Image bg = getToolkit().getImage("resources/img/menu2.png");
+    private Image bg = getToolkit().getImage("resources/img/fond.png");
     
     private boolean fullScreen = false;
-    
-    //JButton btnNew = new JButton("NOUVELLE PARTIE");
-    //
     
     JButton btnNew = new JButton(new ImageIcon("resources/img/pancarte1.png"));
     JButton btnCont = new JButton(new ImageIcon("resources/img/pancarte2.png"));
@@ -50,13 +47,13 @@ class Graph extends JPanel
     JButton btnHelp = new JButton(new ImageIcon("resources/img/pancarte5.png"));
     JButton btnExit = new JButton(new ImageIcon("resources/img/pancarte6.png"));
     
+    //JButton btnNew = new JButton("NOUVELLE PARTIE");
     //JButton btnCont = new JButton("CONTINUER");
     //JButton btnLoad = new JButton("CHARGER NIVEAU");
     //JButton btnHelp = new JButton("AIDE");
     //JButton btnEditNiveau = new JButton("EDITION NIVEAU");
     //JButton btnExit = new JButton("QUITTER");
     JButton btnFullScreen = new JButton("FULLSCREEN");
-    
     
     int width = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
     int height = (int) Toolkit.getDefaultToolkit().getScreenSize().height;

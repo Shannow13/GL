@@ -30,7 +30,7 @@ public class EditorIHM {
 	public JFrame frame;
 	//public JPanel panelG, panel;
 	public JButton jardin, carotte, rocher, renard, quitter,fin;
-	public boolean flagAnnuler = false;
+	public boolean IsOk;
 
 
 
@@ -103,6 +103,8 @@ public class EditorIHM {
 		frame.setVisible(true);
 
 		LOGGER.debug("Fin IHM");
+		
+		IsOk = false;
 
 	}
 
@@ -590,6 +592,9 @@ public class EditorIHM {
 	
 	/////////////////////////////////////////////	FINALISATION	//////////////////////////////////////////////////////
 
+	
+	// Gestion de la finalisation
+	
 	public class EditFin implements ActionListener{
 		
 		JFrame frame;
@@ -606,20 +611,26 @@ public class EditorIHM {
 				LOGGER.debug("Pas tous fini!");
 				new PopUp();
 			}
-				
+			else
+			{
+				LOGGER.debug("Toutes les étapes sont OK");
+				new WriteCSV(frame);
+			}
 			
 		}
 		
 	}
 	
 	
+	// Gestion de la demande de finalisation sans toutes les étapes
 	private class PopUp{
 		JFrame frame;
 		
 		public PopUp(){
 			frame = new JFrame("NOPE!");
-			frame.setSize(new Dimension(500,300));
+			frame.setSize(new Dimension(400,300));
 			frame.setLocation(700,300);
+			frame.setLayout(null);
 			
 			JLabel text = new JLabel("Vous devez terminer TOUTES les étapes.");
 			JButton ok = new JButton("J'y retourne...");
@@ -627,11 +638,10 @@ public class EditorIHM {
 			frame.add(text);
 			frame.add(ok);
 			
-			int w = 500/2;
-			int h = 300/2;
 			
-			ok.setBounds(w-100,h-100,100,40);
-			text.setBounds(w-100,h+50,100,40);
+			
+			ok.setBounds(90,150,200,40);
+			text.setBounds(75,50,300,40);
 			
 			frame.setVisible(true);
 			
@@ -647,4 +657,16 @@ public class EditorIHM {
 
 	}
 	
+	
+	// Gestion de la finalisation avec toutes les étapes accomplies
+	
+	public class WriteCSV{
+		JFrame frame;
+		
+		public WriteCSV(JFrame frame){
+			this.frame = frame;
+			new EditorLevel(theJardin, cList, rList);
+		}
+		
+	}
 }	
