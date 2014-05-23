@@ -32,7 +32,7 @@ public class EditorLevel{
 		
 		LOGGER.debug("Le fichier devrait etre créer avec le CSVWriter");
 		
-		writer = new CSVWriter(wFile,';');
+		writer = new CSVWriter(wFile,';',CSVWriter.NO_QUOTE_CHARACTER);
 		
 		writeJardin(jardin);
 		writeCarotte(c);
