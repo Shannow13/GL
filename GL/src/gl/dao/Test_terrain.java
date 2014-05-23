@@ -4,19 +4,10 @@ import game.Jardin;
 import game.Lapin;
 import game.Renard;
 import game.Rocher;
-//import game.SimpleJardin;
+import game.SimpleJardin;
 import game.SimpleLapin;
 import game.SimpleRenard;
-//import gl.dao.*;
-
-
-
-
-
-
-
-
-
+import gl.dao.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -33,17 +24,18 @@ import org.apache.log4j.Logger;
 
 
 
-public class Tableau extends JFrame {
+public class Test_terrain extends JFrame {
 
 
 	/**
 	 * 
 	 */
-
+	
 	private static final long serialVersionUID = 1L;
 	public static final Logger LOGGER = Logger.getLogger(Tableau.class);
 
-	
+	public List<Renard> renards;
+	public List<Lapin> lapins;
 	public char[][] jardin;
 	public JPanel[][] jp;
 	public boolean[] isLapinAlive;
@@ -64,34 +56,24 @@ public class Tableau extends JFrame {
 	
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String JARDIN_FILE_NAME = "jardin-1.csv";
-	private final static String RENARD_FILE_NAME = "DAO/renard-1.csv";
 	final static File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
-	final static File renard_file = new File(RESOURCES_PATH + RENARD_FILE_NAME);
-	
-	public ArrayList<Carottes> carottes;
-	public ArrayList<Rocher> rochers;
 
-	public List<Renard> renards;
-	public List<Lapin> lapins;
-	
-	
-	public Tableau(Jardin jardins) {
+
+	public Test_terrain(Jardin jardins) {
 
 		
 		LOGGER.debug("config");
 		
 		int x = jardins.getSizeX();
 		int y = jardins.getSizeY();
-		carottes = new ArrayList<Carottes>();
-		rochers = new ArrayList<Rocher>();
+		ArrayList<Carottes> carottes = new ArrayList<Carottes>();
+		ArrayList<Rocher> rochers = new ArrayList<Rocher>();
 		carottes = jardins.getCarottes();
 		rochers = jardins.getRochers();
-		//renards = TODO
 		over = false;
 
 		jardin = new char[x][y]; //Tableau du jardin avec infos herbe, carottes et rochers
-
-
+		
 		for(int i = 0; i<x; i++) {
 			for(int j = 0; j<y ; j++) {
 
@@ -99,6 +81,12 @@ public class Tableau extends JFrame {
 
 			}
 		}
+//<<<<<<< HEAD
+
+		jardin[2][2] = 'c'; // carotte
+		jardin[5][5] = 'c';
+		jardin[4][4] = 'r'; // rocher
+//=======
 		for(Carottes c : carottes){
 		
 			jardin[c.getPositionX()][c.getPositionY()] = 'c';
@@ -112,6 +100,7 @@ public class Tableau extends JFrame {
 		
 		//jardin[2][2] = 'c'; // carotte
 		//jardin[4][4] = 'r'; // rocher
+//>>>>>>> branch 'master' of https://github.com/Shannow13/GL.git
 		/*jardin[2][4] = 'l'; // lapin
 		jardin[5][5] = 'l';
 		jardin[0][0] = 'l';
@@ -139,73 +128,97 @@ public class Tableau extends JFrame {
 		lapins.add(new SimpleLapin(0,0,'E',"Wabbit"));
 
 
-		this.setTitle("Terrain de jeu"); //Titre de la fenêtre
-		this.setSize(100*x,120*y); //Taille de la fenêtre
-		this.setResizable(false); //On interdit à l'utilisateur la possibilité de redimensionner la fenêtre
-		this.setLocation(100, 100); //On set l'endroit où la fenêtre va apparaitre à l'écran
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //Fermeture du jeu si on ferme la fenêtre de jeu
+		this.setTitle("Terrain de jeu");
+		this.setSize(100*x,120*y);
+		this.setResizable(false);
+		this.setLocation(100, 100);
+		//this.setPreferredSize(new Dimension(1000, 800));
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		Container c = getContentPane(); //On créer notre container général pour la totalité de la fenêtre de jeu
-
-		JPanel panelGeneral = new JPanel(); //On crée un Panel général pour y ajouter tous nos Panels d'images (Lapins, Herbe, Renards, Rochers)
-		GridLayout grille = new GridLayout(x,y); //On créer un GridLayout pour positionner toutes nos entités comme on le souhaite
+		Container c = getContentPane();
+				
+		JPanel panelGeneral = new JPanel();
+		GridLayout grille = new GridLayout(x,y);
 		panelGeneral.setLayout(grille);
 
-		jp = new JPanel[x][y]; //On créer un JPanel
+		jp = new JPanel[x][y];
 
+
+		//panel.setBackground(Color.GREEN);
 
 		for(int i = 0; i<x; i++) {
 			for(int j = 0; j<y; j++) {
 				jp[i][j] = new JPanel();
-				//jp[i][j].setPreferredSize(new Dimension(500,130));
-
-				if(jardin[i][j] == 'c') { //Si jardin[i][j] contient une ou plusieurs carottes
-					ImageIcon car_img = new ImageIcon("resources/img/carrot2.png" ); //On crée l'image de carotte
-					JLabel carr = new JLabel(car_img); //JLabel pour le fond des cases
-					(jp[i][j]).setLayout(new BorderLayout());
-					(jp[i][j]).add(carr); //On ajoute l'image de carotte au Panel
-					(jp[i][j]).setBackground(Color.orange); //On rajoute un background de couleur orange
-				}
-				else if(jardin[i][j] == 'r'){ //Si jardin[i][j] contient un ou plusieurs rochers
-					ImageIcon stone_img = new ImageIcon("resources/img/caillou2.png" ); //On crée les images de rochers
-					JLabel rock = new JLabel(stone_img); //JLabel pour le fond des cases
-					(jp[i][j]).setLayout(new BorderLayout());
-					(jp[i][j]).add(rock); //On ajoute les images de rochers au Panel
-					(jp[i][j]).setBackground(Color.lightGray); //On ajoute un background de couleur gris clair
-				}
-				else { 
-					ImageIcon herbe_img = new ImageIcon("resources/img/grass4.png" ); //Sinon ce sont des cases d'herbe, on crée l'image d'herbe
-					JLabel herbe = new JLabel(herbe_img); //JLabel pour le fond des cases
-					(jp[i][j]).setLayout(new BorderLayout());
-					(jp[i][j]).add(herbe); //On ajoute les images d'herbe au Panel
-					(jp[i][j]).setBackground(Color.green); //On ajoute un background de couleur vert
-				}
+				jp[i][j].setPreferredSize(new Dimension(150,130));
 				
-				(jp[i][j]).setBorder(BorderFactory.createEtchedBorder()); //Affichage d'un quadrillage pour plus de lisibilité
-				panelGeneral.add(jp[i][j]); //On ajoute la totalité de nos Panels au Panel général (terrain)
+				if(jardin[i][j] == 'h') {
+					ImageIcon herbe_img = new ImageIcon("resources/img/grass2.png" );
+					JLabel herbe = new JLabel(herbe_img); //JLabel pour le fond des cases
+					//carr.setPreferredSize(new Dimension(110, 100));
+					//carr.setIcon(car_img);	
+					(jp[i][j]).setLayout(new BorderLayout());
+					(jp[i][j]).add(herbe);
+					(jp[i][j]).setBackground(Color.green);
+				}
+				else if(jardin[i][j] == 'c') {
+					ImageIcon car_img = new ImageIcon("resources/img/carrot2.png" );
+					JLabel carr = new JLabel(car_img); //JLabel pour le fond des cases
+					//carr.setPreferredSize(new Dimension(110, 100));
+					//carr.setIcon(car_img);	
+					(jp[i][j]).setLayout(new BorderLayout());
+					(jp[i][j]).add(carr);
+					(jp[i][j]).setBackground(Color.orange);
+				}
+				else if(jardin[i][j] == 'r'){
+					ImageIcon stone_img = new ImageIcon("resources/img/caillou2.png" );
+					JLabel rock = new JLabel(stone_img); //JLabel pour le fond des cases
+					//rock.setPreferredSize(new Dimension(100, 100));
+					//rock.setIcon(stone_img);	
+					(jp[i][j]).setLayout(new BorderLayout());
+					(jp[i][j]).add(rock);
+					(jp[i][j]).setBackground(Color.lightGray);
+				}
+				/*else if(jardin[i][j] == 'f') {
+					(jp[i][j]).setBackground(Color.red);
+				}
+				else if(jardin[i][j] == 'l') {
+					(jp[i][j]).setBackground(Color.white);
+				}*/
+				else { 
+					/*JLabel grass = new JLabel(); //JLabel pour le fond des cases
+					ImageIcon img = new ImageIcon("resources/grass.jpg" );
+					grass.setIcon(img);	
+					(jp[i][j]).setLayout(new BorderLayout());
+					(jp[i][j]).add(grass);*/
+					(jp[i][j]).setBackground(Color.green);
+
+
+				}
+				(jp[i][j]).setBorder(BorderFactory.createEtchedBorder());
+				//setBorderColor(Color.BLACK);
+				panelGeneral.add(jp[i][j]);
 			}
 
  		}
 
-		for(Renard r : renards) { //On parcourt la liste de renards
-			ImageIcon fox_img = new ImageIcon("resources/img/fox2.png" ); //On crée l'image du renard à ajouter sur le terrain de jeu
+		for(Renard r : renards) {
+			ImageIcon fox_img = new ImageIcon("resources/img/fox2.png" );
 			JLabel fox = new JLabel(fox_img); //JLabel pour le fond des cases
-			(jp[r.getPositionX()][r.getPositionY()]).add(fox); //On ajoute le renard sur la case correspondante
-			(jp[r.getPositionX()][r.getPositionY()]).setBackground(Color.red); //On rajouter un backgroudn de couleur rouge
+			(jp[r.getPositionX()][r.getPositionY()]).add(fox);
+			(jp[r.getPositionX()][r.getPositionY()]).setBackground(Color.red);
 		}
 
-		for(Lapin l : lapins) { //On parcourt la liste de lapins
-			ImageIcon lapin_img = new ImageIcon("resources/img/lap2.png" ); //On crée l'image du lapin à ajouter sur le terrain de jeu
+		for(Lapin l : lapins) {
+			ImageIcon lapin_img = new ImageIcon("resources/img/lap2.png" );
 			JLabel lapin = new JLabel(lapin_img); //JLabel pour le fond des cases
-			(jp[l.getPositionX()][l.getPositionY()]).add(lapin); //On ajoute le lapin sur la case correspondante
-			(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white); //On rajoute un background de couleur blanche
+			(jp[l.getPositionX()][l.getPositionY()]).add(lapin);
+			(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
 		}
-
 
 
 
 		//pack();
-		c.add(panelGeneral, BorderLayout.CENTER); //On ajoute notre panelGeneral au Container pour créer la fenêtre de jeu
+		c.add(panelGeneral, BorderLayout.CENTER);
 		
 		/*boutons*/
 
@@ -239,6 +252,7 @@ public class Tableau extends JFrame {
 		
 		
 		LOGGER.debug("pop fenetre");
+		this.validate();
 		this.setVisible(true);
 
 
@@ -287,28 +301,35 @@ public class Tableau extends JFrame {
 				boolean ok = false;
 				do {
 
+
+					// TODO remplacer le scanner par des actionlistener sur le coté du tableau
+					/*String s = scan.next();
+					s.toUpperCase();
+					System.out.print(s);
+					char dir = s.charAt(0);
+					System.out.println(" "+ dir);*/
 					
 					nameLabel.setText(l.getNom());
 					orientLabel.setText("orientation : "+ l.getOrientation());
 
-					if(dir == 'A') { //Si la direction choisie est "Avancer" (A)
-						switch(o) { //Alors plusieurs cas par rapport à l'orientation d'origine
-						case 'N': //Dans le cas où le lapin avait pour direction initiale le Nord
-							if(lx != 0) { //Si on ne se trouve pas sur le bord supérieur du plateau de jeu
-								if(jardin[lx-1][ly] == 'r') { //Si il y a un rocher sur la ligne où le lapin essaie d'avancer
-									System.out.println("Déplacement sur un rocher impossible, ressayer"); //Déplacement impossible
-									dir = '0'; 
+					if(dir == 'A') {
+						switch(o) {
+						case 'N': 
+							if(lx != 0) {
+								if(jardin[lx-1][ly] == 'r') {
+									System.out.println("Déplacement sur un rocher impossible, ressayer");
+									dir = '0';
 									break;
 								} else {
 									(jp[lx][ly]).removeAll();
-									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 									(jp[lx][ly]).setBackground(Color.green);
 									l.setPositionX(lx-1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
 									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
 									(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white);
 									this.validate(); //Actualisation de la frame
-									ok = true; //On passe le flag à "true"
+									ok = true;
 									break;
 								}
 							}
@@ -326,7 +347,7 @@ public class Tableau extends JFrame {
 									break;
 								} else {
 									(jp[lx][ly]).removeAll();
-									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 									(jp[lx][ly]).setBackground(Color.green);
 									l.setPositionX(lx+1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
@@ -352,7 +373,7 @@ public class Tableau extends JFrame {
 								}
 								else {
 									(jp[lx][ly]).removeAll();
-									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 									(jp[lx][ly]).setBackground(Color.green);
 									l.setPositionY(ly+1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
@@ -376,7 +397,7 @@ public class Tableau extends JFrame {
 									break;
 								} else {
 									(jp[lx][ly]).removeAll();
-									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 									(jp[lx][ly]).setBackground(Color.green);
 									l.setPositionY(ly-1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
@@ -496,7 +517,7 @@ public class Tableau extends JFrame {
 								break;
 							} else {
 								(jp[rx][ry]).removeAll();
-								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 								(jp[rx][ry]).setBackground(Color.green);
 								r.setPositionX(rx-1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
@@ -514,11 +535,11 @@ public class Tableau extends JFrame {
 					case 'S':
 						if(rx != x-1) {
 							if(jardin[rx+1][ry] == 'r') {
-								LOGGER.warn("Déplacement du renard sur un rocher impossible");
+								LOGGER.warn("Déplacement du renrad sur un rocher impossible");
 								break;
 							} else {
 								(jp[rx][ry]).removeAll();
-								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 								(jp[rx][ry]).setBackground(Color.green);
 								r.setPositionX(rx+1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
@@ -541,7 +562,7 @@ public class Tableau extends JFrame {
 							}
 							else {
 								(jp[rx][ry]).removeAll();
-								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 								(jp[rx][ry]).setBackground(Color.green);
 								r.setPositionY(ry+1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
@@ -563,7 +584,7 @@ public class Tableau extends JFrame {
 								break;
 							} else {
 								(jp[rx][ry]).removeAll();
-								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
+								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass2.png")));
 								(jp[rx][ry]).setBackground(Color.green);
 								r.setPositionY(ry-1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
@@ -739,6 +760,7 @@ public class Tableau extends JFrame {
 	
 	
 }
+
 
 
 
