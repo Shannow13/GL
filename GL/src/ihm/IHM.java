@@ -36,7 +36,7 @@ class Graph extends JPanel
 {
     private static final long serialVersionUID = 1L;
 
-    private Image bg = getToolkit().getImage("resources/img/bugs_bunny.jpg");
+    private Image bg = getToolkit().getImage("resources/img/menu2.png");
     
     private boolean fullScreen = false;
     
@@ -98,12 +98,12 @@ class Graph extends JPanel
         btnExit.setBorderPainted(false);
         btnExit.setContentAreaFilled(false);
         
-        btnNew.setBounds( w - 50, h - 200, 200, 40);
-        btnCont.setBounds( w - 50, h - 100, 200, 40 );
-        btnLoad.setBounds( w - 50, h, 200, 40);
-        btnEditNiveau.setBounds( w - 50, h + 100, 200, 40);
-        btnHelp.setBounds( w - 50, h + 200, 200, 40 );
-        btnExit.setBounds( w - 50, h + 300, 200, 40 );
+        btnNew.setBounds( w - 50, h - 70, 200, 40);
+        btnCont.setBounds( w - 50, h + 30, 200, 40 );
+        btnLoad.setBounds( w - 50, h + 130, 200, 40);
+        btnEditNiveau.setBounds( w - 50, h + 230, 200, 40);
+        btnHelp.setBounds( w - 50, h + 330, 200, 40 );
+        btnExit.setBounds( w - 50, h + 430, 200, 40 );
         btnFullScreen.setBounds(w + 860, h + 580, 108, 15);
         
         setOpaque( false );
