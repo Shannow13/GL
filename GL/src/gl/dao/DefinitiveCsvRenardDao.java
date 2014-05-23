@@ -42,9 +42,10 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
 
             
             
-
+             //On crée une nouvelle liste de renards de la taille du nombre de lignes du fichier
              renards = new ArrayList<Renard>(lignes.size());
              
+             //On transforme chaaque ligne en objet Renard
              for (String[] ligne : lignes) {
                  final Renard renard= transformLigneToRenard(ligne);
                  renards.add(renard);
@@ -64,10 +65,11 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
         if (file == null) {
             throw new IllegalStateException("Le fichier est vide...");
         }
-
+        //On crée une ArrayList de String[]
         final List<String[] > lignes = new ArrayList<String[] >();
         
         try {
+        	//On utilise la bibliothèque csvReader pour obtenir des lignes distinctes à partir d'un csv
             final FileReader fr = new FileReader(file);
             final CSVReader csvReader = new CSVReader(fr, SEPARATOR);
             
@@ -102,16 +104,17 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
 
     private Renard transformLigneToRenard(final String [] values){
     	
+    	//On crée un nouvel objet vide
     	final SimpleRenard renard = new SimpleRenard();
     	
-    	
+    	//on l'initialise
     	
     	renard.setPositionX(Integer.parseInt(values[1]));
     	renard.setPositionY(Integer.parseInt(values[2]));
     	renard.setOrientation(values[3].charAt(0));
     	renard.setTrajet(values[4]);
     	renard.setNom(values[5]);
-    	
+    	// on le retourne
     	return renard;
     	
     }
