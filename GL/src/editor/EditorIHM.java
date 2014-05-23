@@ -111,7 +111,6 @@ public class EditorIHM {
 
 	//////////////////////////////////////////////////	GENERAL	///////////////////////////////////////////////////
 
-
 	public static void main(String[] args){
 		new EditorIHM();
 	}
@@ -161,7 +160,6 @@ public class EditorIHM {
 
 			LOGGER.debug("Click de jardin");
 			final JFrame frmJardin = new JFrame("Création Jardin");
-			//frmJardin.setUndecorated(true);
 			frmJardin.setSize(new Dimension(500,300));
 			frmJardin.setLocation(600, 300);
 			frmJardin.setLayout(null);

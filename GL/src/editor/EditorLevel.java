@@ -6,6 +6,7 @@ import game.Rocher;
 import game.SimpleJardin;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
@@ -31,11 +32,18 @@ public class EditorLevel{
 		
 		LOGGER.debug("Le fichier devrait etre créer avec le CSVWriter");
 		
-		writer = new CSVWriter(wFile,'\n');
+		writer = new CSVWriter(wFile,';');
 		
 		writeJardin(jardin);
 		writeCarotte(c);
 		writeRocher(r);
+		
+		try{
+			writer.close();
+		}catch(IOException e){
+			LOGGER.error("Erreur de fermeture du fichier!");
+			return;
+		}
 	}
 	
 	public String fileName()
@@ -66,5 +74,7 @@ public class EditorLevel{
 	private void writeJardin(SimpleJardin jardin){
 		String[] entries = ("J;"+jardin.getSizeX()+";"+jardin.getSizeY()+";0;1").split(";");
 		writer.writeNext(entries);
+		
+		
 	}
 }
