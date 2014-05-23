@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import java.awt.event.*;
+import editor.EditorIHM;
 
 public class IHM
 {
@@ -39,13 +40,23 @@ class Graph extends JPanel
     
     private boolean fullScreen = false;
     
-    JButton btnNew = new JButton("NOUVELLE PARTIE");
-    JButton btnCont = new JButton("CONTINUER");
-    JButton btnLoad = new JButton("CHARGER NIVEAU");
-    JButton btnHelp = new JButton("AIDE");
-    JButton btnExit = new JButton("QUITTER");
+    //JButton btnNew = new JButton("NOUVELLE PARTIE");
+    //
+    
+    JButton btnNew = new JButton(new ImageIcon("resources/img/pancarte1.png"));
+    JButton btnCont = new JButton(new ImageIcon("resources/img/pancarte2.png"));
+    JButton btnLoad = new JButton(new ImageIcon("resources/img/pancarte3.png"));
+    JButton btnEditNiveau = new JButton(new ImageIcon("resources/img/pancarte4.png"));
+    JButton btnHelp = new JButton(new ImageIcon("resources/img/pancarte5.png"));
+    JButton btnExit = new JButton(new ImageIcon("resources/img/pancarte6.png"));
+    
+    //JButton btnCont = new JButton("CONTINUER");
+    //JButton btnLoad = new JButton("CHARGER NIVEAU");
+    //JButton btnHelp = new JButton("AIDE");
+    //JButton btnEditNiveau = new JButton("EDITION NIVEAU");
+    //JButton btnExit = new JButton("QUITTER");
     JButton btnFullScreen = new JButton("FULLSCREEN");
-    JButton btnEditNiveau = new JButton("EDITION NIVEAU");
+    
     
     int width = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
     int height = (int) Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -69,6 +80,24 @@ class Graph extends JPanel
         int w = ( width / 2) - 50;
         int h = ( height / 2 ) - 150;
 
+        btnNew.setBorderPainted(false);
+        btnNew.setContentAreaFilled(false);
+        
+        btnCont.setBorderPainted(false);
+        btnCont.setContentAreaFilled(false);
+        
+        btnLoad.setBorderPainted(false);
+        btnLoad.setContentAreaFilled(false);
+        
+        btnHelp.setBorderPainted(false);
+        btnHelp.setContentAreaFilled(false);
+        
+        btnEditNiveau.setBorderPainted(false);
+        btnEditNiveau.setContentAreaFilled(false);
+        
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
+        
         btnNew.setBounds( w - 50, h - 200, 200, 40);
         btnCont.setBounds( w - 50, h - 100, 200, 40 );
         btnLoad.setBounds( w - 50, h, 200, 40);
@@ -187,7 +216,8 @@ class Graph extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println("Edition Niveau");
+                //System.out.println("Edition Niveau");
+            	new EditorIHM();
             }
         });
         
@@ -198,10 +228,11 @@ class Graph extends JPanel
                 final JFrame frmHelp = new JFrame( "Aide" );
                 frmHelp.setResizable(false);
                 
-                Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+                /*Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
                 int hauteur = (int)tailleEcran.getHeight();
                 int largeur = (int)tailleEcran.getWidth();
-                frmHelp.setLocation((int)(hauteur*0.712), (int)(largeur*0.15));
+                frmHelp.setLocation((int)(hauteur*0.712), (int)(largeur*0.15));*/
+                frmHelp.setLocation(750, 200);
                 
                 JButton btnBack = new JButton("Retour");
                 
