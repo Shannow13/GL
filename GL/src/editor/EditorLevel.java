@@ -30,6 +30,7 @@ public class EditorLevel{
 	private CSVWriter fWriter;	// fox
 	private CSVWriter lWriter;	// lapin
 	
+	public boolean isok;
 	
 	public EditorLevel(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r, ArrayList<Renard> f, ArrayList<Lapin> l)
 	{
@@ -44,8 +45,9 @@ public class EditorLevel{
 		fWriter = new CSVWriter(fFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// fox
 		lWriter = new CSVWriter(lFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// lapin
 		
+		isok = isOk(jardin,c,r,f,l);
 		
-		if(!isOk(jardin,c,r,f,l))
+		if(!isok)
 		{
 			LOGGER.error("Quelques chose ne convient pas (élément en dehors du jardin, jardin à taille négative...)");
 			return;

@@ -49,7 +49,7 @@ public class EditorIHM {
         LOGGER.debug("Debut du IHM");
 
         frame = new JFrame("Edition");
-        //frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation("EXIT_ON_CLOSE");
         frame.setSize(new Dimension(500,500));
         frame.setBounds(0, 0, 500, 500);
         frame.setLayout(null);
@@ -1090,12 +1090,16 @@ public class EditorIHM {
    
     // Gestion de la finalisation avec toutes les étapes accomplies
     
-    public class WriteCSV{
+    private class WriteCSV{
         JFrame frame;
         
         public WriteCSV(JFrame frame){
             this.frame = frame;
-            new EditorLevel(theJardin, cList, rList, fList, lList);
+            EditorLevel edi = new EditorLevel(theJardin, cList, rList, fList, lList);
+            
+            if(edi.isok)
+            	frame.setVisible(false);
+            
         }
         
     }
