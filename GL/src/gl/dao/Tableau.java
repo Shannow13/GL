@@ -780,8 +780,6 @@ public class Tableau extends JFrame {
 	}
 	
 	
-	
-	
 	private void doDao() {
 		LOGGER.debug("On va créer le jardin");
 		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
