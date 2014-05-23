@@ -558,6 +558,9 @@ public class Tableau extends JFrame {
 					(jp[rx][ry]).setBackground(Color.red);
 					LOGGER.debug("Nouvelle orientation du renard : " + o);
 				}
+				else if(dir == 'X') {
+					LOGGER.debug("renard statique");
+				}
 				else {
 					LOGGER.error("Erreur du trajet du renard");
 				}
