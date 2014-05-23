@@ -17,7 +17,7 @@ Lancer une partie :
 	Cliquer sur le bouton "nouvelle partie" (non implémenté pour le moment)
 
 Choisir un niveau :
-	Cliquer sur le bouton "charger partie"
+	Cliquer sur le bouton "charger partie" puis choisir le numéro du niveau.
 	
 Créer un niveau :
 	Cliquer sur le bouton "Editer Niveau"
@@ -40,4 +40,6 @@ Les controles se font par les boutons placer à droite du plateau de jeu. Les bou
 	- Bouton attendre :
 		Le lapin ne fait rien pendant 1 tour.
 Une action équivaut à un clique sur un bouton.
-Le lapin controlé pour le joueur se trouve sur un case bleue. Son nom et son orientation sont indiqués en bas à droite de la fénètre (sous les boutons).
+Le lapin controlé par le joueur se trouve sur un case bleue. Son nom et son orientation sont indiqués en bas à droite de la fénètre (sous les boutons).
+Les lapins en attentes sont sur des cases blanches.
+

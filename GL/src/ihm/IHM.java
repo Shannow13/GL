@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 import editor.EditorIHM;
+import gl.dao.Tableau;
 
 public class IHM
 {
@@ -109,6 +110,7 @@ class Graph extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
+            	new Tableau();
                 System.out.println("Nouvelle Partie");
             }
         });

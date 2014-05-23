@@ -69,7 +69,11 @@ public class Tableau extends JFrame {
 	public List<Lapin> lapins;
 	
 	
-	public Tableau(Jardin jardins, List<Renard> renards, List<Lapin> lapins) {
+	public Tableau(){
+		doDao();
+	}
+	
+	public void tableauCrea(Jardin jardins, List<Renard> renards, List<Lapin> lapins) {
 
 		
 		LOGGER.debug("config");
@@ -771,14 +775,14 @@ public class Tableau extends JFrame {
 
 	public static void main(String[] args) {
 		
-			doDao();
+			new Tableau();
 			
 	}
 	
 	
 	
 	
-	private static void doDao() {
+	private void doDao() {
 		LOGGER.debug("On va créer le jardin");
 		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
 		final CsvRenardDao daoR = new DefinitiveCsvRenardDao();
@@ -790,11 +794,11 @@ public class Tableau extends JFrame {
 	}
 
 
-	private static void doWork(final JardinDao dao, final RenardDao daoR, final CsvLapinDao daoL) {
+	private void doWork(final JardinDao dao, final RenardDao daoR, final CsvLapinDao daoL) {
 		final Jardin jardins = dao.findJardin();
 		final List<Renard> renards = daoR.findAllRenards();
 		final List<Lapin> lapins = daoL.findAllLapins();
-		new Tableau(jardins, renards, lapins);
+		tableauCrea(jardins, renards, lapins);
 
 		
 	}
