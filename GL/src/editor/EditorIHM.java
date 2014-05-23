@@ -612,6 +612,7 @@ public class EditorIHM {
 		
 	}
 	
+	
 	private class PopUp{
 		JFrame frame;
 		
