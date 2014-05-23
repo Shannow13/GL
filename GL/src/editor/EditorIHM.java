@@ -21,15 +21,15 @@ import org.apache.log4j.Logger;
 
 public class EditorIHM {
 
-	SimpleJardin theJardin = new SimpleJardin();
+	SimpleJardin theJardin;
 	ArrayList<Carottes> cList;
-	ArrayList<Rocher> rList = new ArrayList<Rocher>();
+	ArrayList<Rocher> rList;
 
 	private static final Logger LOGGER = Logger.getLogger(EditorIHM.class);
 
 	public JFrame frame;
 	//public JPanel panelG, panel;
-	public JButton jardin, carotte, rocher, renard, quitter;
+	public JButton jardin, carotte, rocher, renard, quitter,fin;
 	public boolean flagAnnuler = false;
 
 
@@ -54,12 +54,14 @@ public class EditorIHM {
 		rocher = new JButton ("Rocher");
 		renard = new JButton ("Renard");
 		quitter = new JButton("Retour");
+		fin = new JButton ("Créer");
 
 		frame.add(jardin);
 		frame.add(carotte);
 		frame.add(rocher);
 		frame.add(renard);
 		frame.add(quitter);
+		frame.add(fin);
 
 		int w = (frame.getWidth()/2)-50;
 		int h = (frame.getHeight()/2);
@@ -69,7 +71,8 @@ public class EditorIHM {
 		carotte.setBounds( w - 50, h -100, 200, 40);
 		rocher.setBounds( w - 50, h -50, 200, 40);
 		renard.setBounds( w - 50, h , 200, 40 );
-		quitter.setBounds(w-50 , h + 50 , 200, 40);
+		quitter.setBounds(w-50 , h + 100 , 200, 40);
+		fin.setBounds(w-50,h+50,200,40);
 
 		//Lien entre les boutons et les actions
 		jardin.addActionListener(new EditJardin());
@@ -77,7 +80,7 @@ public class EditorIHM {
 		rocher.addActionListener(new EditRocher());
 		renard.addActionListener(new EditRenard());
 		quitter.addActionListener(new EditQuitter(frame));
-
+		fin.addActionListener(new EditFin(frame));
 		/*GridLayout gridL = new GridLayout(4,1);
 		gridL.setHgap(50);
 		gridL.setVgap(30);
@@ -174,23 +177,50 @@ public class EditorIHM {
 			frmJardin.add(btnOk);
 
 			//Positionnement des boutons et champs
-			colonnes.setBounds( w - 125, h - 50, 150, 40);
-			lignes.setBounds( w + 75, h - 50, 150, 40);
+			colonnes.setBounds( w +75, h - 50, 150, 40);
+			lignes.setBounds( w -125, h - 50, 150, 40);
 			btnAnnuler.setBounds( w - 125, h + 50, 150, 40);
 			btnOk.setBounds( w + 75, h + 50, 150, 40 );
 
 			btnAnnuler.addActionListener(new EditCancel(frmJardin));		
 
-			btnOk.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					frmJardin.setVisible( false );
-				}
-			});	
+			btnOk.addActionListener(new EditOkJardin(lignes, colonnes, frmJardin));
 
 			frmJardin.setVisible(true);
 		}
+	}
+	
+	private class EditOkJardin implements ActionListener{
+		
+		JFrame frame;
+		JTextField l,c;
+		int ligne,colonne;
+
+		public EditOkJardin (JTextField l, JTextField c, JFrame frame)
+		{
+			this.frame = frame;
+			this.l = l;
+			this.c = c;
+		}
+		
+		public void actionPerformed(ActionEvent arg0) {
+			
+			try{
+				ligne = Integer.parseInt(l.getText());
+				colonne = Integer.parseInt(c.getText());
+				LOGGER.debug("Ce sont bien des int.");
+			}catch(NumberFormatException er){
+				LOGGER.error("Ce ne sont pas des INT!");
+				return;
+			}
+			
+			theJardin = new SimpleJardin();
+			theJardin.setSizeX(ligne);
+			theJardin.setSizeY(colonne);
+			
+			frame.setVisible(false);
+		}
+		
 	}
 
 
@@ -557,5 +587,23 @@ public class EditorIHM {
 		}
 	}
 
+	
+	/////////////////////////////////////////////	FINALISATION	//////////////////////////////////////////////////////
+	// TODO
+	public class EditFin implements ActionListener{
+		
+		JFrame frame;
+		
+		public EditFin(JFrame frame)
+		{
+			this.frame = frame;
+		}
+	
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 	
 }	
