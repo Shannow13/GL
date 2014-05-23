@@ -110,7 +110,7 @@ class Graph extends JPanel
         {
             public void actionPerformed(ActionEvent e)
             {
-            	new Tableau();
+            	new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
                 System.out.println("Nouvelle Partie");
             }
         });

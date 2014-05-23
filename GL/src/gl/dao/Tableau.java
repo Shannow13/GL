@@ -7,6 +7,7 @@ import game.Rocher;
 //import game.SimpleJardin;
 import game.SimpleLapin;
 import game.SimpleRenard;
+
 //import gl.dao.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -54,13 +55,14 @@ public class Tableau extends JFrame {
 	
 	public static Jardin jardins;
 	
-	private final static String RESOURCES_PATH = "resources/";
+	/*private final static String RESOURCES_PATH = "resources/";
 	private final static String JARDIN_FILE_NAME = "jardin-1.csv";
 	private final static String RENARD_FILE_NAME = "DAO/renard-1.csv";
 	private final static String LAPIN_FILE_NAME = "DAO/lapin-1.csv";
 	final static File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
 	final static File renard_file = new File(RESOURCES_PATH + RENARD_FILE_NAME);
-	final static File lapin_file = new File(RESOURCES_PATH + LAPIN_FILE_NAME);
+	final static File lapin_file = new File(RESOURCES_PATH + LAPIN_FILE_NAME);*/
+	
 	
 	public ArrayList<Carottes> carottes;
 	public ArrayList<Rocher> rochers;
@@ -69,8 +71,8 @@ public class Tableau extends JFrame {
 	public List<Lapin> lapins;
 	
 	
-	public Tableau(){
-		doDao();
+	public Tableau(final String jardin_file, final  String renard_file, final String lapin_file){
+		doDao(jardin_file, renard_file, lapin_file);
 	}
 	
 	public void tableauCrea(Jardin jardins, List<Renard> renards, List<Lapin> lapins) {
@@ -775,19 +777,19 @@ public class Tableau extends JFrame {
 
 	public static void main(String[] args) {
 		
-			new Tableau();
+			new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
 			
 	}
 	
 	
-	private void doDao() {
+	private void doDao(final String jardin_file, final  String renard_file, final String lapin_file) {
 		LOGGER.debug("On va créer le jardin");
 		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
 		final CsvRenardDao daoR = new DefinitiveCsvRenardDao();
 		final CsvLapinDao daoL = new DefinitiveCsvLapinDao();
-		dao.init(file);
-		daoR.init(renard_file);
-		daoL.init(lapin_file);
+		dao.init(new File(jardin_file));
+		daoR.init(new File(renard_file));
+		daoL.init(new File(lapin_file));
 		doWork(dao, daoR, daoL);
 	}
 
