@@ -84,23 +84,31 @@ public class Tableau extends JFrame {
 		}
 		for(Carottes c : carottes){
 		
-			jardin[c.getPositionY()][c.getPositionX()] = 'c';
+			jardin[c.getPositionX()][c.getPositionY()] = 'c';
 			
 			
 		}
-		/*for(Rocher r : rochers){
+		for(Rocher r : rochers){
 			jardin[r.getPositionX()][r.getPositionY()] = 'r';
 			
-		}*/
+		}
 		
 		//jardin[2][2] = 'c'; // carotte
-		jardin[4][4] = 'r'; // rocher
+		//jardin[4][4] = 'r'; // rocher
 		/*jardin[2][4] = 'l'; // lapin
 		jardin[5][5] = 'l';
 		jardin[0][0] = 'l';
 		jardin[1][1] = 'f'; // renard ; fox*/
 
 
+		
+		/*
+		 * X : lignes
+		 * Y : colonnes
+		 * 
+		 * */
+		
+		
 
 		/*ajout de renards pour la liste*/
 		LOGGER.debug("init renards");
@@ -283,6 +291,7 @@ public class Tableau extends JFrame {
 							if(lx != 0) {
 								if(jardin[lx-1][ly] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
+									dir = '0';
 									break;
 								} else {
 									(jp[lx][ly]).setBackground(Color.green);
@@ -302,6 +311,7 @@ public class Tableau extends JFrame {
 							if(lx != x-1) {
 								if(jardin[lx+1][ly] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
+									dir = '0';
 									break;
 								} else {
 									(jp[lx][ly]).setBackground(Color.green);
@@ -321,6 +331,7 @@ public class Tableau extends JFrame {
 							if(ly != y-1) {
 								if(jardin[lx][ly+1] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
+									dir = '0';
 									break;
 								}
 								else {
@@ -340,6 +351,7 @@ public class Tableau extends JFrame {
 							if(ly != 0) {
 								if(jardin[lx][ly-1] == 'r') {
 									System.out.println("Déplacement sur un rocher impossible, ressayer");
+									dir = '0';
 									break;
 								} else {
 									(jp[lx][ly]).setBackground(Color.green);
