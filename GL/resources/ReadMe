@@ -29,7 +29,7 @@ Quitter le jeu :
 	Cliquer sur le bouton "Quitter"
 	
 
-Une fois la partie lancer, le jeu se déroule au tour par tour. Chaque personnage effectue une action à la fois dans l'ordre suivant : les lapins puis les renards.
+Une fois la partie lancée, le jeu se déroule au tour par tour. Chaque personnage effectue une action à la fois dans l'ordre suivant : les lapins puis les renards.
 Les controles se font par les boutons placer à droite du plateau de jeu. Les boutons ont les actions suivantes :
 	- Bouton avancer :
 		Le lapin avance droit devant lui sauf s'il y a un rocher ou un bord du plateau
@@ -39,4 +39,5 @@ Les controles se font par les boutons placer à droite du plateau de jeu. Les bou
 		Le lapin tourne sur lui même dans le sens anti horaire ce qui a pour effet de modifier de la même manière la direction de déplacement du lapin. Chaque rotation se fait à angle droit.
 	- Bouton attendre :
 		Le lapin ne fait rien pendant 1 tour.
-Un tour équivaut à un clique sur un bouton.
+Une action équivaut à un clique sur un bouton.
+Le lapin controlé pour le joueur se trouve sur un case bleue. Son nom et son orientation sont indiqués en bas à droite de la fénètre (sous les boutons).
