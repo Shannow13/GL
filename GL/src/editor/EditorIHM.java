@@ -30,7 +30,7 @@ public class EditorIHM {
 	public JFrame frame;
 	//public JPanel panelG, panel;
 	public JButton jardin, carotte, rocher, renard, quitter,fin;
-	public boolean flagAnnuler = false;
+	public boolean IsOk;
 
 
 
@@ -103,6 +103,8 @@ public class EditorIHM {
 		frame.setVisible(true);
 
 		LOGGER.debug("Fin IHM");
+		
+		IsOk = false;
 
 	}
 
@@ -110,9 +112,9 @@ public class EditorIHM {
 	//////////////////////////////////////////////////	GENERAL	///////////////////////////////////////////////////
 
 
-	public static void main(String[] args){
+/*	public static void main(String[] args){
 		new EditorIHM();
-	}
+	}*/
 
 	//	Gestion du bouton quitter
 
@@ -663,9 +665,8 @@ public class EditorIHM {
 		
 		public WriteCSV(JFrame frame){
 			this.frame = frame;
+			IsOk = true;
 		}
-		
-		
 		
 	}
 }	

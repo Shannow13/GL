@@ -10,11 +10,11 @@ import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;
 
-public abstract class AbstractEditorDao {
-	private static final Logger LOGGER = getLogger(AbstractEditorDao.class);
+public abstract class AbstractEditor {
+	private static final Logger LOGGER = getLogger(AbstractEditor.class);
 	 
 	private final static String RESOURCES_PATH = "resources/";
-	private EditorLevel edit;
+	private EditorLevel edit = new EditorLevel();
 	
 	private int num;
 	
@@ -33,9 +33,14 @@ public abstract class AbstractEditorDao {
 					file = new File(RESOURCES_PATH + "jardinEdite-" + num + ".csv");
 					edit.init(file);
 				}
+				LOGGER.debug("Fichier bien créer avec le numéro : "+num);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}		
+				LOGGER.debug("Le fichier à foiré!");
+				LOGGER.error("Erreur de création du gestion");
+			}
+			
+			
 	}
 	
 	@Test
