@@ -118,6 +118,19 @@ public class EditorLevel{
 			}
 		}
 		
+		
+		for(Rocher rocher : r)
+		{
+			for(Carottes carotte : c)
+			{
+				if(rocher.getPositionX() == carotte.getPositionX() && rocher.getPositionY() == carotte.getPositionY())
+				{
+					LOGGER.error("Une ou plusieurs carottes se superposent avec des rochers!");
+					return false;
+				}
+			}
+		}
+		
 		return true;
 	}
 	

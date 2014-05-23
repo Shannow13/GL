@@ -938,6 +938,7 @@ public class EditorIHM {
 
         //text.setBounds( w-75 , h -100, 200, 40);
 
+       
         ligne.setBounds(w-200, h-115, 100,40);
         l.setBounds(w-200,h-70,100,40);
         colonne.setBounds(w-50,h-115,100,40);
