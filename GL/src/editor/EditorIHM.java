@@ -1,17 +1,13 @@
 package editor;
 
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
-
 import game.Carottes;
 import game.Rocher;
 import game.SimpleCarottes;
 import game.SimpleJardin;
 import game.SimpleRocher;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,7 +15,6 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.apache.log4j.Logger;
