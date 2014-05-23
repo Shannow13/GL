@@ -75,7 +75,7 @@ public class Tableau extends JFrame {
 	public List<Lapin> lapins;
 	
 	
-	public Tableau(Jardin jardins) {
+	public Tableau(Jardin jardins, List<Renard> renards) {
 
 		
 		LOGGER.debug("config");
@@ -86,7 +86,7 @@ public class Tableau extends JFrame {
 		rochers = new ArrayList<Rocher>();
 		carottes = jardins.getCarottes();
 		rochers = jardins.getRochers();
-		//renards = TODO
+		
 		over = false;
 
 		jardin = new char[x][y]; //Tableau du jardin avec infos herbe, carottes et rochers
@@ -129,8 +129,8 @@ public class Tableau extends JFrame {
 
 		/*ajout de renards pour la liste*/
 		LOGGER.debug("init renards");
-		renards = new ArrayList<Renard>();
-		renards.add(new SimpleRenard(1,1,'S',"AGAGAGAGADADADAD","Fox1"));
+		/*renards = new ArrayList<Renard>();
+		renards.add(new SimpleRenard(1,1,'S',"AGAGAGAGADADADAD","Fox1"));*/
 
 		LOGGER.debug("init lapins");
 		lapins = new ArrayList<Lapin>();
@@ -700,14 +700,17 @@ public class Tableau extends JFrame {
 	private static void doDao() {
 		LOGGER.debug("On va créer le jardin");
 		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
+		final CsvRenardDao daoR = new DefinitiveCsvRenardDao();
 		dao.init(file);
-		doWork(dao);
+		daoR.init(renard_file);
+		doWork(dao, daoR);
 	}
 
 
-	private static void doWork(final JardinDao dao) {
+	private static void doWork(final JardinDao dao, final RenardDao daoR) {
 		final Jardin jardins = dao.findJardin();
-		new Tableau(jardins);
+		final List<Renard> renards = daoR.findAllRenards();
+		new Tableau(jardins, renards);
 
 		
 	}
