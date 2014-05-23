@@ -292,7 +292,6 @@ public class Tableau extends JFrame {
 
 					
 					nameLabel.setText(l.getNom());
-					LOGGER.debug("name : "+l.getNom());
 					orientLabel.setText("orientation : "+ l.getOrientation());
 
 					if(dir == 'A') { //Si la direction choisie est "Avancer" (A)
@@ -648,6 +647,22 @@ public class Tableau extends JFrame {
 			}
 
 			LOGGER.debug("fin de la phase renards");
+			
+			LOGGER.debug("mise à jour du tableau");
+			for(int i = 0; i<jardin.length;i++) {
+				for(int j = 0; j>jardin[0].length;j++) {
+					if(jardin[i][j] == 'c') {
+						(jp[i][j]).removeAll();
+						(jp[i][j]).add(new JLabel(new ImageIcon("resources/img/carrot2.png")));
+						(jp[i][j]).setBackground(Color.orange);
+					}
+				}
+			}
+			
+			
+			
+			
+			
 			LOGGER.debug("fin de ce tour");
 			tours ++;
 		}
