@@ -1,6 +1,7 @@
 package game;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Jardin extends Serializable {
@@ -12,8 +13,8 @@ public interface Jardin extends Serializable {
 	int getIndicelvl();
 	int getDebloque();
 	
-	List<Rocher> getRochers();
-	List<Carottes> getCarottes();
+	ArrayList<Rocher> getRochers();
+	ArrayList<Carottes> getCarottes();
 	
 
 	
