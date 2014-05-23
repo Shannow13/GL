@@ -1,0 +1,42 @@
+Auteurs :
+	- ARRESTIER Christophe
+	- CASSAGNES Lucien
+	- COSSOU Cédric
+	- DA SILVA Thibault
+	- LAVILLE Lucas
+	- MESCLE Pierre-Jean
+	- NGUYEN Hai
+	- PERREIRA AlMEIDA Patrick
+
+Nom jeu : Lapin Insanity
+
+But du jeu :
+	Récupérer les carottes à l'aide de un ou plusieurs lapins sans se faire toucher par un renard.
+	
+Lancer une partie :
+	Cliquer sur le bouton "nouvelle partie" (non implémenté pour le moment)
+
+Choisir un niveau :
+	Cliquer sur le bouton "charger partie"
+	
+Créer un niveau :
+	Cliquer sur le bouton "Editer Niveau"
+	
+Commande :
+	Cliquer sur le bouton "Aide"
+	
+Quitter le jeu :
+	Cliquer sur le bouton "Quitter"
+	
+
+Une fois la partie lancer, le jeu se déroule au tour par tour. Chaque personnage effectue une action à la fois dans l'ordre suivant : les lapins puis les renards.
+Les controles se font par les boutons placer à droite du plateau de jeu. Les boutons ont les actions suivantes :
+	- Bouton avancer :
+		Le lapin avance droit devant lui sauf s'il y a un rocher ou un bord du plateau
+	- Bouton rotation droite :
+		Le lapin tourne sur lui même dans le sens horaire ce qui a pour effet de modifier de la même manière la direction de déplacement du lapin. Chaque rotation se fait à angle droit. 
+	- Bouton rotation gauche :
+		Le lapin tourne sur lui même dans le sens anti horaire ce qui a pour effet de modifier de la même manière la direction de déplacement du lapin. Chaque rotation se fait à angle droit.
+	- Bouton attendre :
+		Le lapin ne fait rien pendant 1 tour.
+Un tour équivaut à un clique sur un bouton.
