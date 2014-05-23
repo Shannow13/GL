@@ -5,6 +5,70 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Projet Génie Logiciel 3A</name>
   <description>Projet de Génie Logiciel pour l'année 2013-2014 de l'ESIEA</description>
+		
+  <developers>
+  
+  		<developer>
+			<name>Christophe Arrestier</name>
+			<roles>
+				<role>Developpeur</role>
+				<role>Réalisation Editeur de niveaux</role>
+			</roles>
+		</developer>
+ 		 <developer>
+			<name>Lucien Cassagnes</name>
+			<roles>
+				<role>Developpeur</role>
+				<role>Conception Interface graphique Menu</role>
+			</roles>
+			
+		</developer>
+		<developer>
+			<name>Cédric Cossou</name>
+			<roles>
+				<role>Réalisation du rapport</role>
+				<role>Scribe</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Thibaut Da Silva</name>
+			<roles>
+				<role>Developper</role>
+				<role>Conception Interface graphique Menu</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Lucas Laville</name>
+			<roles>
+				<role>Developpeur</role>
+				<role>Conception Algorithmes du jeu</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Pierre-Jean Mescle</name>
+			<roles>
+				<role>Developpeur</role>
+				<role>Conception du DAO et son intégration</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Dinh Anh Hai Nguyen</name>
+			<roles>
+				<role>Developpeur</role>
+				<role>Conception du rapport</role>
+				<role>Aide interface graphique Menu</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Patrick Perreira-Almeida</name>
+			<roles>
+				<role>Developpeur</role>
+				<role>Aide Interface graphique Menu </role>
+				<role>Conception du rapport</role>
+			</roles>
+		</developer>
+  </developers>
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>

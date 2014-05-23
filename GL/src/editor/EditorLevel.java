@@ -15,32 +15,44 @@ import org.apache.log4j.Logger;
 import au.com.bytecode.opencsv.CSVWriter;
 
 
-
 public class EditorLevel{
 	
 	private static final Logger LOGGER = getLogger(EditorLevel.class);
 	
-	private FileWriter wFile;
+	private FileWriter wFile;	// jardin
+	private FileWriter fFile;	// fox
+	private FileWriter lFile;	// lapin
+	
 	private FileEditor fichier;
 	
-	private CSVWriter writer;
+	private CSVWriter writer;	// jardin
+	private CSVWriter fWriter;	// fox
+	private CSVWriter lWriter;	// lapin
 	
 	
-	public EditorLevel(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r )
+	public EditorLevel(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r, ArrayList<Renard> f)
 	{
 		fichier = new FileEditor();
-		this.wFile = fichier.wFile;
+		this.wFile = fichier.wFile;	// jardin
+		this.fFile = fichier.fWFile;	// fox
+		this.lFile = fichier.lWFile;	// lapin
 		
 		LOGGER.debug("Le fichier devrait etre créer avec le CSVWriter");
 		
-		writer = new CSVWriter(wFile,';',CSVWriter.NO_QUOTE_CHARACTER);
+		writer = new CSVWriter(wFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// jardin
+		fWriter = new CSVWriter(fFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// fox
+		lWriter = new CSVWriter(lFile,';',CSVWriter.NO_QUOTE_CHARACTER);	// lapin
 		
 		writeJardin(jardin);
 		writeCarotte(c);
 		writeRocher(r);
+		writeFox(f);
+
 		
 		try{
 			writer.close();
+			fWriter.close();
+			lWriter.close();
 		}catch(IOException e){
 			LOGGER.error("Erreur de fermeture du fichier!");
 			return;
@@ -69,10 +81,11 @@ public class EditorLevel{
 	}
 	
 	private void writeFox(ArrayList<Renard> renard){
+		int i =0;
 		for( Renard f : renard)
 		{
-			String[] entries = ("F;"+ f.getPositionX()+ ";"+ f.getPositionY()+";"+f.getOrientation()+";"+f.getTrajet()+";"+f.getNom()).split(";");
-			writer.writeNext(entries);
+			String[] entries = ("F;"+ f.getPositionX()+ ";"+ f.getPositionY()+";"+f.getOrientation()+";"+f.getTrajet()+";Renard"+i++).split(";");
+			fWriter.writeNext(entries);
 		}
 		
 	}

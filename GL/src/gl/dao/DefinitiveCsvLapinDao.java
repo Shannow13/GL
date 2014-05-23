@@ -1,8 +1,7 @@
 package gl.dao;
 
-import game.Renard;
-import game.SimpleRenard;
-//import gl.dao.test.AbstractCsvRenardDaoTest;
+import game.Lapin;
+import game.SimpleLapin;
 
 import java.io.File;
 import java.io.FileReader;
@@ -13,12 +12,16 @@ import org.apache.log4j.Logger;
 
 import au.com.bytecode.opencsv.CSVReader;
 
-public class DefinitiveCsvRenardDao implements CsvRenardDao {
+public class DefinitiveCsvLapinDao implements CsvLapinDao {
+
+	/**
+ * Cette classe est extrêmement similaire à DefinitiveCsvRenardDao et fonctionne de la même façon que cette dernière
+ */
 
 	private File file;
-	private static final Logger LOGGER = Logger.getLogger(DefinitiveCsvRenardDao.class);
+	private static final Logger LOGGER = Logger.getLogger(DefinitiveCsvLapinDao.class);
 	private final static char SEPARATOR = ';';
-	private List<Renard> renards;
+	private List<Lapin> lapins;
 	
 	@Override
 	public void init(File file) {
@@ -26,12 +29,12 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
 		this.file=file;
 		
 		//Nouvelle lecture à chaque init. Cela permet ainsi de changer de fichier ou de le recharger.
-		reloadRenards();
+		reloadLapins();
 		
 	}
 	
-    private void reloadRenards() {
-    	 LOGGER.debug("reloadRenards");
+    private void reloadLapins() {
+    	 LOGGER.debug("reloadLapins");
 
          if (file == null) {
              throw new IllegalStateException("Le fichier est vide...");
@@ -42,13 +45,12 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
 
             
             
-             //On crée une nouvelle liste de renards de la taille du nombre de lignes du fichier
-             renards = new ArrayList<Renard>(lignes.size());
+
+             lapins = new ArrayList<Lapin>(lignes.size());
              
-             //On transforme chaaque ligne en objet Renard
              for (String[] ligne : lignes) {
-                 final Renard renard= transformLigneToRenard(ligne);
-                 renards.add(renard);
+                 final Lapin lapin= transformLigneToLapin(ligne);
+                 lapins.add(lapin);
 
              
              }
@@ -65,11 +67,10 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
         if (file == null) {
             throw new IllegalStateException("Le fichier est vide...");
         }
-        //On crée une ArrayList de String[]
+
         final List<String[] > lignes = new ArrayList<String[] >();
         
         try {
-        	//On utilise la bibliothèque csvReader pour obtenir des lignes distinctes à partir d'un csv
             final FileReader fr = new FileReader(file);
             final CSVReader csvReader = new CSVReader(fr, SEPARATOR);
             
@@ -102,31 +103,28 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
         return lignes;
     }
 
-    private Renard transformLigneToRenard(final String [] values){
+    private Lapin transformLigneToLapin(final String [] values){
     	
-    	//On crée un nouvel objet vide
-    	final SimpleRenard renard = new SimpleRenard();
+    	final SimpleLapin lapin = new SimpleLapin();
     	
-    	//on l'initialise
     	
-    	renard.setPositionX(Integer.parseInt(values[1]));
-    	renard.setPositionY(Integer.parseInt(values[2]));
-    	renard.setOrientation(values[3].charAt(0));
-    	renard.setTrajet(values[4]);
-    	renard.setNom(values[5]);
-    	// on le retourne
-    	return renard;
+    	
+    	lapin.setPositionX(Integer.parseInt(values[1]));
+    	lapin.setPositionY(Integer.parseInt(values[2]));
+    	lapin.setOrientation(values[3].charAt(0));
+    	lapin.setNom(values[4]);
+    	
+    	return lapin;
     	
     }
 
 	
 	@Override
-	public List<Renard> findAllRenards() {
-		LOGGER.debug("Remplissage des Renards");
+	public List<Lapin> findAllLapins() {
 		
 		
 		
-		return renards;
+		return lapins;
 	}
 
 	// Getters
@@ -134,5 +132,4 @@ public class DefinitiveCsvRenardDao implements CsvRenardDao {
 		return file;
 	}		
 	
-
 }
