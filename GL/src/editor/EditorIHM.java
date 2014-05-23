@@ -112,7 +112,6 @@ public class EditorIHM {
 			LOGGER.debug("Click de jardin");
 			final JFrame frmJardin = new JFrame("Création Jardin");
 			//frmJardin.setUndecorated(true);
-			frmJardin.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmJardin.setSize(new Dimension(500,300));
 			frmJardin.setLocation(600, 300);
 			frmJardin.setLayout(null);
@@ -155,7 +154,6 @@ public class EditorIHM {
 			
 			LOGGER.debug("Click de carotte");
 			final JFrame frmNbC = new JFrame("Nombre de Carottes");
-			frmNbC.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmNbC.setSize(new Dimension(300,300));
 			frmNbC.setLocation(700, 300);
 			frmNbC.setLayout(null);
@@ -191,7 +189,6 @@ public class EditorIHM {
 			LOGGER.debug("Click de rocher");
 			
 			final JFrame frmNbR = new JFrame("Nombre de Rocher");
-			frmNbR.setDefaultCloseOperation(EXIT_ON_CLOSE);
 			frmNbR.setSize(new Dimension(500,300));
 			frmNbR.setLocation(600, 300);
 			frmNbR.setLayout(null);
@@ -301,7 +298,6 @@ public class EditorIHM {
 		{
 			LOGGER.debug("Création des carottes");
 				frame = new JFrame("Les Carottes!");
-				frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
 				frame.setSize(new Dimension(500,300));
 				frame.setLocation(600, 300);
 				frame.setLayout(null);
@@ -431,7 +427,7 @@ public class EditorIHM {
 					frame.setSize(new Dimension(500,300));
 					frame.setLocation(600, 300);
 					frame.setLayout(null);
-					frame.getContentPane().setBackground(new Color(255, 102, 0));
+					frame.getContentPane().setBackground(new Color(255, 102, 255));
 					frame.setResizable(false);
 					
 					int w = (frame.getWidth() /2);
@@ -439,30 +435,24 @@ public class EditorIHM {
 					
 					JLabel ligne = new JLabel("N° Ligne :");
 					JLabel colonne = new JLabel("N° Colonne :");
-					JLabel nombre = new JLabel("Nombre :");
 					JTextField l = new JTextField();
 					JTextField c = new JTextField();
-					JTextField n = new JTextField();
 					JButton cancel = new JButton("Annuler");
 					JButton ok = new JButton("OK");
 					
 					frame.add(ligne);
 					frame.add(colonne);
-					frame.add(nombre);
 					frame.add(l);
 					frame.add(c);
-					frame.add(n);
 					frame.add(cancel);
 					frame.add(ok);
 					
 					//text.setBounds( w-75 , h -100, 200, 40);
 					
-					ligne.setBounds(w-200, h-115, 100,40);
-					l.setBounds(w-200,h-70,100,40);
-					colonne.setBounds(w-50,h-115,100,40);
-					c.setBounds(w-50,h-70,100,40);
-					nombre.setBounds(w+100,h-115,100,40);
-					n.setBounds(w+100,h-70,100,40);
+					ligne.setBounds(w-150, h-115, 100,40);
+					l.setBounds(w-150,h-70,100,40);
+					colonne.setBounds(w+50,h-115,100,40);
+					c.setBounds(w+50,h-70,100,40);
 					cancel.setBounds(w-150,h+50,100,40);
 					ok.setBounds(w+50,h+50,100,40);
 					
