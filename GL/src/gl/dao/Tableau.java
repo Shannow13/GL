@@ -8,16 +8,6 @@ import game.Rocher;
 import game.SimpleLapin;
 import game.SimpleRenard;
 //import gl.dao.*;
-
-
-
-
-
-
-
-
-
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +32,6 @@ public class Tableau extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	public static final Logger LOGGER = Logger.getLogger(Tableau.class);
-
 	
 	public char[][] jardin;
 	public JPanel[][] jp;
@@ -59,6 +48,8 @@ public class Tableau extends JFrame {
 	private JPanel textPanel;
 	private JLabel nameLabel;
 	private JLabel orientLabel;
+	private JLabel orientPhoto;
+	private ImageIcon orientImg;
 
 	public static Jardin jardins;
 	
@@ -80,6 +71,9 @@ public class Tableau extends JFrame {
 		
 		LOGGER.debug("config");
 		
+		orientImg = new ImageIcon("resources/img/fN.png");
+		orientPhoto = new JLabel(orientImg);
+	
 		int x = jardins.getSizeX();
 		int y = jardins.getSizeY();
 		carottes = new ArrayList<Carottes>();
@@ -201,9 +195,6 @@ public class Tableau extends JFrame {
 			(jp[l.getPositionX()][l.getPositionY()]).setBackground(Color.white); //On rajoute un background de couleur blanche
 		}
 
-
-
-
 		//pack();
 		c.add(panelGeneral, BorderLayout.CENTER); //On ajoute notre panelGeneral au Container pour créer la fenêtre de jeu
 		
@@ -211,23 +202,78 @@ public class Tableau extends JFrame {
 
 		eastPanel = new JPanel(new GridLayout(2,1));
 		boutonPanel = new JPanel(new GridLayout(2,2));
-		buttonA = new JButton("Avancer");
+		
+		//Bouton "Avancer"
+		buttonA = new JButton();
+		buttonA.setBackground(Color.WHITE);
+		JPanel panA = new JPanel();
+		panA.setBackground(Color.WHITE);
+		panA.setLayout(new BorderLayout());
+		JLabel titleA = new JLabel("     Avancer");
+		ImageIcon img_A = new ImageIcon("resources/img/fleche.png");
+		JLabel imgA = new JLabel(img_A);
+		panA.add(titleA, BorderLayout.CENTER);
+		panA.add(imgA, BorderLayout.SOUTH);
+		imgA.setPreferredSize(new Dimension(80, 80));
+		buttonA.add(panA);
 		buttonA.addActionListener(new Avance());
-		buttonX = new JButton("Attendre");
+		
+		//Bouton "Attendre"
+		buttonX = new JButton();
+		buttonX.setBackground(Color.WHITE);
+		JPanel panX = new JPanel();
+		panX.setBackground(Color.WHITE);
+		panX.setLayout(new BorderLayout());
+		JLabel titleX = new JLabel("     Attendre");
+		ImageIcon img_X = new ImageIcon("resources/img/zzz2.png");
+		JLabel imgX = new JLabel(img_X);
+		panX.add(titleX, BorderLayout.CENTER);
+		panX.add(imgX, BorderLayout.SOUTH);
+		imgX.setPreferredSize(new Dimension(80, 80));
+		buttonX.add(panX);
 		buttonX.addActionListener(new stayHere());
-		buttonG = new JButton("Rot.G");
+		
+		//Bouton "Rotation Gauche"
+		buttonG = new JButton();
+		buttonG.setBackground(Color.WHITE);
+		JPanel panG = new JPanel();
+		panG.setBackground(Color.WHITE);
+		panG.setLayout(new BorderLayout());
+		JLabel titleG = new JLabel("     Rot. Gauche");
+		ImageIcon img_G = new ImageIcon("resources/img/rotD.png");
+		JLabel imgG = new JLabel(img_G);
+		panG.add(titleG, BorderLayout.CENTER);
+		panG.add(imgG, BorderLayout.SOUTH);
+		imgG.setPreferredSize(new Dimension(80, 80));
+		buttonG.add(panG);
 		buttonG.addActionListener(new rotateGauche());
-		buttonD = new JButton("Rot.D");
+		
+		//Bouton "Rotation Droite"
+		buttonD = new JButton();
+		buttonD.setBackground(Color.WHITE);
+		JPanel panD = new JPanel();
+		panD.setBackground(Color.WHITE);
+		panD.setLayout(new BorderLayout());
+		JLabel titleD = new JLabel("     Rot. Droite");
+		ImageIcon img_D = new ImageIcon("resources/img/rotG.png");
+		JLabel imgD = new JLabel(img_D);
+		panD.add(titleD, BorderLayout.CENTER);
+		panD.add(imgD, BorderLayout.SOUTH);
+		imgD.setPreferredSize(new Dimension(80, 80));
+		buttonD.add(panD);
 		buttonD.addActionListener(new rotateDroite());
+		
 		boutonPanel.add(buttonA);
 		boutonPanel.add(buttonX);
 		boutonPanel.add(buttonG);
 		boutonPanel.add(buttonD);
+		
 		textPanel = new JPanel(new GridLayout(2,1));
 		nameLabel = new JLabel("name", JLabel.CENTER);
 		orientLabel = new JLabel("orient",JLabel.CENTER);
-		textPanel.add(nameLabel, "Center");
-		textPanel.add(orientLabel, "Center");
+		textPanel.add(nameLabel, "North");
+		//textPanel.add(orientLabel, "Center");
+		textPanel.add(orientPhoto, "Center");
 		eastPanel.add(boutonPanel,BorderLayout.NORTH);
 		eastPanel.add(textPanel,BorderLayout.SOUTH);
 
@@ -288,10 +334,11 @@ public class Tableau extends JFrame {
 				boolean ok = false;
 				do {
 
-					
 					nameLabel.setText(l.getNom());
 					orientLabel.setText("orientation : "+ l.getOrientation());
-
+					orientImg = new ImageIcon("resources/img/f"+ l.getOrientation() + ".png");
+					orientPhoto.setIcon(orientImg);
+										
 					if(dir == 'A') { //Si la direction choisie est "Avancer" (A)
 						switch(o) { //Alors plusieurs cas par rapport à l'orientation d'origine
 						case 'N': //Dans le cas où le lapin avait pour direction initiale le Nord
