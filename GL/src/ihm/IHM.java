@@ -202,6 +202,66 @@ class Graph extends JPanel
                  frmLoad.add(back, BorderLayout.SOUTH);
                  frmLoad.add(top, BorderLayout.NORTH);
                  
+                 btnLoad1.addActionListener(new ActionListener()
+                 {
+                         public void actionPerformed(ActionEvent e)
+                         {
+                             new Thread() { 
+                                 public void run() {
+                                  new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
+                                 } 
+                             }.start();
+                         }
+                 });
+                 
+                 btnLoad2.addActionListener(new ActionListener()
+                 {
+                         public void actionPerformed(ActionEvent e)
+                         {
+                             new Thread() { 
+                                 public void run() {
+                                  new Tableau("resources/jardin-2.csv","resources/DAO/renard-2.csv","resources/DAO/lapin-2.csv");
+                                 } 
+                             }.start();
+                         }
+                 });
+                 
+                 btnLoad3.addActionListener(new ActionListener()
+                 {
+                         public void actionPerformed(ActionEvent e)
+                         {
+                             new Thread() { 
+                                 public void run() {
+                                  new Tableau("resources/jardin-3.csv","resources/DAO/renard-3.csv","resources/DAO/lapin-3.csv");
+                                 } 
+                             }.start();
+                         }
+                 });
+                 
+                 btnLoad4.addActionListener(new ActionListener()
+                 {
+                         public void actionPerformed(ActionEvent e)
+                         {
+                             new Thread() { 
+                                 public void run() {
+                                  new Tableau("resources/jardin-4.csv","resources/DAO/renard-4.csv","resources/DAO/lapin-4.csv");
+                                 } 
+                             }.start();
+                         }
+                 });
+                 
+                 btnLoad5.addActionListener(new ActionListener()
+                 {
+                         public void actionPerformed(ActionEvent e)
+                         {
+                             new Thread() { 
+                                 public void run() {
+                                  new Tableau("resources/jardin-5.csv","resources/DAO/renard-5.csv","resources/DAO/lapin-5.csv");
+                                 } 
+                             }.start();
+                         }
+                 });
+                 
                  btnBack.addActionListener(new ActionListener()
                  {
                          public void actionPerformed(ActionEvent e)
@@ -216,6 +276,7 @@ class Graph extends JPanel
                  System.out.println("Charger Niveau");
             }
         });
+
         
         btnEditNiveau.addActionListener(new ActionListener()
         {
