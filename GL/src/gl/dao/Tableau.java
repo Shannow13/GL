@@ -775,11 +775,11 @@ public class Tableau extends JFrame {
 	}
 	
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 			new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
 			
-	}
+	}*/
 	
 	
 	private void doDao(final String jardin_file, final  String renard_file, final String lapin_file) {
