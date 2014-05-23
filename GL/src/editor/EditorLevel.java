@@ -2,6 +2,7 @@ package editor;
 
 import static org.apache.log4j.Logger.getLogger;
 import game.Carottes;
+import game.Lapin;
 import game.Renard;
 import game.Rocher;
 import game.SimpleJardin;
@@ -30,7 +31,7 @@ public class EditorLevel{
 	private CSVWriter lWriter;	// lapin
 	
 	
-	public EditorLevel(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r, ArrayList<Renard> f)
+	public EditorLevel(SimpleJardin jardin, ArrayList<Carottes> c, ArrayList<Rocher> r, ArrayList<Renard> f, ArrayList<Lapin> l)
 	{
 		fichier = new FileEditor();
 		this.wFile = fichier.wFile;	// jardin
@@ -47,6 +48,7 @@ public class EditorLevel{
 		writeCarotte(c);
 		writeRocher(r);
 		writeFox(f);
+		writeLapin(l);
 
 		
 		try{
@@ -90,6 +92,14 @@ public class EditorLevel{
 		
 	}
 	
+	private void writeLapin(ArrayList<Lapin> lapin){
+		int i =0;
+		for( Lapin l : lapin)
+		{
+			String[] entries = ("L;"+ l.getPositionX()+ ";"+ l.getPositionY()+";"+l.getOrientation()+";Lapin"+i++).split(";");
+			lWriter.writeNext(entries);
+		}
+	}
 	
 	private void writeJardin(SimpleJardin jardin){
 		String[] entries = ("J;"+jardin.getSizeX()+";"+jardin.getSizeY()+";0;1").split(";");
