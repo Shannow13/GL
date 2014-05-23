@@ -1,7 +1,5 @@
 package gl.dao;
 
-import gl.dao.Tableau.Avance;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,23 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class IsVictory extends JFrame {
-
-	
-	private static final long serialVersionUID = 1L;
-	/*private boolean flagWin;
 	
 	private static final long serialVersionUID = 1L;
 	
-	public static JFrame getFrm()
-    {
-        return this.flagWin;
-    }
-
-    public static void setFrm(boolean flagWin)
-    {
-        this.flagWin = flagWin;
-    }
-	*/
 	public IsVictory() {
 		
 		final JFrame frmWin = new JFrame("Victoire !");
@@ -41,27 +25,7 @@ public class IsVictory extends JFrame {
 		
 		JPanel panWin = new JPanel();
 		
-		JButton btnNext = new JButton("Continuer");
-		JButton btnReload = new JButton("Rejouer");
-		JButton btnMenu = new JButton("Menu");
-		
-		btnNext.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-            	frmWin.setVisible(false);
-            	frmWin.dispose();
-            }
-        });
-		
-		btnReload.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-            	frmWin.setVisible(false);
-            	frmWin.dispose();
-            }
-        });
+		JButton btnMenu = new JButton("GG !");
 		
 		btnMenu.addActionListener(new ActionListener()
         {
@@ -72,8 +36,6 @@ public class IsVictory extends JFrame {
             }
         });
 		
-		panWin.add(btnNext);
-		panWin.add(btnReload);
 		panWin.add(btnMenu);
 		
 		frmWin.add(panWin);
@@ -85,7 +47,6 @@ public class IsVictory extends JFrame {
 		
 		frmWin.validate();
 		frmWin.setVisible(true);
-		//this.flagWin = flagWin;
 		
 	}
 	

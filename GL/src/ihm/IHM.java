@@ -48,13 +48,7 @@ class Graph extends JPanel
     JButton btnHelp = new JButton(new ImageIcon("resources/img/pancarte5.png"));
     JButton btnExit = new JButton(new ImageIcon("resources/img/pancarte6.png"));
     
-    //JButton btnNew = new JButton("NOUVELLE PARTIE");
-    //JButton btnCont = new JButton("CONTINUER");
-    //JButton btnLoad = new JButton("CHARGER NIVEAU");
-    //JButton btnHelp = new JButton("AIDE");
-    //JButton btnEditNiveau = new JButton("EDITION NIVEAU");
-    //JButton btnExit = new JButton("QUITTER");
-    JButton btnFullScreen = new JButton("FULLSCREEN");
+    JButton btnFullScreen = new JButton(new ImageIcon("resources/img/pancarte_fullscreen.png"));
     
     int width = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
     int height = (int) Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -96,13 +90,16 @@ class Graph extends JPanel
         btnExit.setBorderPainted(false);
         btnExit.setContentAreaFilled(false);
         
+        btnFullScreen.setBorderPainted(false);
+        btnFullScreen.setContentAreaFilled(false);
+        
         btnNew.setBounds( w - 50, h - 70, 200, 40);
         btnCont.setBounds( w - 50, h + 30, 200, 40 );
         btnLoad.setBounds( w - 50, h + 130, 200, 40);
         btnEditNiveau.setBounds( w - 50, h + 230, 200, 40);
         btnHelp.setBounds( w - 50, h + 330, 200, 40 );
         btnExit.setBounds( w - 50, h + 430, 200, 40 );
-        btnFullScreen.setBounds(w + 860, h + 580, 108, 15);
+        btnFullScreen.setBounds(w + 750, h + 580, 200, 40);
         
         setOpaque( false );
         
@@ -452,7 +449,7 @@ class Graph extends JPanel
                     frame.setUndecorated(true);
                     frame.setVisible(true);
                     fullScreen = true;
-                    btnFullScreen.setText("WINDOWED");
+                    btnFullScreen.setIcon(new ImageIcon("resources/img/pancarte_windowed.png"));
                 }
                 else
                 {
@@ -461,7 +458,7 @@ class Graph extends JPanel
                     frame.setUndecorated(false);
                     frame.setVisible(true);
                     fullScreen = false;
-                    btnFullScreen.setText("FULLSCREEN");
+                    btnFullScreen.setIcon(new ImageIcon("resources/img/pancarte_windowed.png"));
                 }
             }
         });   

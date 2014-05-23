@@ -12,23 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class IsDefeat extends JFrame {
-
 	
 	private static final long serialVersionUID = 1L;
-	/*private boolean flagWin;
-	
-	private static final long serialVersionUID = 1L;
-	
-	public static JFrame getFrm()
-    {
-        return this.flagWin;
-    }
 
-    public static void setFrm(boolean flagWin)
-    {
-        this.flagWin = flagWin;
-    }
-	*/
 	public IsDefeat() {
 		
 		final JFrame frmWin = new JFrame("Défaite !");
@@ -40,16 +26,6 @@ public class IsDefeat extends JFrame {
 		JPanel panWin = new JPanel();
 		
 		JButton btnQuit = new JButton("RageQuit");
-		JButton btnReload = new JButton("Rejouer");
-		
-		btnReload.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-            	frmWin.setVisible(false);
-            	frmWin.dispose();
-            }
-        });
 		
 		btnQuit.addActionListener(new ActionListener()
         {
@@ -61,7 +37,6 @@ public class IsDefeat extends JFrame {
         });
 		
 		panWin.add(btnQuit);
-		panWin.add(btnReload);
 		
 		frmWin.add(panWin);
 		
