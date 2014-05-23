@@ -65,8 +65,10 @@ public class Tableau extends JFrame {
 	private final static String RESOURCES_PATH = "resources/";
 	private final static String JARDIN_FILE_NAME = "jardin-1.csv";
 	private final static String RENARD_FILE_NAME = "DAO/renard-1.csv";
+	private final static String LAPIN_FILE_NAME = "DAO/lapin-1.csv";
 	final static File file = new File(RESOURCES_PATH + JARDIN_FILE_NAME);
 	final static File renard_file = new File(RESOURCES_PATH + RENARD_FILE_NAME);
+	final static File lapin_file = new File(RESOURCES_PATH + LAPIN_FILE_NAME);
 	
 	public ArrayList<Carottes> carottes;
 	public ArrayList<Rocher> rochers;
@@ -75,7 +77,7 @@ public class Tableau extends JFrame {
 	public List<Lapin> lapins;
 	
 	
-	public Tableau(Jardin jardins, List<Renard> renards) {
+	public Tableau(Jardin jardins, List<Renard> renards, List<Lapin> lapins) {
 
 		
 		LOGGER.debug("config");
@@ -133,10 +135,10 @@ public class Tableau extends JFrame {
 		renards.add(new SimpleRenard(1,1,'S',"AGAGAGAGADADADAD","Fox1"));*/
 
 		LOGGER.debug("init lapins");
-		lapins = new ArrayList<Lapin>();
+		//lapins = new ArrayList<Lapin>();
 		//lapins.add(new SimpleLapin(2,4,'E',"Bugs"));
 		//lapins.add(new SimpleLapin(5,5,'N',"Bunny"));
-		lapins.add(new SimpleLapin(0,0,'E',"Wabbit"));
+		//lapins.add(new SimpleLapin(0,0,'E',"Wabbit"));
 
 
 		this.setTitle("Terrain de jeu"); //Titre de la fenêtre
@@ -701,16 +703,19 @@ public class Tableau extends JFrame {
 		LOGGER.debug("On va créer le jardin");
 		final CsvJardinDao dao = new DefinitiveCsvJardinDao();
 		final CsvRenardDao daoR = new DefinitiveCsvRenardDao();
+		final CsvLapinDao daoL = new DefinitiveCsvLapinDao();
 		dao.init(file);
 		daoR.init(renard_file);
-		doWork(dao, daoR);
+		daoL.init(lapin_file);
+		doWork(dao, daoR, daoL);
 	}
 
 
-	private static void doWork(final JardinDao dao, final RenardDao daoR) {
+	private static void doWork(final JardinDao dao, final RenardDao daoR, final CsvLapinDao daoL) {
 		final Jardin jardins = dao.findJardin();
 		final List<Renard> renards = daoR.findAllRenards();
-		new Tableau(jardins, renards);
+		final List<Lapin> lapins = daoL.findAllLapins();
+		new Tableau(jardins, renards, lapins);
 
 		
 	}
