@@ -142,7 +142,7 @@ public class Tableau extends JFrame {
 		this.setTitle("Terrain de jeu"); //Titre de la fenêtre
 		this.setSize(100*x,120*y); //Taille de la fenêtre
 		this.setResizable(false); //On interdit à l'utilisateur la possibilité de redimensionner la fenêtre
-		this.setLocation(100, 100); //On set l'endroit où la fenêtre va apparaitre à l'écran
+		this.setLocation(100, 10); //On set l'endroit où la fenêtre va apparaitre à l'écran
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE); //Fermeture du jeu si on ferme la fenêtre de jeu
 
 		Container c = getContentPane(); //On créer notre container général pour la totalité de la fenêtre de jeu
@@ -178,7 +178,7 @@ public class Tableau extends JFrame {
 					JLabel herbe = new JLabel(herbe_img); //JLabel pour le fond des cases
 					(jp[i][j]).setLayout(new BorderLayout());
 					(jp[i][j]).add(herbe); //On ajoute les images d'herbe au Panel
-					(jp[i][j]).setBackground(Color.green); //On ajoute un background de couleur vert
+					(jp[i][j]).setBackground(new Color( 80, 151, 9)); //On ajoute un background de couleur vert
 				}
 				
 				(jp[i][j]).setBorder(BorderFactory.createEtchedBorder()); //Affichage d'un quadrillage pour plus de lisibilité
@@ -211,13 +211,13 @@ public class Tableau extends JFrame {
 
 		eastPanel = new JPanel(new GridLayout(2,1));
 		boutonPanel = new JPanel(new GridLayout(2,2));
-		buttonA = new JButton("A");
+		buttonA = new JButton("Avancer");
 		buttonA.addActionListener(new Avance());
-		buttonX = new JButton("X");
+		buttonX = new JButton("Attendre");
 		buttonX.addActionListener(new stayHere());
-		buttonG = new JButton("G");
+		buttonG = new JButton("Rot.G");
 		buttonG.addActionListener(new rotateGauche());
-		buttonD = new JButton("D");
+		buttonD = new JButton("Rot.D");
 		buttonD.addActionListener(new rotateDroite());
 		boutonPanel.add(buttonA);
 		boutonPanel.add(buttonX);
@@ -236,7 +236,8 @@ public class Tableau extends JFrame {
 		c.add(eastPanel, BorderLayout.EAST);
 		
 		
-		
+		//this.setUndecorated(true);
+		//this.removeNotify();
 		
 		LOGGER.debug("pop fenetre");
 		this.setVisible(true);
@@ -302,7 +303,7 @@ public class Tableau extends JFrame {
 								} else {
 									(jp[lx][ly]).removeAll();
 									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-									(jp[lx][ly]).setBackground(Color.green);
+									(jp[lx][ly]).setBackground(new Color( 80, 151, 9));
 									l.setPositionX(lx-1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
 									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
@@ -327,7 +328,7 @@ public class Tableau extends JFrame {
 								} else {
 									(jp[lx][ly]).removeAll();
 									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-									(jp[lx][ly]).setBackground(Color.green);
+									(jp[lx][ly]).setBackground(new Color( 80, 151, 9));
 									l.setPositionX(lx+1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
 									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
@@ -353,7 +354,7 @@ public class Tableau extends JFrame {
 								else {
 									(jp[lx][ly]).removeAll();
 									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-									(jp[lx][ly]).setBackground(Color.green);
+									(jp[lx][ly]).setBackground(new Color( 80, 151, 9));
 									l.setPositionY(ly+1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
 									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
@@ -377,7 +378,7 @@ public class Tableau extends JFrame {
 								} else {
 									(jp[lx][ly]).removeAll();
 									(jp[lx][ly]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-									(jp[lx][ly]).setBackground(Color.green);
+									(jp[lx][ly]).setBackground(new Color( 80, 151, 9));
 									l.setPositionY(ly-1);
 									(jp[l.getPositionX()][l.getPositionY()]).removeAll();
 									(jp[l.getPositionX()][l.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/lap2.png")));
@@ -497,7 +498,7 @@ public class Tableau extends JFrame {
 							} else {
 								(jp[rx][ry]).removeAll();
 								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-								(jp[rx][ry]).setBackground(Color.green);
+								(jp[rx][ry]).setBackground(new Color( 80, 151, 9));
 								r.setPositionX(rx-1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
 								(jp[r.getPositionX()][r.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/fox2.png")));
@@ -519,7 +520,7 @@ public class Tableau extends JFrame {
 							} else {
 								(jp[rx][ry]).removeAll();
 								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-								(jp[rx][ry]).setBackground(Color.green);
+								(jp[rx][ry]).setBackground(new Color( 80, 151, 9));
 								r.setPositionX(rx+1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
 								(jp[r.getPositionX()][r.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/fox2.png")));
@@ -542,7 +543,7 @@ public class Tableau extends JFrame {
 							else {
 								(jp[rx][ry]).removeAll();
 								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-								(jp[rx][ry]).setBackground(Color.green);
+								(jp[rx][ry]).setBackground(new Color( 80, 151, 9));
 								r.setPositionY(ry+1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
 								(jp[r.getPositionX()][r.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/fox2.png")));
@@ -564,7 +565,7 @@ public class Tableau extends JFrame {
 							} else {
 								(jp[rx][ry]).removeAll();
 								(jp[rx][ry]).add(new JLabel(new ImageIcon("resources/img/grass4.png")));
-								(jp[rx][ry]).setBackground(Color.green);
+								(jp[rx][ry]).setBackground(new Color( 80, 151, 9));
 								r.setPositionY(ry-1);
 								(jp[r.getPositionX()][r.getPositionY()]).removeAll();
 								(jp[r.getPositionX()][r.getPositionY()]).add(new JLabel(new ImageIcon("resources/img/fox2.png")));
