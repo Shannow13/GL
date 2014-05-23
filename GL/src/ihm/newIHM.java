@@ -3,10 +3,10 @@ package ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
+//import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+//import java.awt.Image;
+//import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,24 +19,19 @@ import javax.swing.JPanel;
 import editor.EditorIHM;
 import gl.dao.*;
 
-public class newIHM extends JPanel{
+public class newIHM{
 	
-	    private static final long serialVersionUID = 1L;
+	   // private static final long serialVersionUID = 1L;
 
-	    
-	    static JFrame frm = new JFrame("Projet GL");
+		JFrame frame;
+		
 	    
 	    public static void main(String[] args)
 	    {
-	        frm.getContentPane().setLayout( new BorderLayout() );
-	        frm.getContentPane().add( new newIHM(), BorderLayout.CENTER );
-	        int w = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
-	        int h = (int) Toolkit.getDefaultToolkit().getScreenSize().height;
-	        frm.setSize( w, h );
-	        frm.setVisible( true );
+	      new newIHM();
 	    }
 	    
-	    public static JFrame getFrm()
+	   /* public static JFrame getFrm()
 	    {
 	        return frm;
 	    }
@@ -44,12 +39,12 @@ public class newIHM extends JPanel{
 	    public static void setFrm(JFrame frm)
 	    {
 	        IHM.frm = frm;
-	    }
+	    }*/
 	    
 	    
-	    private Image bg = getToolkit().getImage("resources/img/fond.png");
+	  //  private Image bg = getToolkit().getImage("resources/img/fond.png");
 	    
-	    private boolean fullScreen = false;
+	   // private boolean fullScreen = false;
 	    
 	    JButton btnNew = new JButton(new ImageIcon("resources/img/pancarte1.png"));
 	    JButton btnCont = new JButton(new ImageIcon("resources/img/pancarte2.png"));
@@ -64,29 +59,29 @@ public class newIHM extends JPanel{
 	    //JButton btnHelp = new JButton("AIDE");
 	    //JButton btnEditNiveau = new JButton("EDITION NIVEAU");
 	    //JButton btnExit = new JButton("QUITTER");
-	    JButton btnFullScreen = new JButton("FULLSCREEN");
+	    //JButton btnFullScreen = new JButton("FULLSCREEN");
 	    
-	    int width = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
-	    int height = (int) Toolkit.getDefaultToolkit().getScreenSize().height;
+	    //int width = (int) Toolkit.getDefaultToolkit().getScreenSize().width;
+	    //int height = (int) Toolkit.getDefaultToolkit().getScreenSize().height;
 	    
 	    public newIHM()
 	    {  
-	        final JFrame frame = IHM.frm;
+	        frame = new JFrame("Rabbit Insanity");
 	        
-	        setBounds(0, 0, width, height);
+	       // setBounds(0, 0, width, height);
 
-	        setLayout(null);
+	        frame.setLayout(null);
 
-	        add( btnNew );
-	        add( btnCont );
-	        add( btnLoad );
-	        add( btnEditNiveau);
-	        add( btnHelp );
-	        add( btnExit );
-	        add( btnFullScreen );
+	        frame.add( btnNew );
+	        frame.add( btnCont );
+	        frame.add( btnLoad );
+	        frame.add( btnEditNiveau);
+	        frame.add( btnHelp );
+	        frame.add( btnExit );
+	        //frame.add( btnFullScreen );
 	                
-	        int w = ( width / 2) - 50;
-	        int h = ( height / 2 ) - 150;
+	        int w = (1000 / 2)+200;
+	        int h = (1900 / 2 )-500;
 
 	        btnNew.setBorderPainted(false);
 	        btnNew.setContentAreaFilled(false);
@@ -106,15 +101,18 @@ public class newIHM extends JPanel{
 	        btnExit.setBorderPainted(false);
 	        btnExit.setContentAreaFilled(false);
 	        
-	        btnNew.setBounds( w - 50, h - 70, 200, 40);
-	        btnCont.setBounds( w - 50, h + 30, 200, 40 );
-	        btnLoad.setBounds( w - 50, h + 130, 200, 40);
-	        btnEditNiveau.setBounds( w - 50, h + 230, 200, 40);
-	        btnHelp.setBounds( w - 50, h + 330, 200, 40 );
-	        btnExit.setBounds( w - 50, h + 430, 200, 40 );
-	        btnFullScreen.setBounds(w + 860, h + 580, 108, 15);
+	        btnNew.setBounds( w, h - 400, 200, 40);
+	        btnCont.setBounds( w , h -300, 200, 40 );
+	        btnLoad.setBounds( w , h -200, 200, 40);
+	        btnEditNiveau.setBounds( w, h -100, 200, 40);
+	        btnHelp.setBounds( w , h , 200, 40 );
+	        btnExit.setBounds( w , h +100, 200, 40 );
+	        //btnFullScreen.setBounds(w + 860, h + 580, 108, 15);
 	        
-	        setOpaque( false );
+	        //setOpaque( false );
+	        
+	        frame.setSize(new Dimension(1900,1000));
+	        frame.setVisible(true);
 	        
 	        btnNew.addActionListener(new ActionListener()
 	        {
@@ -367,7 +365,7 @@ public class newIHM extends JPanel{
 	            }
 	        });
 	        
-	        btnFullScreen.addActionListener(new ActionListener()
+	      /*  btnFullScreen.addActionListener(new ActionListener()
 	        {
 	            public void actionPerformed(ActionEvent e)
 	            {
@@ -391,13 +389,14 @@ public class newIHM extends JPanel{
 	                }
 	            }
 	        });   
-	    }
+	    }*/
 
-	    public void paint(Graphics g)
+	    /*public void paint(Graphics g)
 	    {
 	        g.drawImage( bg, 0, 0, width, height, this );
 	        super.paint( g );
+	    }*/
 	    }
-} 
+}
 	
 
