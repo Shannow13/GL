@@ -126,12 +126,14 @@ public class Tableau extends JFrame {
 
 			}
 		}
+		
 		for(Carottes c : carottes){
 		
 			jardin[c.getPositionX()][c.getPositionY()] = 'c';
 			
 			
 		}
+		
 		for(Rocher r : rochers){
 			jardin[r.getPositionX()][r.getPositionY()] = 'r';
 			
@@ -799,7 +801,8 @@ public class Tableau extends JFrame {
 	}
 	
 
-	/*public static void main(String[] args) {
+	/*
+	public static void main(String[] args) {
 		
 			new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
 			

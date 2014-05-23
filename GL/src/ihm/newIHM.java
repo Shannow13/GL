@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import editor.EditorIHM;
-import gl.dao.Tableau;
+import gl.dao.*;
 
 public class newIHM extends JPanel{
 	
@@ -120,9 +120,14 @@ public class newIHM extends JPanel{
 	        {
 	            public void actionPerformed(ActionEvent e)
 	            {
+	            	
 	                System.out.println("Nouvelle Partie");
-	                frame.setVisible(false);
-	                new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
+	                frame.setVisible(true);
+	                new Thread() { 
+	                	   public void run() {
+	                		   new Tableau("resources/jardin-1.csv","resources/DAO/renard-1.csv","resources/DAO/lapin-1.csv");
+	                	   } 
+	                	}.start();
 	            }
 	        });
 	        
