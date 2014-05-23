@@ -35,7 +35,7 @@ public class EditorIHM {
 
     public JFrame frame;
     //public JPanel panelG, panel;
-    public JButton jardin, carotte, rocher, renard, quitter,fin;
+    public JButton jardin, carotte, rocher, renard, quitter,fin,lapin;
     public boolean IsOk;
 
 
@@ -61,6 +61,7 @@ public class EditorIHM {
         renard = new JButton ("Renard");
         quitter = new JButton("Retour");
         fin = new JButton ("Créer");
+        lapin = new JButton("Lapin");
 
         frame.add(jardin);
         frame.add(carotte);
@@ -68,6 +69,7 @@ public class EditorIHM {
         frame.add(renard);
         frame.add(quitter);
         frame.add(fin);
+        frame.add(lapin);
 
         int w = (frame.getWidth()/2)-50;
         int h = (frame.getHeight()/2);
@@ -78,7 +80,8 @@ public class EditorIHM {
         rocher.setBounds( w - 50, h -100, 200, 40);
         renard.setBounds( w - 50, h -50 , 200, 40 );
         quitter.setBounds(w-50 , h + 100 , 200, 40);
-        fin.setBounds(w-50,h,200,40);
+        fin.setBounds(w-50,h+50,200,40);
+        lapin.setBounds(w-50,h,200,40);
 
         //Lien entre les boutons et les actions
         jardin.addActionListener(new EditJardin());
@@ -87,6 +90,7 @@ public class EditorIHM {
         renard.addActionListener(new EditRenard());
         quitter.addActionListener(new EditQuitter(frame));
         fin.addActionListener(new EditFin(frame));
+        lapin.addActionListener(new EditLapin());
         /*GridLayout gridL = new GridLayout(4,1);
         gridL.setHgap(50);
         gridL.setVgap(30);
@@ -664,7 +668,6 @@ public class EditorIHM {
                 nbFox = Integer.parseInt(nbF.getText());
                 frame.setVisible(false);
                 LOGGER.debug("C'est bien un int.");
-                creationRenard(nbFox);
             }catch(NumberFormatException er){
                 LOGGER.debug("C'est pas un INT!!!!");
                 return;
@@ -885,7 +888,6 @@ public class EditorIHM {
                 nbLapin = Integer.parseInt(nbL.getText());
                 frame.setVisible(false);
                 LOGGER.debug("C'est bien un int.");
-                creationRenard(nbLapin);
             }catch(NumberFormatException er){
                 LOGGER.debug("C'est pas un INT!!!!");
                 return;
@@ -899,7 +901,7 @@ public class EditorIHM {
     }
 
 
-    // Gestion du pop up pour définir les renards    
+    // Gestion du pop up pour définir les lapins    
     private void creationLapin(int nbL)
     {
         LOGGER.debug("Création des Lapins");
@@ -947,7 +949,7 @@ public class EditorIHM {
 
         frame.setVisible(true);
 
-        fList = new ArrayList<Renard>();
+        lList = new ArrayList<Lapin>();
 
         cancel.addActionListener(new EditCancel(frame,fList));
         ok.addActionListener(new NouveauLapin(nbL,l,c,o,frame));
@@ -960,13 +962,13 @@ public class EditorIHM {
     private class NouveauLapin implements ActionListener{
 
         private JFrame frame;
-        private int nbF;
+        private int nbL;
         private JTextField l,c,o;
         int ligne, colonne;
         char orient;
 
-        public NouveauLapin(int nbF,  JTextField l, JTextField c, JTextField o, JFrame frame){
-            this.nbF = nbF;
+        public NouveauLapin(int nbL,  JTextField l, JTextField c, JTextField o, JFrame frame){
+            this.nbL = nbL;
             this.l = l;
             this.c = c;
             this.o = o;
@@ -1001,9 +1003,9 @@ public class EditorIHM {
 
             lList.add(lapin);
 
-            if(fList.size() == nbF){
+            if(lList.size() == nbL){
                 frame.setVisible(false);
-                LOGGER.debug("Les lapins sont finis! =>" + nbF);
+                LOGGER.debug("Les lapins sont finis! =>" + nbL);
             }
 
             l.setText("");
