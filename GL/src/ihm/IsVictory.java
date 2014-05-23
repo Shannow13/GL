@@ -1,6 +1,4 @@
-package gl.dao;
-
-import gl.dao.Tableau.Avance;
+package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
