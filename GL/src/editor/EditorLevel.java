@@ -99,7 +99,6 @@ public class EditorLevel{
 			String[] entries = ("L;"+ l.getPositionX()+ ";"+ l.getPositionY()+";"+l.getOrientation()+";Lapin"+i++).split(";");
 			lWriter.writeNext(entries);
 		}
-		
 	}
 	
 	private void writeJardin(SimpleJardin jardin){

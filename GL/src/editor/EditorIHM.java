@@ -1083,7 +1083,7 @@ public class EditorIHM {
 
     }
     
-    
+   
     // Gestion de la finalisation avec toutes les étapes accomplies
     
     public class WriteCSV{
